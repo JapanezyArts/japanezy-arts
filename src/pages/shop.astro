@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Shop - Japanezy Arts">
+	<section class="shop-hero">
+		<h1>Shop</h1>
+		<p>Original Japanese-inspired artwork available for purchase</p>
+	</section>
+
+	<section class="shop-section">
+		<p class="coming-soon">Artwork listings coming soon. Stay tuned!</p>
+		<a href="https://www.youtube.com/@JapanezyArts" target="_blank" rel="noopener" class="btn">
+			Follow on YouTube for Updates
+		</a>
+	</section>
+</Layout>
+
+<style>
+	.shop-hero {
+		background: linear-gradient(135deg, #1a1a1a 0%, #2d2420 50%, #1a1a1a 100%);
+		color: #faf8f5;
+		text-align: center;
+		padding: 5rem 2rem;
+	}
+
+	.shop-hero h1 {
+		font-size: 3rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.shop-hero p {
+		color: #c4a87c;
+		font-size: 1.1rem;
+	}
+
+	.shop-section {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 5rem 2rem;
+		text-align: center;
+	}
+
+	.coming-soon {
+		font-size: 1.25rem;
+		color: #666;
+		margin-bottom: 2rem;
+	}
+
+	.btn {
+		display: inline-block;
+		padding: 0.85rem 2rem;
+		background: #1a1a1a;
+		color: #faf8f5;
+		border-radius: 4px;
+		font-weight: 600;
+		font-size: 0.95rem;
+		transition: background 0.2s;
+	}
+
+	.btn:hover {
+		background: #333;
+	}
+</style>
