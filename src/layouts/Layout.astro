@@ -11,7 +11,7 @@ const { title = "Japanezy Arts" } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/ja-main-logo.png" />
 		<meta name="description" content="Japanezy Arts - Japanese-inspired artwork, tutorials, and original pieces for sale." />
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,12 +39,56 @@ const { title = "Japanezy Arts" } = Astro.props;
 		</div>
 
 		<nav class="nav">
-			<a href="/" class="logo">Japanezy Arts</a>
-			<div class="nav-links">
-				<a href="#about" class="nav-btn about-btn">About Me</a>
-				<a href="#products" class="nav-btn products-btn">Products</a>
+			<a href="/" class="nav-logo-link">
+				<img src="/ja-main-logo.png" alt="Japanezy Arts" class="nav-logo" />
+			</a>
+			<button class="hamburger" id="hamburger" aria-label="Toggle menu">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+			<div class="nav-links" id="nav-links">
+				<a href="/" class="nav-btn home-btn"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:4px"><path d="M12 3l-10 9h3v9h6v-6h2v6h6v-9h3z"/></svg>Home</a>
+				<a href="/puchipaws" class="nav-btn puchipaws-btn">&#128062; Puchipaws</a>
+				<a href="/shorts" class="nav-btn shorts-btn">&#9654; Shorts</a>
+				<a href="#about" class="nav-btn about-btn">&hearts; About Me</a>
 			</div>
 		</nav>
+
+		<!-- Spin the Wheel Modal -->
+		<div class="wheel-overlay" id="wheel-overlay">
+			<div class="wheel-modal">
+				<button class="wheel-close" id="wheel-close">&times;</button>
+				<h2 class="wheel-title">Spin the Wheel!</h2>
+				<div class="wheel-container">
+					<div class="wheel-arrow"></div>
+					<canvas id="wheel-canvas" width="320" height="320"></canvas>
+				</div>
+				<div class="wheel-btn-row">
+					<button class="wheel-spin-btn" id="spin-btn">Spin</button>
+					<button class="wheel-stop-btn" id="stop-btn" style="display:none;">Stop</button>
+				</div>
+				<p class="wheel-result" id="wheel-result"></p>
+				<div class="unlock-section">
+					<button class="unlock-btn" id="unlock-btn">Unlock</button>
+					<div class="unlock-input-wrapper" id="unlock-input-wrapper" style="display:none;">
+						<input type="password" class="unlock-input" id="unlock-input" placeholder="Enter password..." />
+						<button class="unlock-submit" id="unlock-submit">Go</button>
+					</div>
+					<p class="unlock-msg" id="unlock-msg"></p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Rewards Modal -->
+		<div class="wheel-overlay" id="rewards-overlay">
+			<div class="wheel-modal">
+				<button class="wheel-close" id="rewards-close">&times;</button>
+				<h2 class="wheel-title">Your Rewards</h2>
+				<div id="rewards-list" class="rewards-list"></div>
+				<p class="rewards-empty" id="rewards-empty">No rewards yet. Spin the wheel to earn some!</p>
+			</div>
+		</div>
 
 		<main>
 			<slot />
@@ -53,6 +97,293 @@ const { title = "Japanezy Arts" } = Astro.props;
 		<footer>
 			<p>&copy; {new Date().getFullYear()} Japanezy Arts. All rights reserved.</p>
 		</footer>
+
+		<script>
+			const segments = [
+				{ label: '10% Off', color: '#FFB3BA', textColor: '#333' },
+				{ label: 'Try Again', color: '#BAE1FF', textColor: '#333' },
+				{ label: 'Free Sticker', color: '#BAFFC9', textColor: '#333' },
+				{ label: 'Bonus Gift', color: '#E8BAFF', textColor: '#333' },
+				{ label: '50% Off', color: '#FFD700', textColor: '#e53935' },
+			];
+
+			const canvas = document.getElementById('wheel-canvas') as HTMLCanvasElement;
+			const ctx = canvas?.getContext('2d');
+			const overlay = document.getElementById('wheel-overlay');
+			const openBtn = document.getElementById('open-wheel');
+			const closeBtn = document.getElementById('wheel-close');
+			const spinBtn = document.getElementById('spin-btn') as HTMLButtonElement;
+			const resultEl = document.getElementById('wheel-result');
+
+			const rewardsOverlay = document.getElementById('rewards-overlay');
+			const rewardsOpenBtn = document.getElementById('open-rewards');
+			const rewardsCloseBtn = document.getElementById('rewards-close');
+			const rewardsList = document.getElementById('rewards-list');
+			const rewardsEmpty = document.getElementById('rewards-empty');
+
+			let currentAngle = 0;
+			let spinning = false;
+
+			function canSpin(): boolean {
+				const lastSpin = localStorage.getItem('japanezy-last-spin');
+				if (!lastSpin) return true;
+				const diff = Date.now() - parseInt(lastSpin);
+				const oneWeek = 7 * 24 * 60 * 60 * 1000;
+				return diff >= oneWeek;
+			}
+
+			function getRewards(): { label: string; date: string }[] {
+				return JSON.parse(localStorage.getItem('japanezy-rewards') || '[]');
+			}
+
+			function saveReward(label: string) {
+				const rewards = getRewards();
+				rewards.push({ label, date: new Date().toLocaleDateString() });
+				localStorage.setItem('japanezy-rewards', JSON.stringify(rewards));
+				localStorage.setItem('japanezy-last-spin', Date.now().toString());
+			}
+
+			function renderRewards() {
+				const rewards = getRewards();
+				if (!rewardsList || !rewardsEmpty) return;
+				if (rewards.length === 0) {
+					rewardsEmpty.style.display = 'block';
+					rewardsList.innerHTML = '';
+				} else {
+					rewardsEmpty.style.display = 'none';
+					rewardsList.innerHTML = rewards.map(r =>
+						`<div class="reward-item"><span>${r.label}</span><span class="reward-date">${r.date}</span></div>`
+					).join('');
+				}
+			}
+
+			function checkSpinAvailability() {
+				if (!canSpin() && spinBtn && resultEl) {
+					spinBtn.setAttribute('disabled', '');
+					resultEl.textContent = 'Sorry, you have to wait one week to spin this wheel again.';
+				}
+			}
+
+			function drawWheel(angle: number) {
+				if (!ctx) return;
+				const cx = canvas.width / 2;
+				const cy = canvas.height / 2;
+				const r = cx - 5;
+				const segAngle = (2 * Math.PI) / segments.length;
+
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+				segments.forEach((seg, i) => {
+					const start = angle + i * segAngle;
+					const end = start + segAngle;
+
+					ctx.beginPath();
+					ctx.moveTo(cx, cy);
+					ctx.arc(cx, cy, r, start, end);
+					ctx.closePath();
+					ctx.fillStyle = seg.color;
+					ctx.fill();
+					ctx.strokeStyle = '#fff';
+					ctx.lineWidth = 2;
+					ctx.stroke();
+
+					// Label
+					ctx.save();
+					ctx.translate(cx, cy);
+					ctx.rotate(start + segAngle / 2);
+					ctx.textAlign = 'right';
+					ctx.fillStyle = seg.textColor;
+					ctx.font = 'bold 14px Inter, sans-serif';
+					ctx.fillText(seg.label, r - 15, 5);
+					ctx.restore();
+				});
+
+				// Center circle
+				ctx.beginPath();
+				ctx.arc(cx, cy, 18, 0, 2 * Math.PI);
+				ctx.fillStyle = '#fff';
+				ctx.fill();
+				ctx.strokeStyle = '#ddd';
+				ctx.lineWidth = 2;
+				ctx.stroke();
+			}
+
+			const stopBtn = document.getElementById('stop-btn');
+			let spinSpeed = 0;
+			let stopping = false;
+			let animFrameId: number | null = null;
+
+			// Weighted random: pick which segment to land on
+			// 50% Off = 5%, others = 23.75% each
+			function pickWeightedSegment(): number {
+				const r = Math.random() * 100;
+				// segments: 0=10% Off, 1=Try Again, 2=Free Sticker, 3=Bonus Gift, 4=50% Off
+				if (r < 23.75) return 0;
+				if (r < 47.5) return 1;
+				if (r < 71.25) return 2;
+				if (r < 95) return 3;
+				return 4; // 5% chance
+			}
+
+			function spinWheel() {
+				if (spinning) return;
+				if (!canSpin()) {
+					if (resultEl) resultEl.textContent = 'Sorry, you have to wait one week to spin this wheel again.';
+					return;
+				}
+				spinning = true;
+				stopping = false;
+				spinSpeed = 0.3 + Math.random() * 0.2; // fast random speed
+				if (spinBtn) spinBtn.style.display = 'none';
+				if (stopBtn) stopBtn.style.display = 'inline-block';
+				if (resultEl) resultEl.textContent = '';
+
+				function animate() {
+					if (stopping) {
+						spinSpeed *= 0.97; // decelerate
+						if (spinSpeed < 0.001) {
+							spinSpeed = 0;
+							spinning = false;
+							stopping = false;
+							if (spinBtn) spinBtn.style.display = 'inline-block';
+							if (stopBtn) stopBtn.style.display = 'none';
+
+							// Determine winner
+							const segAngle = (2 * Math.PI) / segments.length;
+							const normalized = ((2 * Math.PI) - (currentAngle % (2 * Math.PI)) + (3 * Math.PI / 2)) % (2 * Math.PI);
+							const index = Math.floor(normalized / segAngle) % segments.length;
+							const winner = segments[index].label;
+
+							if (winner === 'Try Again') {
+								if (resultEl) {
+									resultEl.textContent = 'Try Again! Spinning one more time...';
+								}
+								setTimeout(() => {
+									spinWheel();
+								}, 1500);
+								return;
+							}
+
+							saveReward(winner);
+							checkSpinAvailability();
+
+							if (resultEl) {
+								resultEl.textContent = `Congratulations! You landed on ${winner}!`;
+							}
+							return;
+						}
+					}
+
+					currentAngle += spinSpeed;
+					drawWheel(currentAngle);
+					animFrameId = requestAnimationFrame(animate);
+				}
+
+				animFrameId = requestAnimationFrame(animate);
+			}
+
+			function stopWheel() {
+				if (!spinning || stopping) return;
+				stopping = true;
+
+				// Weighted target: pick segment and nudge toward it
+				const targetIdx = pickWeightedSegment();
+				const segAngle = (2 * Math.PI) / segments.length;
+				// Calculate target angle so arrow lands in the middle of that segment
+				const targetCenter = segAngle * targetIdx + segAngle / 2;
+				const targetAngle = (3 * Math.PI / 2) - targetCenter;
+				// Normalize to add extra full rotations so it keeps going forward
+				const extra = Math.ceil(spinSpeed * 80); // enough rotations to decelerate
+				const finalAngle = targetAngle + extra * 2 * Math.PI;
+
+				// Adjust currentAngle so deceleration lands near target
+				const remaining = finalAngle - (currentAngle % (2 * Math.PI));
+				currentAngle = currentAngle + (remaining > 0 ? remaining : remaining + 2 * Math.PI);
+			}
+
+			stopBtn?.addEventListener('click', stopWheel);
+
+			// Draw initial wheel
+			if (ctx) drawWheel(currentAngle);
+
+			// Open/close modal
+			openBtn?.addEventListener('click', () => overlay?.classList.add('open'));
+			closeBtn?.addEventListener('click', () => overlay?.classList.remove('open'));
+			overlay?.addEventListener('click', (e) => {
+				if (e.target === overlay) overlay.classList.remove('open');
+			});
+
+			// Spin
+			spinBtn?.addEventListener('click', spinWheel);
+
+			// Rewards modal
+			rewardsOpenBtn?.addEventListener('click', () => { renderRewards(); rewardsOverlay?.classList.add('open'); });
+			rewardsCloseBtn?.addEventListener('click', () => rewardsOverlay?.classList.remove('open'));
+			rewardsOverlay?.addEventListener('click', (e) => {
+				if (e.target === rewardsOverlay) rewardsOverlay.classList.remove('open');
+			});
+
+			// Unlock button
+			const unlockBtn = document.getElementById('unlock-btn');
+			const unlockWrapper = document.getElementById('unlock-input-wrapper');
+			const unlockInput = document.getElementById('unlock-input') as HTMLInputElement;
+			const unlockSubmit = document.getElementById('unlock-submit');
+			const unlockMsg = document.getElementById('unlock-msg');
+
+			unlockBtn?.addEventListener('click', () => {
+				unlockWrapper!.style.display = unlockWrapper!.style.display === 'none' ? 'flex' : 'none';
+				if (unlockMsg) unlockMsg.textContent = '';
+			});
+
+			unlockSubmit?.addEventListener('click', () => {
+				if (unlockInput?.value === 'roseyblackwhiteburt') {
+					localStorage.removeItem('japanezy-last-spin');
+					if (spinBtn) spinBtn.removeAttribute('disabled');
+					if (resultEl) resultEl.textContent = '';
+					if (unlockMsg) {
+						unlockMsg.textContent = 'Wheel unlocked!';
+						unlockMsg.style.color = '#4caf50';
+					}
+					unlockWrapper!.style.display = 'none';
+					unlockInput.value = '';
+				} else {
+					if (unlockMsg) {
+						unlockMsg.textContent = 'Wrong password.';
+						unlockMsg.style.color = '#e53935';
+					}
+				}
+			});
+
+			unlockInput?.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter') unlockSubmit?.click();
+			});
+
+			// Remove any "Try Again" entries from saved rewards
+			const currentRewards = getRewards();
+			const filtered = currentRewards.filter(r => r.label !== 'Try Again');
+			if (filtered.length !== currentRewards.length) {
+				localStorage.setItem('japanezy-rewards', JSON.stringify(filtered));
+			}
+
+			// Check if they can spin on load
+			checkSpinAvailability();
+
+			// Hamburger menu toggle
+			const hamburger = document.getElementById('hamburger');
+			const navLinks = document.getElementById('nav-links');
+			hamburger?.addEventListener('click', () => {
+				navLinks?.classList.toggle('open');
+				hamburger.classList.toggle('open');
+			});
+			// Close menu when a nav link is clicked
+			navLinks?.querySelectorAll('a, button').forEach(link => {
+				link.addEventListener('click', () => {
+					navLinks.classList.remove('open');
+					hamburger?.classList.remove('open');
+				});
+			});
+
+		</script>
 	</body>
 </html>
 
@@ -149,20 +480,22 @@ const { title = "Japanezy Arts" } = Astro.props;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 1.25rem 2rem;
-		background: rgba(30, 30, 30, 0.9);
-		backdrop-filter: blur(8px);
-		color: #faf8f5;
+		padding: 0.75rem 2rem;
+		background: #ffffff;
 		position: sticky;
 		top: 0;
 		z-index: 100;
+		box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
 	}
 
-	.logo {
-		font-family: 'Noto Serif JP', serif;
-		font-size: 1.5rem;
-		font-weight: 700;
-		letter-spacing: 0.02em;
+	.nav-logo-link {
+		display: flex;
+		align-items: center;
+	}
+
+	.nav-logo {
+		height: 60px;
+		width: auto;
 	}
 
 	.nav-links {
@@ -180,13 +513,40 @@ const { title = "Japanezy Arts" } = Astro.props;
 		transition: all 0.2s;
 	}
 
-	.about-btn {
+	.home-btn {
 		background: #f8bbd0;
 		color: #4a4a4a;
 	}
 
-	.about-btn:hover {
+	.home-btn:hover {
 		background: #f9ccd9;
+	}
+
+	.puchipaws-btn {
+		background: #b3d4fc;
+		color: #fff;
+	}
+
+	.puchipaws-btn:hover {
+		background: #9ac2f0;
+	}
+
+	.shorts-btn {
+		background: #f8bbd0;
+		color: #fff;
+	}
+
+	.shorts-btn:hover {
+		background: #f4a9c1;
+	}
+
+	.about-btn {
+		background: #d5b3f5;
+		color: #fff;
+	}
+
+	.about-btn:hover {
+		background: #c9a3eb;
 	}
 
 	.products-btn {
@@ -196,6 +556,255 @@ const { title = "Japanezy Arts" } = Astro.props;
 
 	.products-btn:hover {
 		background: #c9a3eb;
+	}
+
+	.cart-btn {
+		background: #b3d4fc;
+		color: #333;
+	}
+
+	.cart-btn:hover {
+		background: #9ec5f7;
+	}
+
+	.wheel-btn {
+		background: #d5b3f5;
+		color: #ffffff;
+		border: none;
+		cursor: pointer;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.wheel-btn:hover {
+		background: #c9a3eb;
+	}
+
+	.rewards-btn {
+		background: #b3d4fc;
+		color: #333;
+		border: none;
+		cursor: pointer;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.rewards-btn:hover {
+		background: #9ec5f7;
+	}
+
+	.rewards-list {
+		text-align: left;
+		max-height: 300px;
+		overflow-y: auto;
+	}
+
+	.reward-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.75rem 1rem;
+		background: #f8f0ff;
+		border-radius: 8px;
+		margin-bottom: 0.5rem;
+		font-weight: 600;
+		color: #333;
+	}
+
+	.reward-item .reward-date {
+		font-size: 0.75rem;
+		color: #999;
+		font-weight: 400;
+	}
+
+	.rewards-empty {
+		color: #999;
+		font-size: 1rem;
+		padding: 2rem 0;
+	}
+
+	.unlock-section {
+		margin-top: 1rem;
+		text-align: right;
+	}
+
+	.unlock-btn {
+		background: #9b59b6;
+		color: #fff;
+		border: none;
+		padding: 0.4rem 1rem;
+		border-radius: 5px;
+		font-size: 0.8rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: background 0.2s;
+	}
+
+	.unlock-btn:hover {
+		background: #8e44ad;
+	}
+
+	.unlock-input-wrapper {
+		display: flex;
+		gap: 0.5rem;
+		justify-content: flex-end;
+		margin-top: 0.5rem;
+	}
+
+	.unlock-input {
+		padding: 0.4rem 0.6rem;
+		border: 2px solid #d5b3f5;
+		border-radius: 5px;
+		font-size: 0.85rem;
+		outline: none;
+		width: 180px;
+	}
+
+	.unlock-input:focus {
+		border-color: #9b59b6;
+	}
+
+	.unlock-submit {
+		background: #9b59b6;
+		color: #fff;
+		border: none;
+		padding: 0.4rem 0.8rem;
+		border-radius: 5px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		cursor: pointer;
+	}
+
+	.unlock-submit:hover {
+		background: #8e44ad;
+	}
+
+	.unlock-msg {
+		font-size: 0.8rem;
+		margin-top: 0.3rem;
+		min-height: 1.2em;
+	}
+
+	/* Wheel Modal */
+	.wheel-overlay {
+		display: none;
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 200;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.wheel-overlay.open {
+		display: flex;
+	}
+
+	.wheel-modal {
+		background: #fff;
+		border-radius: 16px;
+		padding: 2rem;
+		text-align: center;
+		position: relative;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+		max-width: 400px;
+		width: 90%;
+	}
+
+	.wheel-close {
+		position: absolute;
+		top: 0.75rem;
+		right: 1rem;
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		color: #999;
+		cursor: pointer;
+	}
+
+	.wheel-close:hover {
+		color: #333;
+	}
+
+	.wheel-title {
+		font-size: 1.5rem;
+		color: #333;
+		margin-bottom: 1.5rem;
+	}
+
+	.wheel-container {
+		position: relative;
+		display: inline-block;
+	}
+
+	.wheel-arrow {
+		position: absolute;
+		top: -12px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 0;
+		height: 0;
+		border-left: 14px solid transparent;
+		border-right: 14px solid transparent;
+		border-top: 24px solid #333;
+		z-index: 2;
+	}
+
+	#wheel-canvas {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.wheel-btn-row {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: center;
+		margin-top: 1.5rem;
+	}
+
+	.wheel-spin-btn {
+		background: #9b59b6;
+		color: #fff;
+		border: none;
+		padding: 0.75rem 2.5rem;
+		border-radius: 6px;
+		font-size: 1.1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: background 0.2s;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.wheel-spin-btn:hover {
+		background: #8e44ad;
+	}
+
+	.wheel-spin-btn:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	.wheel-stop-btn {
+		background: #e53935;
+		color: #fff;
+		border: none;
+		padding: 0.75rem 2.5rem;
+		border-radius: 6px;
+		font-size: 1.1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: background 0.2s;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.wheel-stop-btn:hover {
+		background: #c62828;
+	}
+
+	.wheel-result {
+		margin-top: 1rem;
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: #9b59b6;
+		min-height: 1.5em;
 	}
 
 	footer {
@@ -208,4 +817,95 @@ const { title = "Japanezy Arts" } = Astro.props;
 		position: relative;
 		z-index: 1;
 	}
+
+	/* Hamburger button */
+	.hamburger {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.5rem;
+		z-index: 101;
+	}
+
+	.hamburger span {
+		display: block;
+		width: 24px;
+		height: 2.5px;
+		background: #9b59b6;
+		border-radius: 2px;
+		transition: all 0.3s;
+	}
+
+	.hamburger.open span:nth-child(1) {
+		transform: rotate(45deg) translate(5px, 5px);
+	}
+
+	.hamburger.open span:nth-child(2) {
+		opacity: 0;
+	}
+
+	.hamburger.open span:nth-child(3) {
+		transform: rotate(-45deg) translate(5px, -5px);
+	}
+
+	/* Mobile nav */
+	@media (max-width: 768px) {
+		.hamburger {
+			display: flex;
+		}
+
+		.nav {
+			padding: 0.75rem 1rem;
+		}
+
+		.nav-links {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background: #fff;
+			flex-direction: column;
+			padding: 1rem;
+			gap: 0.5rem;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+			z-index: 100;
+		}
+
+		.nav-links.open {
+			display: flex;
+		}
+
+		.nav-btn {
+			width: 100%;
+			text-align: center;
+			padding: 0.75rem 1.5rem;
+			font-size: 1rem;
+		}
+
+		.wheel-modal {
+			max-width: 90vw;
+			padding: 1.5rem;
+		}
+
+		#wheel-canvas {
+			width: 260px;
+			height: 260px;
+		}
+
+		.wheel-title {
+			font-size: 1.25rem;
+			margin-bottom: 1rem;
+		}
+
+		.decorations .heart,
+		.decorations .star {
+			font-size: 1.4rem;
+		}
+	}
+
 </style>

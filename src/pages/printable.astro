@@ -1,0 +1,217 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Puchipaws Coloring Page - Japanezy Arts">
+	<section class="printable-section">
+		<a href="/" class="close-btn" aria-label="Back to home">&times;</a>
+		<h2>Puchipaws Coloring Page</h2>
+		<p class="printable-subtitle">Print it out and color in your favorite characters!</p>
+		<img src="/puchipaws-coloring.png" alt="Puchipaws coloring page" class="coloring-page" />
+		<div class="btn-row">
+			<button class="btn btn-primary print-btn" id="print-btn">Print Coloring Page</button>
+			<a href="/fan-art" class="btn fanart-btn">Have Fan Art?</a>
+		</div>
+
+		<div class="secret-video">
+			<h3 class="secret-title">Secret Video</h3>
+			<p class="secret-subtitle">Watch me color it in!</p>
+			<video class="secret-player" controls preload="metadata" poster="/secret-video-thumb.jpg">
+				<source src="/puchipawscoloringpage.MOV" type="video/mp4" />
+				Your browser does not support the video tag.
+			</video>
+		</div>
+
+		<div class="notice">
+			<p class="notice-title">NOTICE</p>
+			<p>Do not advertise on your channel without tagging me.</p>
+			<p>Do not post this on any social media platform except for YouTube, and you can only post this on YouTube if you tag Japanezy Arts.</p>
+			<p>You can only post this if you are subscribed.</p>
+			<p>Otherwise, this is for personal use only.</p>
+		</div>
+	</section>
+
+</Layout>
+
+<style>
+	.close-btn {
+		position: absolute;
+		top: 0.75rem;
+		left: 0.75rem;
+		width: 40px;
+		height: 40px;
+		background: #fff;
+		border: 2px solid #ddd;
+		border-radius: 50%;
+		font-size: 1.5rem;
+		line-height: 36px;
+		text-align: center;
+		color: #666;
+		text-decoration: none;
+		z-index: 10;
+		transition: all 0.2s;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.close-btn:hover {
+		background: #f8bbd0;
+		color: #fff;
+		border-color: #f8bbd0;
+	}
+
+	.printable-section {
+		padding: 4rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.printable-section h2 {
+		font-size: 2.25rem;
+		margin-bottom: 0.5rem;
+		color: #7baed4;
+	}
+
+	.printable-subtitle {
+		color: #666;
+		margin-bottom: 2rem;
+		font-size: 1.1rem;
+	}
+
+	.coloring-page {
+		width: 100%;
+		max-width: 800px;
+		height: auto;
+		background: #fff;
+	}
+
+	.btn-row {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		margin-top: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.print-btn {
+		padding: 0.85rem 2rem;
+		background: #d5b3f5;
+		color: #fff;
+		border: none;
+		border-radius: 6px;
+		font-weight: 600;
+		font-size: 0.95rem;
+		cursor: pointer;
+		transition: all 0.2s;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.print-btn:hover {
+		background: #c9a3eb;
+	}
+
+	.fanart-btn {
+		padding: 0.85rem 2rem;
+		background: #f8bbd0;
+		color: #fff;
+		border-radius: 6px;
+		font-weight: 600;
+		font-size: 0.95rem;
+		transition: all 0.2s;
+	}
+
+	.fanart-btn:hover {
+		background: #f4a9c1;
+	}
+
+	.secret-video {
+		margin-top: 2.5rem;
+		max-width: 700px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.secret-title {
+		font-size: 1.5rem;
+		color: #9b59b6;
+		margin-bottom: 0.25rem;
+	}
+
+	.secret-subtitle {
+		color: #666;
+		margin-bottom: 1rem;
+		font-size: 1rem;
+	}
+
+	.secret-player {
+		width: 100%;
+		border-radius: 12px;
+		box-shadow: 0 4px 16px rgba(155, 89, 182, 0.15);
+	}
+
+	.notice {
+		margin-top: 2rem;
+		padding: 1.25rem 2rem;
+		background: #fff;
+		border: 2px solid #f8bbd0;
+		border-radius: 10px;
+		max-width: 500px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.notice-title {
+		font-size: 1.1rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		color: #e53935;
+		margin-bottom: 0.5rem;
+	}
+
+	.notice p {
+		font-size: 0.95rem;
+		color: #555;
+		margin: 0.25rem 0;
+	}
+
+	@page {
+		size: landscape;
+	}
+
+	@media print {
+		.printable-section {
+			padding: 0;
+		}
+
+		.printable-section h2,
+		.printable-subtitle,
+		.print-btn,
+		.close-btn,
+		.secret-video,
+		.notice {
+			display: none;
+		}
+
+		.coloring-page {
+			max-width: 100%;
+			border: none;
+			border-radius: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.printable-section {
+			padding: 2.5rem 1rem;
+		}
+
+		.printable-section h2 {
+			font-size: 1.75rem;
+		}
+	}
+</style>
+
+<script>
+	document.getElementById('print-btn')?.addEventListener('click', () => window.print());
+</script>

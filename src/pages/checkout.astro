@@ -1,0 +1,363 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Checkout - Japanezy Arts">
+	<!-- Thank you popup -->
+	<div class="reward-popup-overlay" id="thankyou-popup">
+		<div class="reward-popup">
+			<p>Thank you for your order!</p>
+			<button id="close-thankyou">OK</button>
+		</div>
+	</div>
+
+	<section class="checkout-section">
+		<div class="checkout-top-row">
+			<a href="/cart" class="back-link">&larr; Back to Cart</a>
+			<button class="how-to-pay-btn" id="how-to-pay-btn">How do you pay?</button>
+		</div>
+		<h2>Checkout</h2>
+		<p class="checkout-subtitle">Please enter your information to complete your order.</p>
+
+		<form class="checkout-form" id="checkout-form">
+			<div class="form-group">
+				<label for="full-name">Full Name</label>
+				<input type="text" id="full-name" placeholder="Enter your full name" required />
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" id="email" placeholder="Enter your email" required />
+			</div>
+			<div class="form-group">
+				<label for="phone">Phone Number</label>
+				<input type="tel" id="phone" placeholder="Enter your phone number" required />
+			</div>
+			<div class="form-group">
+				<label for="card-number">Card Number</label>
+				<input type="text" id="card-number" placeholder="Enter your card number" required />
+			</div>
+
+			<div class="checkout-totals">
+				<div class="checkout-line">
+					<span>Items Total:</span>
+					<span id="checkout-items-total">$0</span>
+				</div>
+				<h3 class="plus-tax-heading">Plus tax</h3>
+				<div class="checkout-total">
+					<span>Subtotal:</span>
+					<span id="checkout-total-price">$0</span>
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-checkout-submit">Place Order</button>
+		</form>
+	</section>
+</Layout>
+
+<style is:global>
+	.checkout-section {
+		max-width: 500px;
+		margin: 0 auto;
+		padding: 3rem 2rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.checkout-top-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+	}
+
+	.how-to-pay-btn {
+		background: #d5b3f5;
+		color: #fff;
+		border: none;
+		padding: 0.85rem 1.5rem;
+		border-radius: 6px;
+		font-size: 1.1rem;
+		font-weight: 700;
+		cursor: pointer;
+		transition: background 0.2s;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.how-to-pay-btn:hover {
+		background: #c9a3eb;
+	}
+
+	.checkout-section h2 {
+		font-size: 2.25rem;
+		color: #333;
+		margin-bottom: 0.5rem;
+		text-align: center;
+	}
+
+	.checkout-subtitle {
+		text-align: center;
+		color: #666;
+		margin-bottom: 2rem;
+		font-size: 1.05rem;
+	}
+
+	.back-link {
+		display: inline-block;
+		color: #9b59b6;
+		font-weight: 600;
+		font-size: 0.95rem;
+		margin-bottom: 2rem;
+		background: #fff;
+		padding: 0.6rem 1.2rem;
+		border-radius: 6px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		transition: all 0.2s;
+	}
+
+	.back-link:hover {
+		color: #7d3c98;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	.checkout-form {
+		background: #fff;
+		border-radius: 12px;
+		padding: 2rem;
+		box-shadow: 0 4px 16px rgba(155, 89, 182, 0.15);
+	}
+
+	.form-group {
+		margin-bottom: 1.25rem;
+	}
+
+	.form-group label {
+		display: block;
+		font-weight: 600;
+		color: #333;
+		margin-bottom: 0.4rem;
+		font-size: 0.95rem;
+	}
+
+	.form-group input {
+		width: 100%;
+		padding: 0.75rem 1rem;
+		border: 2px solid #f0d4e8;
+		border-radius: 6px;
+		font-size: 1rem;
+		font-family: 'Inter', sans-serif;
+		outline: none;
+		transition: border-color 0.2s;
+	}
+
+	.form-group input:focus {
+		border-color: #9b59b6;
+	}
+
+	.checkout-totals {
+		margin: 1.5rem 0;
+		padding-top: 1rem;
+		border-top: 2px solid #f0d4e8;
+	}
+
+	.checkout-line {
+		display: flex;
+		justify-content: space-between;
+		font-size: 1.1rem;
+		color: #333;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.plus-tax-heading {
+		color: #e53935;
+		font-size: 1.1rem;
+		text-align: center;
+		margin: 0.75rem 0;
+	}
+
+	.checkout-total {
+		display: flex;
+		justify-content: space-between;
+		font-size: 1.4rem;
+		font-weight: 700;
+		color: #333;
+		margin-top: 0.5rem;
+		padding-top: 0.5rem;
+		border-top: 1px solid #f0d4e8;
+		font-family: 'Noto Serif JP', serif;
+	}
+
+	.checkout-total span:last-child {
+		color: #9b59b6;
+	}
+
+	.btn-checkout-submit {
+		display: block;
+		width: 100%;
+		background: #b3d4fc;
+		color: #333;
+		border: none;
+		padding: 0.85rem 2rem;
+		border-radius: 6px;
+		font-weight: 600;
+		font-size: 1.1rem;
+		cursor: pointer;
+		transition: background 0.2s;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.btn-checkout-submit:hover {
+		background: #9ec5f7;
+	}
+
+	.reward-popup-overlay {
+		display: none;
+		position: fixed;
+		inset: 0;
+		background: rgba(0,0,0,0.5);
+		z-index: 300;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.reward-popup-overlay.open {
+		display: flex;
+	}
+
+	.reward-popup {
+		background: #fff;
+		border-radius: 12px;
+		padding: 2rem;
+		text-align: center;
+		max-width: 360px;
+		width: 90%;
+		box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+	}
+
+	.reward-popup p {
+		font-size: 1.05rem;
+		color: #333;
+		margin-bottom: 1.5rem;
+	}
+
+	.reward-popup button {
+		background: #d5b3f5;
+		color: #fff;
+		border: none;
+		padding: 0.6rem 1.5rem;
+		border-radius: 6px;
+		font-weight: 600;
+		cursor: pointer;
+		font-size: 0.95rem;
+	}
+
+	.reward-popup button:hover {
+		background: #c9a3eb;
+	}
+
+	@media (max-width: 768px) {
+		.checkout-section {
+			padding: 1.5rem 1rem;
+		}
+
+		.checkout-section h2 {
+			font-size: 1.75rem;
+		}
+
+		.checkout-form {
+			padding: 1.25rem;
+		}
+
+		.checkout-top-row {
+			flex-direction: column;
+			gap: 0.75rem;
+			align-items: stretch;
+		}
+
+		.how-to-pay-btn {
+			text-align: center;
+			font-size: 1rem;
+		}
+
+		.back-link {
+			text-align: center;
+		}
+
+		.form-group input {
+			font-size: 16px; /* prevents iOS zoom on focus */
+		}
+
+		.btn-checkout-submit {
+			font-size: 1.05rem;
+			padding: 1rem;
+		}
+	}
+</style>
+
+<script>
+	// Calculate total from cart
+	function applyDiscount(price: number, rewardLabel: string): number {
+		if (rewardLabel === '10% Off') return price * 0.9;
+		if (rewardLabel === '50% Off') return price * 0.5;
+		return price;
+	}
+
+	function isDiscountReward(label: string): boolean {
+		return label === '10% Off' || label === '50% Off';
+	}
+
+	const cart = JSON.parse(localStorage.getItem('japanezy-cart') || '[]');
+
+	// If cart is empty, redirect back
+	if (cart.length === 0) {
+		window.location.href = '/cart';
+	}
+
+	let subtotal = 0;
+	cart.forEach((item: any) => {
+		const price = parseFloat(item.price.replace('$', ''));
+		const appliedRewards: string[] = item.appliedRewards || [];
+		const discountReward = appliedRewards.find((r: string) => isDiscountReward(r));
+		subtotal += discountReward ? applyDiscount(price, discountReward) : price;
+	});
+
+	const tax = subtotal * 0.0825;
+	const total = subtotal + tax;
+
+	const itemsTotalEl = document.getElementById('checkout-items-total');
+	const totalEl = document.getElementById('checkout-total-price');
+	if (itemsTotalEl) itemsTotalEl.textContent = '$' + subtotal.toFixed(2);
+	if (totalEl) totalEl.textContent = '$' + total.toFixed(2);
+
+	// Handle form submission
+	document.getElementById('checkout-form')!.addEventListener('submit', (e) => {
+		e.preventDefault();
+
+		// Mark all cart items as sold out
+		const soldOut: string[] = JSON.parse(localStorage.getItem('japanezy-sold-out') || '[]');
+		cart.forEach((item: any) => {
+			if (!soldOut.includes(item.name)) {
+				soldOut.push(item.name);
+			}
+		});
+		localStorage.setItem('japanezy-sold-out', JSON.stringify(soldOut));
+
+		// Clear the cart
+		localStorage.removeItem('japanezy-cart');
+
+		// Show thank you popup
+		document.getElementById('thankyou-popup')!.classList.add('open');
+	});
+
+	document.getElementById('close-thankyou')!.addEventListener('click', () => {
+		document.getElementById('thankyou-popup')!.classList.remove('open');
+		window.location.href = '/';
+	});
+
+	document.getElementById('thankyou-popup')!.addEventListener('click', (e) => {
+		if (e.target === document.getElementById('thankyou-popup')) {
+			document.getElementById('thankyou-popup')!.classList.remove('open');
+			window.location.href = '/';
+		}
+	});
+</script>

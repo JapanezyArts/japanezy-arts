@@ -1,0 +1,168 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Send Your Drawing - Japanezy Arts">
+	<section class="send-section">
+		<a href="/printable" class="close-btn" aria-label="Back to coloring page">&times;</a>
+		<h2>Send Your Drawing</h2>
+		<p class="send-subtitle">Take a picture of your colored drawing and send it to me!</p>
+		<form action="https://formsubmit.co/scarlettsburt@icloud.com" method="POST" enctype="multipart/form-data" class="send-form">
+			<input type="hidden" name="_subject" value="New Drawing Submission from Japanezy Arts!" />
+			<input type="hidden" name="_captcha" value="false" />
+			<input type="hidden" name="_next" value="http://localhost:4321/drawing-thanks" />
+			<label class="upload-label" id="upload-label">
+				<span class="upload-text">Tap to upload your drawing</span>
+				<input type="file" name="drawing" accept="image/*" required class="upload-input" id="upload-input" />
+			</label>
+			<input type="text" name="name" placeholder="Your name (optional)" class="send-input" />
+			<button type="submit" class="btn send-submit">Send Drawing</button>
+		</form>
+	</section>
+</Layout>
+
+<style>
+	.close-btn {
+		position: absolute;
+		top: 0.75rem;
+		left: 0.75rem;
+		width: 40px;
+		height: 40px;
+		background: #fff;
+		border: 2px solid #ddd;
+		border-radius: 50%;
+		font-size: 1.5rem;
+		line-height: 36px;
+		text-align: center;
+		color: #666;
+		text-decoration: none;
+		z-index: 10;
+		transition: all 0.2s;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.close-btn:hover {
+		background: #f8bbd0;
+		color: #fff;
+		border-color: #f8bbd0;
+	}
+
+	.send-section {
+		padding: 4rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+		max-width: 500px;
+		margin: 0 auto;
+	}
+
+	.send-section h2 {
+		font-size: 2.25rem;
+		color: #9b59b6;
+		margin-bottom: 0.5rem;
+	}
+
+	.send-subtitle {
+		color: #666;
+		margin-bottom: 2rem;
+		font-size: 1.1rem;
+	}
+
+	.send-form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	.upload-label {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		max-width: 350px;
+		min-height: 150px;
+		border: 3px dashed #d5b3f5;
+		border-radius: 12px;
+		cursor: pointer;
+		transition: all 0.2s;
+		background: #faf5ff;
+	}
+
+	.upload-label:hover {
+		border-color: #9b59b6;
+		background: #f3e8ff;
+	}
+
+	.upload-label.has-file {
+		border-color: #4caf50;
+		background: #f0fff0;
+	}
+
+	.upload-text {
+		color: #9b59b6;
+		font-weight: 600;
+		font-size: 1rem;
+		padding: 1rem;
+	}
+
+	.upload-input {
+		display: none;
+	}
+
+	.send-input {
+		width: 100%;
+		max-width: 350px;
+		padding: 0.85rem 1rem;
+		border: 2px solid #ddd;
+		border-radius: 8px;
+		font-size: 1rem;
+		font-family: 'Inter', sans-serif;
+		outline: none;
+		transition: border-color 0.2s;
+	}
+
+	.send-input:focus {
+		border-color: #9b59b6;
+	}
+
+	.send-submit {
+		background: #d5b3f5;
+		color: #fff;
+		padding: 0.85rem 2.5rem;
+		border: none;
+		cursor: pointer;
+		font-family: 'Inter', sans-serif;
+		font-size: 1rem;
+		font-weight: 600;
+		border-radius: 6px;
+		transition: background 0.2s;
+	}
+
+	.send-submit:hover {
+		background: #c9a3eb;
+	}
+
+	@media (max-width: 768px) {
+		.send-section {
+			padding: 2.5rem 1rem;
+		}
+
+		.send-section h2 {
+			font-size: 1.75rem;
+		}
+	}
+</style>
+
+<script>
+	const uploadInput = document.getElementById('upload-input') as HTMLInputElement;
+	const uploadLabel = document.getElementById('upload-label');
+	const uploadText = document.querySelector('.upload-text');
+
+	uploadInput?.addEventListener('change', () => {
+		if (uploadInput.files && uploadInput.files.length > 0) {
+			uploadLabel?.classList.add('has-file');
+			if (uploadText) uploadText.textContent = uploadInput.files[0].name;
+		}
+	});
+</script>

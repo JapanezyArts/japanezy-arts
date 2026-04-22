@@ -1,0 +1,252 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Meet the Puchipaws - Japanezy Arts">
+	<section class="puchipaws-hero">
+		<a href="/" class="close-btn" aria-label="Back to home">&times;</a>
+		<img src="/puchipawstransparent.png" alt="Puchipaws" class="puchipaws-banner" />
+	</section>
+
+	<section class="profiles">
+		<!-- Saki -->
+		<div class="profile-card saki-card">
+			<div class="profile-emotions">
+				<img src="/saki-1.png" alt="Saki - curious" class="emotion-img" />
+				<img src="/saki-2.png" alt="Saki - laughing" class="emotion-img" />
+				<img src="/saki-3.png" alt="Saki - happy" class="emotion-img" />
+			</div>
+			<div class="profile-info">
+				<h2>Saki</h2>
+				<p class="profile-role">The Creative One</p>
+				<p class="profile-bio">
+					Saki is the heart and soul of the Puchipaws. Her favorite color is pink. She's the most intelligent of the three and has an incredible imagination. She's a loving mother to Suzu — she loves her daughter more than anything — and sister to Chizuro. Whether she's painting, drawing, or crafting something out of paper, Saki is always creating. She's the one who comes up with all the ideas and inspires everyone around her with her artsy spirit. If there's a blank page, Saki will fill it with something beautiful.
+				</p>
+				<div class="profile-traits">
+					<span class="trait">Intelligent</span>
+					<span class="trait">Artsy</span>
+					<span class="trait">Creative</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Suzu -->
+		<div class="profile-card suzu-card">
+			<div class="profile-emotions">
+				<img src="/suzu-1.png" alt="Suzu - happy" class="emotion-img" />
+				<img src="/suzu-2.png" alt="Suzu - playful" class="emotion-img" />
+				<img src="/suzu-3.png" alt="Suzu - excited" class="emotion-img" />
+			</div>
+			<div class="profile-info">
+				<h2>Suzu</h2>
+				<p class="profile-role">The Adventurous One</p>
+				<p class="profile-bio">
+					Suzu is Saki's daughter and has a heart of gold. Her favorite color is red. She loves and cares about her mother more than anything, and she is so playful, kind, and loyal. Her paws are always brown and muddy because she loves to play in the mud! She connects with every single person she meets and turns everything into an adventure. You'll never have a boring day with Suzu around — she's the first to jump in and the last to want to stop.
+				</p>
+				<div class="profile-traits">
+					<span class="trait">Heart of Gold</span>
+					<span class="trait">Loyal</span>
+					<span class="trait">Playful</span>
+					<span class="trait">Kind</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Chizuro -->
+		<div class="profile-card chizuro-card">
+			<div class="profile-emotions">
+				<img src="/chizuro-1.png" alt="Chizuro - shy" class="emotion-img" />
+				<img src="/chizuro-2.png" alt="Chizuro - blushing" class="emotion-img" />
+				<img src="/chizuro-3.png" alt="Chizuro - gentle" class="emotion-img" />
+			</div>
+			<div class="profile-info">
+				<h2>Chizuro</h2>
+				<p class="profile-role">The Shy One</p>
+				<p class="profile-bio">
+					Chizuro is Saki's older sister. Her favorite color is purple. She's sweet and kind, but don't let that fool you — at first she's a little feisty and fiery. Her left eye is a button because she's blind in her left eye. Unlike Suzu, Chizuro is very clean and proper. She loves spending time playing with her stuffed animals in her own little world. She's possessive and protective of her owner, and her stuffed animal collection is her pride and joy.
+				</p>
+				<div class="profile-traits">
+					<span class="trait">Feisty</span>
+					<span class="trait">Sweet</span>
+					<span class="trait">Possessive</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="fun-fact">
+		<p><strong>Fun Fact:</strong> "Puchi" means tiny in Japanese!</p>
+	</section>
+</Layout>
+
+<style>
+	.close-btn {
+		position: absolute;
+		top: 0.75rem;
+		left: 0.75rem;
+		width: 40px;
+		height: 40px;
+		background: #fff;
+		border: 2px solid #ddd;
+		border-radius: 50%;
+		font-size: 1.5rem;
+		line-height: 36px;
+		text-align: center;
+		color: #666;
+		text-decoration: none;
+		z-index: 10;
+		transition: all 0.2s;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.close-btn:hover {
+		background: #f8bbd0;
+		color: #fff;
+		border-color: #f8bbd0;
+	}
+
+	.puchipaws-hero {
+		text-align: center;
+		padding: 3rem 2rem 1rem;
+		position: relative;
+		z-index: 1;
+		overflow: visible;
+	}
+
+	.puchipaws-banner {
+		max-width: 700px;
+		width: 100%;
+		height: auto;
+	}
+
+	.profiles {
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 2rem 2rem 4rem;
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.profile-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 16px;
+		padding: 2.5rem 2rem;
+		box-shadow: 0 4px 20px rgba(155, 89, 182, 0.1);
+	}
+
+	.profile-emotions {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		width: 100%;
+	}
+
+	.emotion-img {
+		flex: 1 1 0;
+		width: 0;
+		height: auto;
+		object-fit: contain;
+	}
+
+	.profile-info {
+		flex: 1;
+		text-align: center;
+	}
+
+	.profile-info h2 {
+		font-size: 2rem;
+		margin-bottom: 0.25rem;
+	}
+
+	.saki-card .profile-info h2 { color: #d4a574; }
+	.suzu-card .profile-info h2 { color: #7baed4; }
+	.chizuro-card .profile-info h2 { color: #d4a0b9; }
+
+	.profile-role {
+		font-size: 1.1rem;
+		font-weight: 600;
+		margin-bottom: 1rem;
+	}
+
+	.saki-card .profile-role { color: #c99a6b; }
+	.suzu-card .profile-role { color: #6a9dc4; }
+	.chizuro-card .profile-role { color: #c48daa; }
+
+	.profile-bio {
+		font-size: 1rem;
+		line-height: 1.8;
+		color: #555;
+		margin-bottom: 1.25rem;
+	}
+
+	.profile-traits {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.trait {
+		padding: 0.3rem 0.85rem;
+		border-radius: 20px;
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
+
+	.saki-card .trait { background: #fff3e0; color: #c99a6b; }
+	.suzu-card .trait { background: #e3f2fd; color: #6a9dc4; }
+	.chizuro-card .trait { background: #fce4ec; color: #c48daa; }
+
+	.fun-fact {
+		text-align: center;
+		padding: 2rem 2rem 3rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.fun-fact p {
+		font-size: 1.1rem;
+		color: #9b59b6;
+	}
+
+	@media (max-width: 768px) {
+		.puchipaws-hero {
+			padding: 2rem 1rem 0.5rem;
+		}
+
+		.profiles {
+			padding: 1.5rem 1rem 3rem;
+			gap: 2rem;
+		}
+
+		.profile-card,
+		.profile-card:nth-child(even) {
+			flex-direction: column;
+			text-align: center;
+			padding: 1.5rem;
+		}
+
+		.profile-emotions {
+			justify-content: center;
+		}
+
+		.emotion-img {
+			width: 100px;
+		}
+
+		.profile-traits {
+			justify-content: center;
+		}
+
+		.profile-info h2 {
+			font-size: 1.75rem;
+		}
+	}
+</style>

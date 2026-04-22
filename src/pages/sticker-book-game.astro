@@ -1,0 +1,900 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Sticker Book Game - Japanezy Arts">
+	<section class="sticker-game-section" id="sticker-game">
+		<h2>Sticker Book Game</h2>
+		<p class="game-subtitle">Drag stickers from the tray to decorate the room!</p>
+
+		<div class="game-header">
+			<div class="game-timer" id="game-timer">2:00</div>
+			<div class="game-score" id="game-score">Score: 0</div>
+			<button class="game-start-btn" id="game-start-btn">Start Game</button>
+		</div>
+
+		<div class="game-message" id="game-message"></div>
+
+		<div class="game-container" id="game-container">
+			<div class="sticker-room" id="sticker-room">
+				<div class="room-back-wall"></div>
+				<div class="room-left-wall"></div>
+				<div class="room-right-wall"></div>
+				<div class="room-floor"></div>
+				<div class="room-baseboard"></div>
+			</div>
+			<div class="sticker-tray" id="sticker-tray">
+				<div class="tray-label">Sticker Sheet</div>
+				<div class="tray-scroll" id="tray-scroll"></div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style is:global>
+	/* Sticker Game — global so dynamically created elements get styled */
+	.sticker-game-section {
+		padding: 4rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.sticker-game-section h2 {
+		font-size: 2.25rem;
+		margin-bottom: 0.5rem;
+		color: #333;
+	}
+
+	.game-subtitle {
+		color: #666;
+		margin-bottom: 1.5rem;
+		font-size: 1.05rem;
+	}
+
+	.game-header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1.5rem;
+		margin-bottom: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.game-timer {
+		background: #fff;
+		border: 3px solid #f8bbd0;
+		border-radius: 10px;
+		padding: 0.5rem 1.25rem;
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: #9b59b6;
+		font-family: 'Noto Serif JP', serif;
+		min-width: 90px;
+	}
+
+	.game-timer.warning {
+		border-color: #e53935;
+		color: #e53935;
+		animation: pulse 0.5s ease-in-out infinite alternate;
+	}
+
+	@keyframes pulse {
+		from { transform: scale(1); }
+		to { transform: scale(1.05); }
+	}
+
+	.game-score {
+		background: #fff;
+		border: 3px solid #d5b3f5;
+		border-radius: 10px;
+		padding: 0.5rem 1.25rem;
+		font-size: 1.2rem;
+		font-weight: 700;
+		color: #9b59b6;
+	}
+
+	.game-start-btn {
+		background: #d5b3f5;
+		color: #fff;
+		border: none;
+		padding: 0.65rem 2rem;
+		border-radius: 8px;
+		font-size: 1.05rem;
+		font-weight: 700;
+		cursor: pointer;
+		transition: background 0.2s;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.game-start-btn:hover {
+		background: #c9a3eb;
+	}
+
+	.game-message {
+		font-size: 1.3rem;
+		font-weight: 700;
+		color: #9b59b6;
+		min-height: 2rem;
+		margin-bottom: 1rem;
+	}
+
+	.game-message.success { color: #4caf50; }
+	.game-message.fail { color: #e53935; }
+
+	.game-container {
+		opacity: 0.5;
+		pointer-events: none;
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 4px 24px rgba(155, 89, 182, 0.2);
+	}
+
+	.game-container.active {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	/* Isometric Kawaii Room (Baa Baa House inspired) */
+	.sticker-room {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+		background: #fef9f0;
+	}
+
+	.room-back-wall {
+		position: absolute;
+		top: 0;
+		left: 10%;
+		right: 10%;
+		height: 60%;
+		background:
+			radial-gradient(circle at 20% 30%, rgba(248,187,208,0.1) 2px, transparent 2px),
+			radial-gradient(circle at 60% 50%, rgba(248,187,208,0.1) 2px, transparent 2px),
+			radial-gradient(circle at 80% 20%, rgba(248,187,208,0.1) 2px, transparent 2px),
+			radial-gradient(circle at 40% 70%, rgba(248,187,208,0.1) 2px, transparent 2px),
+			linear-gradient(180deg, #fff8e1 0%, #fff3cd 60%, #ffe0b2 100%);
+		background-size: 40px 40px, 50px 50px, 35px 35px, 45px 45px, 100% 100%;
+		border-bottom: 5px solid #e8c0a8;
+	}
+
+	.room-left-wall {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 10%;
+		height: 100%;
+		background: linear-gradient(90deg, #f5e6c8 0%, #fcefd5 100%);
+		clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
+	}
+
+	.room-right-wall {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 10%;
+		height: 100%;
+		background: linear-gradient(270deg, #f5e6c8 0%, #fcefd5 100%);
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
+	}
+
+	.room-floor {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 40%;
+		background:
+			repeating-linear-gradient(
+				90deg,
+				rgba(180,140,100,0.15) 0px, rgba(180,140,100,0.15) 1px,
+				transparent 1px, transparent 60px
+			),
+			linear-gradient(180deg, #f0d9b5 0%, #e6c9a0 100%);
+		clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+	}
+
+	.room-baseboard {
+		position: absolute;
+		top: 60%;
+		left: 10%;
+		right: 10%;
+		height: 5px;
+		background: #daa88a;
+		border-radius: 0 0 2px 2px;
+	}
+
+	/* Drop zones in room */
+	.drop-zone {
+		position: absolute;
+		transition: all 0.2s;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		touch-action: none;
+	}
+
+	.drop-zone .outline-svg {
+		width: 100%;
+		height: 100%;
+		opacity: 0.25;
+		filter: grayscale(0.6);
+	}
+
+	.drop-zone .outline-border {
+		position: absolute;
+		inset: -3px;
+		border: 2px dashed rgba(155, 89, 182, 0.4);
+		border-radius: 8px;
+	}
+
+	.drop-zone.drag-over .outline-border {
+		border-color: #9b59b6;
+		background: rgba(213, 179, 245, 0.2);
+		border-width: 3px;
+	}
+
+	.drop-zone.filled {
+		cursor: default;
+	}
+
+	.drop-zone.filled .outline-svg {
+		opacity: 1;
+		filter: none;
+		animation: stickerPop 0.4s ease;
+	}
+
+	.drop-zone.filled .outline-border {
+		border: 2px solid #81c784;
+		background: rgba(129, 199, 132, 0.08);
+	}
+
+	.drop-zone.wrong {
+		animation: shake 0.3s ease;
+	}
+
+	.drop-zone.wrong .outline-border {
+		border-color: #e53935;
+		background: rgba(229, 57, 53, 0.1);
+	}
+
+	@keyframes stickerPop {
+		0% { transform: scale(0.3); opacity: 0; }
+		50% { transform: scale(1.15); }
+		100% { transform: scale(1); opacity: 1; }
+	}
+
+	@keyframes shake {
+		0%, 100% { transform: translateX(0); }
+		25% { transform: translateX(-4px); }
+		75% { transform: translateX(4px); }
+	}
+
+	/* Sticker Tray */
+	.sticker-tray {
+		background: #fff;
+		border-top: 3px dashed #f8bbd0;
+		padding: 0.75rem;
+		position: relative;
+	}
+
+	.tray-label {
+		position: absolute;
+		top: -12px;
+		left: 50%;
+		transform: translateX(-50%);
+		background: #f8bbd0;
+		color: #fff;
+		font-size: 0.75rem;
+		font-weight: 700;
+		padding: 0.15rem 0.75rem;
+		border-radius: 4px;
+	}
+
+	.tray-scroll {
+		display: flex;
+		gap: 0.5rem;
+		overflow-x: auto;
+		padding: 0.5rem 0.25rem;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		scrollbar-color: #d5b3f5 #f0d4e8;
+	}
+
+	.tray-scroll::-webkit-scrollbar { height: 6px; }
+	.tray-scroll::-webkit-scrollbar-track { background: #f0d4e8; border-radius: 3px; }
+	.tray-scroll::-webkit-scrollbar-thumb { background: #d5b3f5; border-radius: 3px; }
+
+	.tray-sticker {
+		flex: 0 0 65px;
+		height: 65px;
+		background: #fef9f0;
+		border: 2px solid #f8bbd0;
+		border-radius: 10px;
+		cursor: grab;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.2s;
+		user-select: none;
+		-webkit-user-select: none;
+		padding: 4px;
+		touch-action: none;
+	}
+
+	.tray-sticker:hover {
+		transform: scale(1.08);
+		box-shadow: 0 3px 10px rgba(155, 89, 182, 0.25);
+	}
+
+	.tray-sticker:active {
+		cursor: grabbing;
+	}
+
+	.tray-sticker.dragging {
+		opacity: 0.3;
+		transform: scale(0.95);
+	}
+
+	.tray-sticker.placed {
+		opacity: 0.15;
+		pointer-events: none;
+		transform: none;
+		border-color: #81c784;
+	}
+
+	.tray-sticker svg { width: 100%; height: 100%; }
+
+	/* Drag ghost */
+	.drag-ghost {
+		position: fixed;
+		width: 70px;
+		height: 70px;
+		pointer-events: none;
+		z-index: 9999;
+		opacity: 0.85;
+		filter: drop-shadow(0 4px 12px rgba(155,89,182,0.4));
+		transform: scale(1.1);
+		transition: transform 0.1s;
+	}
+
+	.drag-ghost svg { width: 100%; height: 100%; }
+
+	@media (max-width: 768px) {
+		.sticker-game-section {
+			padding: 2.5rem 0.5rem;
+		}
+
+		.sticker-game-section h2 { font-size: 1.75rem; }
+		.game-timer { font-size: 1.2rem; padding: 0.4rem 1rem; }
+
+		.tray-sticker {
+			flex: 0 0 55px;
+			height: 55px;
+		}
+
+		.drag-ghost {
+			width: 60px;
+			height: 60px;
+		}
+	}
+</style>
+
+<script>
+	// ── Kawaii Sticker Definitions ──
+	// Characters inspired by Sanrio-style figures + Baa Baa House furniture
+
+	const STICKERS = [
+		// ── CHARACTERS ──
+		{ id: 'kuro', x: 20, y: 65, w: 9, h: 13, svg: `<svg viewBox="0 0 50 65" xmlns="http://www.w3.org/2000/svg">
+			<path d="M10,28 Q10,5 18,2 L25,0 L32,2 Q40,5 40,28" fill="#3a3a3a"/>
+			<polygon points="8,20 2,4 16,16" fill="#3a3a3a"/>
+			<polygon points="42,20 48,4 34,16" fill="#3a3a3a"/>
+			<circle cx="25" cy="35" r="17" fill="#fff"/>
+			<circle cx="25" cy="15" r="5" fill="#f8bbd0"/>
+			<path d="M22,13 L25,10 L28,13 L25,16 Z" fill="#f48fb1"/>
+			<circle cx="19" cy="33" r="3" fill="#333"/>
+			<circle cx="31" cy="33" r="3" fill="#333"/>
+			<ellipse cx="18" cy="32" rx="1" ry="1" fill="#fff"/>
+			<ellipse cx="30" cy="32" rx="1" ry="1" fill="#fff"/>
+			<ellipse cx="25" cy="38" rx="2" ry="1.2" fill="#f48fb1"/>
+			<path d="M22,40 Q25,43 28,40" fill="none" stroke="#f48fb1" stroke-width="1.2" stroke-linecap="round"/>
+			<circle cx="14" cy="37" r="3.5" fill="#f8bbd0" opacity="0.4"/>
+			<circle cx="36" cy="37" r="3.5" fill="#f8bbd0" opacity="0.4"/>
+			<ellipse cx="25" cy="55" rx="12" ry="10" fill="#fff"/>
+			<circle cx="20" cy="58" r="2" fill="#e53935" opacity="0.6"/>
+			<circle cx="25" cy="60" r="2" fill="#e53935" opacity="0.6"/>
+			<circle cx="30" cy="58" r="2" fill="#e53935" opacity="0.6"/>
+		</svg>` },
+		{ id: 'cinna', x: 44, y: 62, w: 9, h: 13, svg: `<svg viewBox="0 0 55 65" xmlns="http://www.w3.org/2000/svg">
+			<ellipse cx="10" cy="28" rx="8" ry="20" fill="#fff" transform="rotate(-15 10 28)"/>
+			<ellipse cx="45" cy="28" rx="8" ry="20" fill="#fff" transform="rotate(15 45 28)"/>
+			<ellipse cx="10" cy="28" rx="5" ry="16" fill="#f5f5f5" transform="rotate(-15 10 28)"/>
+			<ellipse cx="45" cy="28" rx="5" ry="16" fill="#f5f5f5" transform="rotate(15 45 28)"/>
+			<circle cx="27" cy="35" r="18" fill="#fff"/>
+			<circle cx="20" cy="32" r="3.5" fill="#4dd0e1"/>
+			<circle cx="34" cy="32" r="3.5" fill="#4dd0e1"/>
+			<circle cx="19" cy="31" r="1.2" fill="#fff"/>
+			<circle cx="33" cy="31" r="1.2" fill="#fff"/>
+			<circle cx="14" cy="37" r="3.5" fill="#f8bbd0" opacity="0.4"/>
+			<circle cx="40" cy="37" r="3.5" fill="#f8bbd0" opacity="0.4"/>
+			<path d="M24,38 Q27,35 30,38" fill="none" stroke="#aaa" stroke-width="1" stroke-linecap="round"/>
+			<rect x="23" y="42" width="8" height="5" rx="2" fill="#66bb6a"/>
+			<polygon points="27,42 24,46 30,46" fill="#81c784"/>
+			<ellipse cx="27" cy="55" rx="13" ry="10" fill="#fff"/>
+		</svg>` },
+		{ id: 'kero', x: 55, y: 68, w: 9, h: 11, svg: `<svg viewBox="0 0 50 55" xmlns="http://www.w3.org/2000/svg">
+			<circle cx="12" cy="10" r="10" fill="#81c784"/>
+			<circle cx="38" cy="10" r="10" fill="#81c784"/>
+			<circle cx="12" cy="9" r="6" fill="#fff"/>
+			<circle cx="38" cy="9" r="6" fill="#fff"/>
+			<circle cx="13" cy="9" r="3.5" fill="#2e7d32"/>
+			<circle cx="39" cy="9" r="3.5" fill="#2e7d32"/>
+			<circle cx="12" cy="8" r="1.5" fill="#fff"/>
+			<circle cx="38" cy="8" r="1.5" fill="#fff"/>
+			<ellipse cx="25" cy="32" rx="20" ry="16" fill="#81c784"/>
+			<ellipse cx="25" cy="34" rx="14" ry="10" fill="#c8e6c9"/>
+			<circle cx="15" cy="30" r="4" fill="#f8bbd0" opacity="0.4"/>
+			<circle cx="35" cy="30" r="4" fill="#f8bbd0" opacity="0.4"/>
+			<path d="M16,36 Q25,44 34,36" fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linecap="round"/>
+			<rect x="30" y="38" width="14" height="12" rx="2" fill="#fff3e0"/>
+			<polygon points="30,38 44,38 44,44" fill="#ffcc80"/>
+		</svg>` },
+		{ id: 'kitty', x: 72, y: 58, w: 9, h: 13, svg: `<svg viewBox="0 0 50 65" xmlns="http://www.w3.org/2000/svg">
+			<polygon points="8,22 4,6 16,18" fill="#fff"/>
+			<polygon points="42,22 46,6 34,18" fill="#fff"/>
+			<circle cx="25" cy="30" r="18" fill="#fff"/>
+			<ellipse cx="8" cy="10" rx="8" ry="6" fill="#f8bbd0"/>
+			<ellipse cx="10" cy="9" rx="5" ry="4" fill="#f48fb1"/>
+			<circle cx="19" cy="27" r="2" fill="#333"/>
+			<circle cx="31" cy="27" r="2" fill="#333"/>
+			<ellipse cx="25" cy="31" rx="2" ry="1.5" fill="#ffb74d"/>
+			<line x1="5" y1="28" x2="16" y2="30" stroke="#ddd" stroke-width="0.8"/>
+			<line x1="5" y1="32" x2="16" y2="32" stroke="#ddd" stroke-width="0.8"/>
+			<line x1="45" y1="28" x2="34" y2="30" stroke="#ddd" stroke-width="0.8"/>
+			<line x1="45" y1="32" x2="34" y2="32" stroke="#ddd" stroke-width="0.8"/>
+			<rect x="15" y="45" width="20" height="16" rx="6" fill="#f8bbd0"/>
+			<circle cx="21" cy="50" r="2" fill="#fff"/>
+			<circle cx="29" cy="50" r="2" fill="#fff"/>
+			<rect x="36" y="44" width="8" height="16" rx="3" fill="#b2dfdb"/>
+			<ellipse cx="40" cy="43" rx="5" ry="4" fill="#c8e6c9"/>
+		</svg>` },
+		{ id: 'pom', x: 32, y: 72, w: 9, h: 11, svg: `<svg viewBox="0 0 50 55" xmlns="http://www.w3.org/2000/svg">
+			<circle cx="25" cy="28" r="18" fill="#ffe0b2"/>
+			<ellipse cx="25" cy="18" rx="18" ry="8" fill="#8d6e63"/>
+			<ellipse cx="25" cy="18" rx="15" ry="5" fill="#a1887f"/>
+			<circle cx="25" cy="12" r="4" fill="#8d6e63"/>
+			<circle cx="19" cy="28" r="2" fill="#5d4037"/>
+			<circle cx="31" cy="28" r="2" fill="#5d4037"/>
+			<path d="M22,33 Q25,36 28,33" fill="none" stroke="#8d6e63" stroke-width="1.2" stroke-linecap="round"/>
+			<circle cx="14" cy="32" r="3.5" fill="#f8bbd0" opacity="0.35"/>
+			<circle cx="36" cy="32" r="3.5" fill="#f8bbd0" opacity="0.35"/>
+			<ellipse cx="25" cy="48" rx="11" ry="7" fill="#ffe0b2"/>
+			<rect x="33" y="40" width="7" height="14" rx="3" fill="#ffb74d"/>
+			<circle cx="36.5" cy="39" r="3" fill="#e65100" opacity="0.5"/>
+		</svg>` },
+		{ id: 'melo', x: 64, y: 66, w: 9, h: 13, svg: `<svg viewBox="0 0 50 65" xmlns="http://www.w3.org/2000/svg">
+			<path d="M10,30 Q5,5 18,2 Q25,0 25,0 Q25,0 32,2 Q45,5 40,30" fill="#f8bbd0"/>
+			<ellipse cx="14" cy="8" rx="6" ry="14" fill="#f8bbd0"/>
+			<ellipse cx="36" cy="8" rx="6" ry="14" fill="#f8bbd0"/>
+			<ellipse cx="14" cy="8" rx="4" ry="10" fill="#f48fb1" opacity="0.4"/>
+			<ellipse cx="36" cy="8" rx="4" ry="10" fill="#f48fb1" opacity="0.4"/>
+			<circle cx="25" cy="35" r="16" fill="#fff"/>
+			<circle cx="36" cy="12" r="5" fill="#90caf9"/>
+			<circle cx="36" cy="12" r="3" fill="#bbdefb"/>
+			<circle cx="36" cy="10" r="1.5" fill="#fff"/>
+			<circle cx="19" cy="33" r="2.8" fill="#5d4037"/>
+			<circle cx="31" cy="33" r="2.8" fill="#5d4037"/>
+			<circle cx="18.5" cy="32" r="1" fill="#fff"/>
+			<circle cx="30.5" cy="32" r="1" fill="#fff"/>
+			<ellipse cx="25" cy="37" rx="1.8" ry="1.2" fill="#ffb74d"/>
+			<circle cx="14" cy="37" r="3" fill="#f48fb1" opacity="0.3"/>
+			<circle cx="36" cy="37" r="3" fill="#f48fb1" opacity="0.3"/>
+			<ellipse cx="25" cy="55" rx="12" ry="10" fill="#fff"/>
+			<rect x="33" y="48" width="8" height="14" rx="3" fill="#f48fb1" opacity="0.5"/>
+			<circle cx="37" cy="47" r="4" fill="#f8bbd0"/>
+			<circle cx="37" cy="55" r="3" fill="#e91e63" opacity="0.3"/>
+		</svg>` },
+		{ id: 'tux', x: 82, y: 64, w: 8, h: 12, svg: `<svg viewBox="0 0 45 55" xmlns="http://www.w3.org/2000/svg">
+			<ellipse cx="22" cy="30" rx="18" ry="20" fill="#64b5f6"/>
+			<ellipse cx="22" cy="33" rx="12" ry="15" fill="#fff"/>
+			<ellipse cx="5" cy="32" rx="5" ry="10" fill="#42a5f5"/>
+			<ellipse cx="39" cy="32" rx="5" ry="10" fill="#42a5f5"/>
+			<circle cx="15" cy="24" r="3" fill="#333"/>
+			<circle cx="29" cy="24" r="3" fill="#333"/>
+			<circle cx="14.5" cy="23" r="1.2" fill="#fff"/>
+			<circle cx="28.5" cy="23" r="1.2" fill="#fff"/>
+			<polygon points="22,28 18,33 26,33" fill="#ffb74d"/>
+			<rect x="17" y="35" width="10" height="5" rx="2" fill="#f8bbd0"/>
+			<polygon points="22,35 19,39 25,39" fill="#f48fb1"/>
+			<ellipse cx="15" cy="50" rx="6" ry="3.5" fill="#ffb74d"/>
+			<ellipse cx="29" cy="50" rx="6" ry="3.5" fill="#ffb74d"/>
+			<ellipse cx="22" cy="8" rx="5" ry="3" fill="#f8bbd0"/>
+		</svg>` },
+
+		// ── FURNITURE (Baa Baa House style) ──
+		{ id: 'bed', x: 58, y: 40, w: 26, h: 20, svg: `<svg viewBox="0 0 100 55" xmlns="http://www.w3.org/2000/svg">
+			<rect x="2" y="12" width="96" height="38" rx="6" fill="#f8bbd0"/>
+			<rect x="2" y="6" width="22" height="44" rx="6" fill="#f48fb1"/>
+			<rect x="5" y="8" width="16" height="10" rx="5" fill="#fff" opacity="0.5"/>
+			<ellipse cx="35" cy="20" rx="14" ry="9" fill="#fff"/>
+			<ellipse cx="60" cy="20" rx="14" ry="9" fill="#fff"/>
+			<rect x="25" y="28" width="70" height="18" rx="4" fill="#fce4ec"/>
+			<circle cx="45" cy="36" r="4" fill="#f8bbd0" opacity="0.4"/>
+			<circle cx="60" cy="34" r="3" fill="#ce93d8" opacity="0.3"/>
+			<circle cx="75" cy="37" r="3.5" fill="#f8bbd0" opacity="0.3"/>
+			<rect x="2" y="46" width="96" height="6" rx="3" fill="#e91e63" opacity="0.2"/>
+		</svg>` },
+		{ id: 'bookshelf', x: 12, y: 18, w: 12, h: 40, svg: `<svg viewBox="0 0 45 85" xmlns="http://www.w3.org/2000/svg">
+			<rect x="2" y="2" width="41" height="81" rx="3" fill="#ffe0b2"/>
+			<rect x="2" y="2" width="41" height="81" rx="3" fill="none" stroke="#ffcc80" stroke-width="2"/>
+			<rect x="5" y="5" width="35" height="17" rx="2" fill="#fff8e1"/>
+			<rect x="5" y="25" width="35" height="17" rx="2" fill="#fff8e1"/>
+			<rect x="5" y="45" width="35" height="17" rx="2" fill="#fff8e1"/>
+			<rect x="5" y="65" width="35" height="14" rx="2" fill="#fff8e1"/>
+			<rect x="8" y="7" width="7" height="13" rx="1" fill="#ef9a9a"/>
+			<rect x="16" y="7" width="6" height="13" rx="1" fill="#a5d6a7"/>
+			<rect x="23" y="7" width="8" height="13" rx="1" fill="#90caf9"/>
+			<rect x="32" y="9" width="5" height="11" rx="1" fill="#ce93d8"/>
+			<rect x="8" y="27" width="9" height="13" rx="1" fill="#ffcc80"/>
+			<rect x="18" y="27" width="6" height="13" rx="1" fill="#f48fb1"/>
+			<rect x="25" y="27" width="7" height="13" rx="1" fill="#80cbc4"/>
+			<rect x="33" y="29" width="5" height="11" rx="1" fill="#fff176"/>
+			<rect x="8" y="47" width="8" height="13" rx="1" fill="#b39ddb"/>
+			<rect x="17" y="47" width="7" height="13" rx="1" fill="#ef9a9a"/>
+			<rect x="25" y="47" width="9" height="13" rx="1" fill="#81d4fa"/>
+			<circle cx="22" cy="72" r="5" fill="#ffcc80"/>
+			<circle cx="22" cy="72" r="3" fill="#ffe0b2"/>
+		</svg>` },
+		{ id: 'desk', x: 14, y: 50, w: 18, h: 14, svg: `<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+			<rect x="2" y="2" width="76" height="10" rx="3" fill="#ffe0b2"/>
+			<rect x="2" y="2" width="76" height="10" rx="3" fill="none" stroke="#ffcc80" stroke-width="1.5"/>
+			<rect x="5" y="12" width="28" height="22" rx="2" fill="#fff8e1"/>
+			<rect x="8" y="16" width="22" height="7" rx="1.5" fill="#ffe0b2"/>
+			<circle cx="19" cy="20" r="2" fill="#ffcc80"/>
+			<rect x="8" y="27" width="22" height="5" rx="1.5" fill="#ffe0b2"/>
+			<circle cx="19" cy="30" r="2" fill="#ffcc80"/>
+			<rect x="6" y="34" width="4" height="14" rx="1" fill="#deb887"/>
+			<rect x="70" y="12" width="4" height="36" rx="1" fill="#deb887"/>
+			<rect x="42" y="4" width="18" height="5" rx="1" fill="#90a4ae"/>
+			<rect x="44" y="2" width="14" height="4" rx="1" fill="#b0bec5"/>
+			<rect x="46" y="3" width="10" height="2" rx="0.5" fill="#cfd8dc"/>
+		</svg>` },
+		{ id: 'chair', x: 24, y: 60, w: 8, h: 13, svg: `<svg viewBox="0 0 35 55" xmlns="http://www.w3.org/2000/svg">
+			<rect x="3" y="0" width="29" height="28" rx="5" fill="#f8bbd0"/>
+			<rect x="6" y="3" width="23" height="22" rx="4" fill="#fce4ec"/>
+			<rect x="3" y="26" width="29" height="7" rx="3" fill="#f48fb1"/>
+			<rect x="5" y="33" width="4" height="20" rx="1.5" fill="#f48fb1" opacity="0.7"/>
+			<rect x="26" y="33" width="4" height="20" rx="1.5" fill="#f48fb1" opacity="0.7"/>
+		</svg>` },
+		{ id: 'lamp', x: 30, y: 34, w: 6, h: 14, svg: `<svg viewBox="0 0 30 55" xmlns="http://www.w3.org/2000/svg">
+			<path d="M5,0 L25,0 Q28,0 26,18 L22,20 L8,20 L4,18 Q2,0 5,0" fill="#fff9c4"/>
+			<path d="M5,0 L25,0 Q28,0 26,18 L22,20 L8,20 L4,18 Q2,0 5,0" fill="none" stroke="#ffee58" stroke-width="1"/>
+			<circle cx="15" cy="8" r="4" fill="#ffee58" opacity="0.5"/>
+			<rect x="12" y="20" width="6" height="25" rx="2" fill="#f8bbd0"/>
+			<ellipse cx="15" cy="48" rx="10" ry="4" fill="#fce4ec"/>
+			<ellipse cx="15" cy="48" rx="10" ry="4" fill="none" stroke="#f8bbd0" stroke-width="1.5"/>
+		</svg>` },
+		{ id: 'rug', x: 36, y: 72, w: 24, h: 10, svg: `<svg viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+			<ellipse cx="50" cy="15" rx="48" ry="14" fill="#e1bee7"/>
+			<ellipse cx="50" cy="15" rx="38" ry="10" fill="#f3e5f5"/>
+			<ellipse cx="50" cy="15" rx="25" ry="6" fill="#fce4ec"/>
+			<circle cx="30" cy="15" r="2.5" fill="#f8bbd0" opacity="0.5"/>
+			<circle cx="50" cy="15" r="2.5" fill="#b39ddb" opacity="0.5"/>
+			<circle cx="70" cy="15" r="2.5" fill="#f8bbd0" opacity="0.5"/>
+			<circle cx="40" cy="10" r="1.5" fill="#ce93d8" opacity="0.3"/>
+			<circle cx="60" cy="20" r="1.5" fill="#ce93d8" opacity="0.3"/>
+		</svg>` },
+		{ id: 'dresser', x: 78, y: 40, w: 12, h: 18, svg: `<svg viewBox="0 0 45 60" xmlns="http://www.w3.org/2000/svg">
+			<rect x="2" y="2" width="41" height="54" rx="4" fill="#e1bee7"/>
+			<rect x="2" y="2" width="41" height="54" rx="4" fill="none" stroke="#ce93d8" stroke-width="1.5"/>
+			<rect x="5" y="5" width="35" height="14" rx="2" fill="#f3e5f5"/>
+			<circle cx="22" cy="12" r="2.5" fill="#ffcc80"/>
+			<rect x="5" y="22" width="35" height="14" rx="2" fill="#f3e5f5"/>
+			<circle cx="22" cy="29" r="2.5" fill="#ffcc80"/>
+			<rect x="5" y="39" width="35" height="14" rx="2" fill="#f3e5f5"/>
+			<circle cx="22" cy="46" r="2.5" fill="#ffcc80"/>
+		</svg>` },
+		{ id: 'plant', x: 86, y: 32, w: 7, h: 12, svg: `<svg viewBox="0 0 30 50" xmlns="http://www.w3.org/2000/svg">
+			<rect x="6" y="28" width="18" height="20" rx="4" fill="#ffcc80"/>
+			<rect x="6" y="28" width="18" height="20" rx="4" fill="none" stroke="#ffb74d" stroke-width="1.5"/>
+			<ellipse cx="15" cy="18" rx="12" ry="15" fill="#81c784"/>
+			<ellipse cx="10" cy="14" rx="7" ry="10" fill="#a5d6a7"/>
+			<ellipse cx="20" cy="16" rx="6" ry="9" fill="#66bb6a"/>
+			<circle cx="15" cy="10" r="3" fill="#c8e6c9"/>
+			<circle cx="9" cy="20" r="2" fill="#e8f5e9"/>
+		</svg>` },
+		{ id: 'window', x: 36, y: 6, w: 18, h: 24, svg: `<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg">
+			<rect x="3" y="3" width="54" height="50" rx="4" fill="#b3e5fc"/>
+			<rect x="3" y="3" width="54" height="50" rx="4" fill="none" stroke="#fff" stroke-width="5"/>
+			<line x1="30" y1="3" x2="30" y2="53" stroke="#fff" stroke-width="4"/>
+			<line x1="3" y1="28" x2="57" y2="28" stroke="#fff" stroke-width="4"/>
+			<circle cx="44" cy="14" r="7" fill="#fff9c4" opacity="0.6"/>
+			<circle cx="44" cy="14" r="4" fill="#fff" opacity="0.4"/>
+			<path d="M0,53 Q5,53 8,58 L12,64 L12,53 Z" fill="#f8bbd0"/>
+			<path d="M60,53 Q55,53 52,58 L48,64 L48,53 Z" fill="#f8bbd0"/>
+			<path d="M12,53 Q12,62 8,65 L0,68 L0,53 Z" fill="#fce4ec"/>
+			<path d="M48,53 Q48,62 52,65 L60,68 L60,53 Z" fill="#fce4ec"/>
+		</svg>` },
+		{ id: 'clock', x: 72, y: 8, w: 7, h: 10, svg: `<svg viewBox="0 0 35 40" xmlns="http://www.w3.org/2000/svg">
+			<circle cx="17" cy="20" r="16" fill="#fff"/>
+			<circle cx="17" cy="20" r="16" fill="none" stroke="#f8bbd0" stroke-width="3"/>
+			<line x1="17" y1="20" x2="17" y2="10" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+			<line x1="17" y1="20" x2="24" y2="20" stroke="#f48fb1" stroke-width="2" stroke-linecap="round"/>
+			<circle cx="17" cy="20" r="2" fill="#f48fb1"/>
+			<circle cx="17" cy="7" r="1.5" fill="#f8bbd0"/>
+			<circle cx="30" cy="20" r="1.5" fill="#f8bbd0"/>
+			<circle cx="17" cy="33" r="1.5" fill="#f8bbd0"/>
+			<circle cx="4" cy="20" r="1.5" fill="#f8bbd0"/>
+			<polygon points="14,3 17,0 20,3" fill="#f8bbd0"/>
+		</svg>` },
+		{ id: 'picture', x: 60, y: 10, w: 10, h: 14, svg: `<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
+			<rect x="2" y="2" width="36" height="44" rx="3" fill="#ffe0b2"/>
+			<rect x="2" y="2" width="36" height="44" rx="3" fill="none" stroke="#ffcc80" stroke-width="2"/>
+			<rect x="5" y="5" width="30" height="38" rx="2" fill="#e8f5e9"/>
+			<circle cx="14" cy="18" r="6" fill="#fff9c4"/>
+			<circle cx="14" cy="18" r="3" fill="#ffee58" opacity="0.6"/>
+			<polygon points="5,40 18,25 26,33 35,26 35,43 5,43" fill="#a5d6a7"/>
+			<polygon points="22,43 28,30 35,43" fill="#81c784"/>
+			<circle cx="28" cy="12" r="2" fill="#f8bbd0"/>
+			<circle cx="32" cy="16" r="1.5" fill="#f48fb1"/>
+		</svg>` },
+		{ id: 'bunting', x: 15, y: 2, w: 60, h: 5, svg: `<svg viewBox="0 0 200 22" xmlns="http://www.w3.org/2000/svg">
+			<path d="M0,4 Q50,8 100,4 Q150,0 200,4" fill="none" stroke="#e0e0e0" stroke-width="1.5"/>
+			<polygon points="15,5 25,20 5,20" fill="#f8bbd0"/>
+			<polygon points="35,4 45,20 25,20" fill="#fff9c4"/>
+			<polygon points="55,5 65,20 45,20" fill="#b2dfdb"/>
+			<polygon points="75,4 85,20 65,20" fill="#e1bee7"/>
+			<polygon points="95,5 105,20 85,20" fill="#ffcc80"/>
+			<polygon points="115,4 125,20 105,20" fill="#90caf9"/>
+			<polygon points="135,5 145,20 125,20" fill="#f8bbd0"/>
+			<polygon points="155,4 165,20 145,20" fill="#fff9c4"/>
+			<polygon points="175,5 185,20 165,20" fill="#b2dfdb"/>
+			<polygon points="195,4 200,12 185,20" fill="#e1bee7"/>
+		</svg>` },
+		{ id: 'mirror', x: 82, y: 12, w: 7, h: 14, svg: `<svg viewBox="0 0 30 50" xmlns="http://www.w3.org/2000/svg">
+			<ellipse cx="15" cy="20" rx="13" ry="18" fill="#e8eaf6"/>
+			<ellipse cx="15" cy="20" rx="13" ry="18" fill="none" stroke="#f8bbd0" stroke-width="3"/>
+			<ellipse cx="12" cy="16" rx="5" ry="7" fill="#fff" opacity="0.35"/>
+			<circle cx="15" cy="5" r="3" fill="#f48fb1"/>
+			<circle cx="15" cy="5" r="2" fill="#fce4ec"/>
+			<rect x="13" y="38" width="4" height="10" rx="1.5" fill="#deb887"/>
+		</svg>` },
+	];
+
+	const GAME_TIME = 120;
+	const POINTS_PER_STICKER = 50;
+	const TIME_BONUS_MULTIPLIER = 10;
+
+	let placedCount = 0;
+	let score = 0;
+	let timeLeft = GAME_TIME;
+	let timerInterval: number | null = null;
+	let gameActive = false;
+
+	// Drag state
+	let draggedStickerId: string | null = null;
+	let draggedElement: HTMLElement | null = null;
+	let ghostEl: HTMLElement | null = null;
+	let dragOffsetX = 0;
+	let dragOffsetY = 0;
+
+	const room = document.getElementById('sticker-room');
+	const trayScroll = document.getElementById('tray-scroll');
+	const timerEl = document.getElementById('game-timer');
+	const scoreEl = document.getElementById('game-score');
+	const startBtn = document.getElementById('game-start-btn') as HTMLButtonElement | null;
+	const messageEl = document.getElementById('game-message');
+	const container = document.getElementById('game-container');
+
+	if (!room || !trayScroll || !timerEl || !scoreEl || !startBtn || !messageEl || !container) {
+		throw new Error('Sticker game: required DOM elements not found');
+	}
+
+	function shuffle<T>(arr: T[]): T[] {
+		const a = [...arr];
+		for (let i = a.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[a[i], a[j]] = [a[j], a[i]];
+		}
+		return a;
+	}
+
+	function formatTime(s: number): string {
+		const m = Math.floor(s / 60);
+		const sec = s % 60;
+		return `${m}:${sec.toString().padStart(2, '0')}`;
+	}
+
+	// ── Drag & Drop ──
+
+	function startDrag(e: MouseEvent | TouchEvent, stickerId: string, trayItem: HTMLElement) {
+		if (!gameActive || trayItem.classList.contains('placed')) return;
+		e.preventDefault();
+
+		draggedStickerId = stickerId;
+		draggedElement = trayItem;
+
+		const sticker = STICKERS.find(s => s.id === stickerId);
+		if (!sticker) return;
+
+		ghostEl = document.createElement('div');
+		ghostEl.className = 'drag-ghost';
+		ghostEl.innerHTML = sticker.svg;
+		document.body.appendChild(ghostEl);
+
+		const touch = 'touches' in e ? e.touches[0] : e;
+		const rect = trayItem.getBoundingClientRect();
+		dragOffsetX = touch.clientX - rect.left;
+		dragOffsetY = touch.clientY - rect.top;
+
+		moveGhost(touch.clientX, touch.clientY);
+		trayItem.classList.add('dragging');
+	}
+
+	function moveGhost(clientX: number, clientY: number) {
+		if (!ghostEl) return;
+		ghostEl.style.left = (clientX - dragOffsetX) + 'px';
+		ghostEl.style.top = (clientY - dragOffsetY) + 'px';
+	}
+
+	function onMouseMove(e: MouseEvent) {
+		if (!ghostEl) return;
+		e.preventDefault();
+		moveGhost(e.clientX, e.clientY);
+		highlightDropZone(e.clientX, e.clientY);
+	}
+
+	function onTouchMove(e: TouchEvent) {
+		if (!ghostEl) return;
+		e.preventDefault();
+		const touch = e.touches[0];
+		moveGhost(touch.clientX, touch.clientY);
+		highlightDropZone(touch.clientX, touch.clientY);
+	}
+
+	function highlightDropZone(clientX: number, clientY: number) {
+		document.querySelectorAll('.drop-zone.drag-over').forEach(z => z.classList.remove('drag-over'));
+		if (!ghostEl) return;
+		ghostEl.style.display = 'none';
+		const el = document.elementFromPoint(clientX, clientY);
+		ghostEl.style.display = '';
+		const zone = el?.closest('.drop-zone') as HTMLElement | null;
+		if (zone && !zone.classList.contains('filled')) {
+			zone.classList.add('drag-over');
+		}
+	}
+
+	function onDragEnd(e: MouseEvent | TouchEvent) {
+		if (!ghostEl || !draggedStickerId) return;
+
+		document.querySelectorAll('.drop-zone.drag-over').forEach(z => z.classList.remove('drag-over'));
+
+		const touch = 'changedTouches' in e ? e.changedTouches[0] : e;
+
+		ghostEl.style.display = 'none';
+		const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+		ghostEl.style.display = '';
+
+		const zone = dropTarget?.closest('.drop-zone') as HTMLElement | null;
+
+		if (zone && zone.dataset.stickerId === draggedStickerId && !zone.classList.contains('filled')) {
+			zone.classList.add('filled');
+			draggedElement?.classList.add('placed');
+			draggedElement?.classList.remove('dragging');
+
+			placedCount++;
+			score += POINTS_PER_STICKER;
+			scoreEl.textContent = `Score: ${score}`;
+
+			if (placedCount === STICKERS.length) endGame(true);
+		} else if (zone && !zone.classList.contains('filled')) {
+			zone.classList.add('wrong');
+			setTimeout(() => zone.classList.remove('wrong'), 400);
+			draggedElement?.classList.remove('dragging');
+		} else {
+			draggedElement?.classList.remove('dragging');
+		}
+
+		ghostEl.remove();
+		ghostEl = null;
+		draggedStickerId = null;
+		draggedElement = null;
+	}
+
+	// Global move/end listeners
+	document.addEventListener('mousemove', onMouseMove);
+	document.addEventListener('mouseup', onDragEnd);
+	document.addEventListener('touchmove', onTouchMove, { passive: false });
+	document.addEventListener('touchend', onDragEnd);
+
+	// ── Game Logic ──
+
+	function buildGame() {
+		room.querySelectorAll('.drop-zone').forEach(z => z.remove());
+		trayScroll.innerHTML = '';
+
+		STICKERS.forEach(s => {
+			const zone = document.createElement('div');
+			zone.className = 'drop-zone';
+			zone.dataset.stickerId = s.id;
+			zone.style.left = s.x + '%';
+			zone.style.top = s.y + '%';
+			zone.style.width = s.w + '%';
+			zone.style.height = s.h + '%';
+			zone.innerHTML = `<div class="outline-svg">${s.svg}</div><div class="outline-border"></div>`;
+			room.appendChild(zone);
+		});
+
+		const shuffled = shuffle(STICKERS);
+		shuffled.forEach(s => {
+			const item = document.createElement('div');
+			item.className = 'tray-sticker';
+			item.dataset.stickerId = s.id;
+			item.innerHTML = s.svg;
+
+			item.addEventListener('mousedown', (e) => startDrag(e, s.id, item));
+			item.addEventListener('touchstart', (e) => startDrag(e, s.id, item), { passive: false });
+
+			trayScroll.appendChild(item);
+		});
+	}
+
+	function startGame() {
+		placedCount = 0;
+		score = 0;
+		timeLeft = GAME_TIME;
+		draggedStickerId = null;
+		draggedElement = null;
+		gameActive = true;
+
+		scoreEl.textContent = 'Score: 0';
+		timerEl.textContent = formatTime(timeLeft);
+		timerEl.classList.remove('warning');
+		messageEl.textContent = '';
+		messageEl.className = 'game-message';
+		startBtn.textContent = 'Restart';
+		container.classList.add('active');
+
+		buildGame();
+
+		if (timerInterval) clearInterval(timerInterval);
+		timerInterval = window.setInterval(() => {
+			timeLeft--;
+			timerEl.textContent = formatTime(timeLeft);
+			if (timeLeft <= 30) timerEl.classList.add('warning');
+			if (timeLeft <= 0) endGame(false);
+		}, 1000);
+	}
+
+	function endGame(won: boolean) {
+		gameActive = false;
+		if (timerInterval) clearInterval(timerInterval);
+
+		if (won) {
+			const timeBonus = timeLeft * TIME_BONUS_MULTIPLIER;
+			score += timeBonus;
+			scoreEl.textContent = `Score: ${score}`;
+			messageEl.textContent = `You did it! All stickers placed! +${timeBonus} time bonus!`;
+			messageEl.className = 'game-message success';
+		} else {
+			messageEl.textContent = `Time's up! You placed ${placedCount}/${STICKERS.length} stickers.`;
+			messageEl.className = 'game-message fail';
+		}
+
+		startBtn.textContent = 'Play Again';
+
+		const highScore = parseInt(localStorage.getItem('japanezy-sticker-highscore') || '0');
+		if (score > highScore) {
+			localStorage.setItem('japanezy-sticker-highscore', score.toString());
+			if (won) messageEl.textContent += ' New high score!';
+		}
+	}
+
+	startBtn.addEventListener('click', startGame);
+	buildGame();
+</script>

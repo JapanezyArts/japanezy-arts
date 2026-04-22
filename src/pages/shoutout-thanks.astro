@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Thank You! - Japanezy Arts">
+	<section class="thanks-section">
+		<h2>Hooray!</h2>
+		<p>You requested a shoutout! Your shoutout will be either a post or a YouTube short on Japanezy Arts.</p>
+		<a href="/" class="btn thanks-btn">Back to Home</a>
+	</section>
+</Layout>
+
+<style>
+	.thanks-section {
+		padding: 6rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+		max-width: 500px;
+		margin: 0 auto;
+	}
+
+	.thanks-section h2 {
+		font-size: 2.25rem;
+		color: #e53935;
+		margin-bottom: 1rem;
+	}
+
+	.thanks-section p {
+		font-size: 1.1rem;
+		color: #555;
+		margin-bottom: 2rem;
+		line-height: 1.6;
+	}
+
+	.thanks-btn {
+		background: #e53935;
+		color: #fff;
+		padding: 0.85rem 2rem;
+	}
+
+	.thanks-btn:hover {
+		background: #c62828;
+	}
+</style>

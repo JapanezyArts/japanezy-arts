@@ -1,0 +1,397 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { products } from '../../data/products';
+
+export function getStaticPaths() {
+	return products.map((product) => ({
+		params: { slug: product.slug },
+		props: { product },
+	}));
+}
+
+const { product } = Astro.props;
+---
+
+<Layout title={`${product.name} - Japanezy Arts`}>
+	<section class="product-page">
+		<a href="/#products" class="back-link">&larr; Back to Products</a>
+
+		<div class="product-detail">
+			<div class="product-image-wrapper">
+				<img src={product.image} alt={product.name} />
+			</div>
+
+			<div class="product-info">
+				<div class="product-info-header">
+					<h1>{product.name}</h1>
+					<span class="sale-badge" id="sale-badge" style="display: none;">Sale!</span>
+				</div>
+				{product.variants && (
+					<div class="variant-buttons">
+						{product.variants.map((v, i) => (
+							<button
+								class={`variant-btn ${i === 0 ? 'active' : ''}`}
+								data-variant-image={v.image}
+								data-variant-price={v.price}
+								data-variant-label={v.label}
+								data-variant-original-price={v.originalPrice || ''}
+							>
+								{v.label}
+							</button>
+						))}
+					</div>
+				)}
+				<p class="product-price" id="product-price">
+					{product.price}
+					<span class="original-price" id="original-price" style="display: none;"></span>
+				</p>
+				{product.description && <p class="product-description">{product.description}</p>}
+				<button
+					class="add-to-cart-btn"
+					data-name={product.name}
+					data-price={product.price}
+					data-image={product.image}
+				>
+					Add to Cart
+				</button>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.product-page {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 2rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.back-link {
+		display: inline-block;
+		color: #9b59b6;
+		font-weight: 600;
+		font-size: 0.95rem;
+		margin-bottom: 2rem;
+		background: #fff;
+		padding: 0.6rem 1.2rem;
+		border-radius: 6px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		transition: all 0.2s;
+	}
+
+	.back-link:hover {
+		color: #7d3c98;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	.product-detail {
+		display: flex;
+		gap: 2.5rem;
+		background: #fff;
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 4px 16px rgba(155, 89, 182, 0.15);
+	}
+
+	.product-image-wrapper {
+		flex: 0 0 380px;
+	}
+
+	.product-info-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+
+	.sale-badge {
+		background: #e53935;
+		color: #fff;
+		font-size: 1.1rem;
+		font-weight: 700;
+		padding: 0.5rem 1.2rem;
+		border-radius: 6px;
+		white-space: nowrap;
+	}
+
+	.original-price {
+		font-size: 0.85em;
+		color: #e53935;
+		text-decoration: line-through;
+		margin-left: 0.5rem;
+		font-weight: 600;
+	}
+
+	.product-image-wrapper {
+		position: relative;
+	}
+
+	.sold-out-overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(255, 0, 0, 0.35);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 2;
+	}
+
+	.sold-out-overlay span {
+		color: #fff;
+		font-size: 2.5rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 3px;
+		text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+	}
+
+	.product-image-wrapper img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	.product-info {
+		flex: 1;
+		padding: 2.5rem 2.5rem 2.5rem 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.product-info h1 {
+		font-size: 1.75rem;
+		color: #333;
+		margin-bottom: 0.75rem;
+	}
+
+	.product-option {
+		display: inline-block;
+		font-size: 0.8rem;
+		color: #555;
+		background: #f0d4e8;
+		padding: 0.3rem 0.7rem;
+		border-radius: 4px;
+		font-weight: 600;
+		margin-bottom: 0.75rem;
+		width: fit-content;
+	}
+
+	.variant-buttons {
+		display: flex;
+		gap: 0.5rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.variant-btn {
+		font-size: 0.8rem;
+		color: #555;
+		background: #f0d4e8;
+		border: 2px solid transparent;
+		padding: 0.4rem 0.8rem;
+		border-radius: 4px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s;
+	}
+
+	.variant-btn:hover {
+		background: #e8c0d8;
+	}
+
+	.variant-btn.active {
+		border-color: #9b59b6;
+		background: #e8c0d8;
+	}
+
+	.product-price {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: #9b59b6;
+		margin-bottom: 1rem;
+	}
+
+	.product-description {
+		font-size: 1.05rem;
+		line-height: 1.7;
+		color: #555;
+		margin-bottom: 2rem;
+	}
+
+	.add-to-cart-btn {
+		background: #d5b3f5;
+		color: #fff;
+		border: none;
+		padding: 0.85rem 2rem;
+		border-radius: 6px;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: background 0.2s;
+		width: fit-content;
+	}
+
+	.add-to-cart-btn:hover {
+		background: #c9a3eb;
+	}
+
+	@media (max-width: 768px) {
+		.product-page {
+			padding: 1.25rem;
+		}
+
+		.product-detail {
+			flex-direction: column;
+		}
+
+		.product-image-wrapper {
+			flex: none;
+			height: 280px;
+		}
+
+		.product-info {
+			padding: 1.5rem;
+		}
+
+		.product-info h1 {
+			font-size: 1.35rem;
+		}
+
+		.product-price {
+			font-size: 1.25rem;
+		}
+
+		.variant-buttons {
+			flex-wrap: wrap;
+		}
+
+		.variant-btn {
+			font-size: 0.75rem;
+			padding: 0.4rem 0.7rem;
+		}
+
+		.add-to-cart-btn {
+			width: 100%;
+			text-align: center;
+			padding: 0.9rem;
+			font-size: 1rem;
+		}
+	}
+</style>
+
+<script>
+	// Check sold-out status
+	function checkSoldOut() {
+		const soldOut: string[] = JSON.parse(localStorage.getItem('japanezy-sold-out') || '[]');
+		const cartBtn = document.querySelector('.add-to-cart-btn') as HTMLButtonElement;
+		const activeVariant = document.querySelector('.variant-btn.active') as HTMLButtonElement | null;
+		const productName = cartBtn?.dataset.name || '';
+		const fullName = productName + (activeVariant ? ` (${activeVariant.dataset.variantLabel})` : '');
+
+		const isSoldOut = soldOut.includes(fullName);
+		const imgWrapper = document.querySelector('.product-image-wrapper');
+
+		// Remove existing overlay
+		const existingOverlay = imgWrapper?.querySelector('.sold-out-overlay');
+		if (existingOverlay) existingOverlay.remove();
+
+		if (isSoldOut) {
+			if (imgWrapper) {
+				const overlay = document.createElement('div');
+				overlay.className = 'sold-out-overlay';
+				overlay.innerHTML = '<span>Sold Out</span>';
+				imgWrapper.appendChild(overlay);
+			}
+			if (cartBtn) {
+				cartBtn.textContent = 'Sold Out';
+				cartBtn.disabled = true;
+				cartBtn.style.opacity = '0.5';
+				cartBtn.style.cursor = 'not-allowed';
+			}
+		} else {
+			if (cartBtn) {
+				cartBtn.textContent = 'Add to Cart';
+				cartBtn.disabled = false;
+				cartBtn.style.opacity = '1';
+				cartBtn.style.cursor = 'pointer';
+			}
+		}
+	}
+
+	checkSoldOut();
+
+	function updateSaleDisplay(originalPrice: string) {
+		const saleBadge = document.getElementById('sale-badge');
+		const originalPriceEl = document.getElementById('original-price');
+		if (originalPrice) {
+			if (saleBadge) saleBadge.style.display = 'block';
+			if (originalPriceEl) { originalPriceEl.textContent = originalPrice; originalPriceEl.style.display = 'inline'; }
+		} else {
+			if (saleBadge) saleBadge.style.display = 'none';
+			if (originalPriceEl) originalPriceEl.style.display = 'none';
+		}
+	}
+
+	// Check initial active variant for sale
+	const initialActive = document.querySelector('.variant-btn.active') as HTMLButtonElement | null;
+	if (initialActive) updateSaleDisplay(initialActive.dataset.variantOriginalPrice || '');
+
+	// Variant switching
+	document.querySelectorAll('.variant-btn').forEach(btn => {
+		btn.addEventListener('click', () => {
+			const variantBtn = btn as HTMLButtonElement;
+			document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+			variantBtn.classList.add('active');
+
+			const img = document.querySelector('.product-image-wrapper img') as HTMLImageElement;
+			const priceEl = document.getElementById('product-price');
+			const cartBtn = document.querySelector('.add-to-cart-btn') as HTMLButtonElement;
+			const originalPriceEl = document.getElementById('original-price');
+
+			if (img) img.src = variantBtn.dataset.variantImage!;
+			if (priceEl) {
+				// Clear and re-add content
+				const priceText = document.createTextNode(variantBtn.dataset.variantPrice!);
+				// Keep the original-price span, clear text nodes
+				Array.from(priceEl.childNodes).forEach(n => { if (n.nodeType === 3) n.remove(); });
+				priceEl.insertBefore(priceText, originalPriceEl);
+			}
+			if (cartBtn) {
+				cartBtn.dataset.price = variantBtn.dataset.variantPrice!;
+				cartBtn.dataset.image = variantBtn.dataset.variantImage!;
+			}
+
+			updateSaleDisplay(variantBtn.dataset.variantOriginalPrice || '');
+			checkSoldOut();
+		});
+	});
+
+	// Add to cart
+	document.querySelector('.add-to-cart-btn')?.addEventListener('click', (e) => {
+		const btn = e.currentTarget as HTMLButtonElement;
+		if (btn.disabled) return;
+		const activeVariant = document.querySelector('.variant-btn.active') as HTMLButtonElement | null;
+		const item = {
+			name: btn.dataset.name + (activeVariant ? ` (${activeVariant.dataset.variantLabel})` : ''),
+			price: btn.dataset.price,
+			image: btn.dataset.image,
+		};
+		const soldOut: string[] = JSON.parse(localStorage.getItem('japanezy-sold-out') || '[]');
+		if (soldOut.includes(item.name)) {
+			btn.textContent = 'Sold Out';
+			return;
+		}
+		const cart = JSON.parse(localStorage.getItem('japanezy-cart') || '[]');
+		if (cart.some((c: any) => c.name === item.name)) {
+			btn.textContent = 'Already in Cart';
+			setTimeout(() => { btn.textContent = 'Add to Cart'; }, 1500);
+			return;
+		}
+		cart.push(item);
+		localStorage.setItem('japanezy-cart', JSON.stringify(cart));
+		btn.textContent = 'Added!';
+		setTimeout(() => { btn.textContent = 'Add to Cart'; }, 1000);
+	});
+</script>

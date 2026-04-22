@@ -1,56 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const products = [
-	{ name: "Cherry Blossom Canvas", price: "$45", image: "https://placehold.co/300x400/f7b8d4/333?text=Cherry+Blossom" },
-	{ name: "Koi Fish Print", price: "$35", image: "https://placehold.co/300x400/d4a8f7/333?text=Koi+Fish" },
-	{ name: "Mountain Ink Wash", price: "$55", image: "https://placehold.co/300x400/a8c8f7/333?text=Mountain+Ink" },
-	{ name: "Bamboo Forest", price: "$40", image: "https://placehold.co/300x400/f7b8d4/333?text=Bamboo+Forest" },
-	{ name: "Dragon Painting", price: "$65", image: "https://placehold.co/300x400/d4a8f7/333?text=Dragon" },
-	{ name: "Geisha Portrait", price: "$50", image: "https://placehold.co/300x400/a8c8f7/333?text=Geisha" },
-	{ name: "Sakura Branch", price: "$30", image: "https://placehold.co/300x400/f7b8d4/333?text=Sakura" },
-	{ name: "Wave Art", price: "$48", image: "https://placehold.co/300x400/d4a8f7/333?text=Wave+Art" },
-];
 ---
 
 <Layout title="Japanezy Arts - Home">
 	<!-- Hero Section -->
 	<section class="hero">
-		<div class="hero-content">
-			<h1>Japanezy Arts</h1>
-			<p>Japanese-inspired artwork, tutorials & original pieces</p>
-			<a href="https://www.youtube.com/@JapanezyArts" target="_blank" rel="noopener" class="btn btn-primary">Watch on YouTube</a>
-		</div>
+		<img src="/ja-main-logo.png" alt="Japanezy Arts" class="hero-logo" />
+		<p>Art, paper crafts, and more with tutorials and ASMR</p>
+		<a href="https://www.youtube.com/@JapanezyArts" target="_blank" rel="noopener" class="btn btn-primary">Watch on YouTube</a>
 	</section>
 
-	<!-- Products Section -->
-	<section class="products-section" id="products">
-		<h2>Products</h2>
-		<p class="section-subtitle">Scroll to browse original artwork</p>
-
-		<div class="products-scroll">
-			{products.map((product) => (
-				<div class="product-card">
-					<img src={product.image} alt={product.name} loading="lazy" />
-					<div class="product-info">
-						<h3>{product.name}</h3>
-						<span class="price">{product.price}</span>
-					</div>
-				</div>
-			))}
-		</div>
+	<!-- Characters Section -->
+	<section class="characters-section">
+		<h2>Meet Puchipaws</h2>
+		<img src="/puchipaws.png" alt="Puchipaws characters" class="characters-banner" />
+		<a href="/printable" class="btn btn-primary" style="margin-top: 2rem;">Free Printable Sheet</a>
 	</section>
 
 	<!-- Videos Section -->
 	<section class="videos-section">
-		<h2>Latest Videos</h2>
-		<p class="section-subtitle">Watch tutorials and process videos from the channel</p>
+		<h2>Latest from Japanezy Arts</h2>
+		<h3 class="video-title">Latest Video</h3>
 
 		<div class="video-card">
 			<div class="video-wrapper">
 				<iframe
-					src="https://www.youtube.com/embed?listType=user_uploads&list=JapanezyArts"
-					title="Japanezy Arts - Latest Upload"
+					src="https://www.youtube.com/embed/ye-XFUdnoaY"
+					title="Latest Video"
 					frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen
@@ -68,43 +44,57 @@ const products = [
 		<div class="about-content">
 			<h2>About Me</h2>
 			<p>
-				Japanezy Arts is a creative channel dedicated to Japanese-inspired artwork.
-				From traditional techniques to modern interpretations, each piece captures
-				the beauty and elegance of Japanese art. Original artwork is also available
-				for purchase — browse the products above!
+				Japanezy Arts is a creative channel dedicated to kawaii artwork.
+				We offer a series of handmade paper crafts/artwork and designs.
 			</p>
 		</div>
 	</section>
+
+	<!-- Subscribe Section -->
+	<section class="subscribe-section">
+		<h2>Subscribe</h2>
+		<button id="subscribe-btn" class="btn subscribe-btn">Subscribe on YouTube</button>
+		<p class="subscribe-note">Subscribe for a shoutout!</p>
+	</section>
+
+	<!-- Shoutout Popup -->
+	<div class="shoutout-overlay" id="shoutout-overlay">
+		<div class="shoutout-modal">
+			<button class="shoutout-close" id="shoutout-close">&times;</button>
+			<h2 class="shoutout-title">Yay, you subscribed!</h2>
+			<p class="shoutout-text">Would you like a shoutout?</p>
+			<div class="shoutout-buttons">
+				<a href="/shoutout" class="btn shoutout-yes">Yes!</a>
+				<button class="btn shoutout-no" id="shoutout-no">No thanks</button>
+			</div>
+		</div>
+	</div>
 </Layout>
 
 <style>
 	/* Hero */
 	.hero {
-		position: relative;
-		min-height: 60vh;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-		background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #e1bee7 100%);
+		padding: 4rem 2rem;
+		min-height: 60vh;
+		position: relative;
 		z-index: 1;
 	}
 
-	.hero-content {
-		padding: 2rem;
-	}
-
-	.hero h1 {
-		font-size: clamp(2.5rem, 6vw, 5rem);
-		color: #4a4a4a;
-		margin-bottom: 1rem;
-		letter-spacing: 0.05em;
+	.hero-logo {
+		height: 600px;
+		width: auto;
+		margin-bottom: 1.5rem;
 	}
 
 	.hero p {
 		font-size: clamp(1rem, 2vw, 1.25rem);
 		color: #7a6b7a;
-		margin-bottom: 2.5rem;
+		margin-bottom: 2rem;
 	}
 
 	/* Buttons */
@@ -126,87 +116,6 @@ const products = [
 		background: #c9a3eb;
 	}
 
-	/* Products Section */
-	.products-section {
-		padding: 4rem 2rem;
-		text-align: center;
-		position: relative;
-		z-index: 1;
-	}
-
-	.products-section h2 {
-		font-size: 2.25rem;
-		margin-bottom: 0.5rem;
-		color: #333;
-	}
-
-	.section-subtitle {
-		color: #666;
-		margin-bottom: 2.5rem;
-		font-size: 1.05rem;
-	}
-
-	.products-scroll {
-		display: flex;
-		gap: 1.5rem;
-		overflow-x: auto;
-		scroll-snap-type: x mandatory;
-		padding: 1rem 1rem 2rem;
-		-webkit-overflow-scrolling: touch;
-		scrollbar-width: thin;
-		scrollbar-color: #9b59b6 #f0d4e8;
-	}
-
-	.products-scroll::-webkit-scrollbar {
-		height: 8px;
-	}
-
-	.products-scroll::-webkit-scrollbar-track {
-		background: #f0d4e8;
-		border-radius: 4px;
-	}
-
-	.products-scroll::-webkit-scrollbar-thumb {
-		background: #9b59b6;
-		border-radius: 4px;
-	}
-
-	.product-card {
-		flex: 0 0 240px;
-		scroll-snap-align: start;
-		background: #fff;
-		border-radius: 12px;
-		overflow: hidden;
-		box-shadow: 0 4px 16px rgba(155, 89, 182, 0.15);
-		transition: transform 0.2s;
-	}
-
-	.product-card:hover {
-		transform: translateY(-6px);
-	}
-
-	.product-card img {
-		width: 100%;
-		height: 280px;
-		object-fit: cover;
-	}
-
-	.product-info {
-		padding: 1rem;
-		text-align: left;
-	}
-
-	.product-info h3 {
-		font-size: 1rem;
-		margin-bottom: 0.4rem;
-	}
-
-	.price {
-		font-weight: 600;
-		color: #9b59b6;
-		font-size: 1.1rem;
-	}
-
 	/* Videos Section */
 	.videos-section {
 		padding: 4rem 2rem;
@@ -221,6 +130,12 @@ const products = [
 		font-size: 2.25rem;
 		margin-bottom: 0.5rem;
 		color: #333;
+	}
+
+	.video-title {
+		color: #555;
+		font-size: 1.25rem;
+		margin-bottom: 2rem;
 	}
 
 	.video-card {
@@ -242,6 +157,29 @@ const products = [
 		left: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	/* Characters Section */
+	.characters-section {
+		padding: 4rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.characters-section h2 {
+		font-size: 2.25rem;
+		margin-bottom: 2rem;
+		color: #333;
+	}
+
+	.characters-banner {
+		width: 100%;
+		max-width: 800px;
+		height: auto;
+		border-radius: 12px;
 	}
 
 	/* About Section */
@@ -270,19 +208,176 @@ const products = [
 		color: #555;
 	}
 
-	@media (max-width: 640px) {
+	/* Subscribe Section */
+	.subscribe-section {
+		padding: 3rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.subscribe-section h2 {
+		font-size: 2.25rem;
+		color: #e53935;
+		margin-bottom: 1.5rem;
+	}
+
+	.subscribe-btn {
+		background: #e53935;
+		color: #fff;
+		font-size: 1.1rem;
+		padding: 1rem 2.5rem;
+	}
+
+	.subscribe-btn:hover {
+		background: #c62828;
+	}
+
+	.subscribe-note {
+		margin-top: 1rem;
+		color: #e53935;
+		font-size: 1rem;
+		font-weight: 600;
+	}
+
+	.subscribe-btn {
+		border: none;
+		cursor: pointer;
+		font-family: 'Inter', sans-serif;
+	}
+
+	/* Shoutout Popup */
+	.shoutout-overlay {
+		display: none;
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 200;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.shoutout-overlay.open {
+		display: flex;
+	}
+
+	.shoutout-modal {
+		background: #fff;
+		border-radius: 16px;
+		padding: 2.5rem 2rem;
+		text-align: center;
+		position: relative;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+		max-width: 400px;
+		width: 90%;
+	}
+
+	.shoutout-close {
+		position: absolute;
+		top: 0.75rem;
+		right: 1rem;
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		color: #999;
+		cursor: pointer;
+	}
+
+	.shoutout-close:hover {
+		color: #333;
+	}
+
+	.shoutout-title {
+		font-size: 1.5rem;
+		color: #e53935;
+		margin-bottom: 0.5rem;
+	}
+
+	.shoutout-text {
+		font-size: 1.1rem;
+		color: #555;
+		margin-bottom: 1.5rem;
+	}
+
+	.shoutout-buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+	}
+
+	.shoutout-yes {
+		background: #e53935;
+		color: #fff;
+		padding: 0.75rem 2rem;
+	}
+
+	.shoutout-yes:hover {
+		background: #c62828;
+	}
+
+	.shoutout-no {
+		background: #ddd;
+		color: #555;
+		padding: 0.75rem 2rem;
+		border: none;
+		cursor: pointer;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.shoutout-no:hover {
+		background: #ccc;
+	}
+</style>
+
+<script>
+	const subscribeBtn = document.getElementById('subscribe-btn');
+	const overlay = document.getElementById('shoutout-overlay');
+	const closeBtn = document.getElementById('shoutout-close');
+	const noBtn = document.getElementById('shoutout-no');
+
+	subscribeBtn?.addEventListener('click', () => {
+		window.open('https://www.youtube.com/@JapanezyArts?sub_confirmation=1', '_blank');
+		overlay?.classList.add('open');
+	});
+
+	closeBtn?.addEventListener('click', () => overlay?.classList.remove('open'));
+	noBtn?.addEventListener('click', () => overlay?.classList.remove('open'));
+	overlay?.addEventListener('click', (e) => {
+		if (e.target === overlay) overlay.classList.remove('open');
+	});
+</script>
+
+<style>
+	@media (max-width: 768px) {
 		.hero {
-			min-height: 50vh;
+			padding: 2.5rem 1.25rem;
+			min-height: 45vh;
 		}
 
-		.products-section,
+		.hero-logo {
+			height: 300px;
+		}
+
+		.characters-section {
+			padding: 2.5rem 1rem;
+		}
+
+		.characters-section h2 {
+			font-size: 1.75rem;
+		}
+
 		.videos-section,
 		.about-section {
-			padding: 3rem 1.25rem;
+			padding: 2.5rem 1rem;
 		}
 
-		.product-card {
-			flex: 0 0 200px;
+		.videos-section h2,
+		.about-content h2 {
+			font-size: 1.75rem;
+		}
+
+		.about-content p {
+			font-size: 1rem;
 		}
 	}
 </style>
