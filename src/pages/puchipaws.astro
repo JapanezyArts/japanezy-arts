@@ -9,8 +9,28 @@ import Layout from '../layouts/Layout.astro';
 	</section>
 
 	<section class="profiles">
+		<!-- Rosey -->
+		<div class="profile-card rosey-card" id="rosey">
+			<div class="profile-emotions rosey-single">
+				<img src="/rosey-hero.png" alt="Rosey" class="emotion-img rosey-img" />
+			</div>
+			<div class="profile-info">
+				<h2>Rosey</h2>
+				<p class="profile-role">The Main Character</p>
+				<p class="profile-bio">
+					Rosey is the star of Japanezy Arts. She has been with me for two years, and she's just about done being a puppy. Her favorite color is light pastel pink, and I like to dress her up in cute outfits &mdash; especially kawaii bibs. She's always dirty and needs a bath just about every week, and whenever there's paint, she likes to roll around in it.
+				</p>
+				<div class="profile-traits">
+					<span class="trait">Creative</span>
+					<span class="trait">Sweet</span>
+					<span class="trait">Bubbly</span>
+					<span class="trait">Talented</span>
+				</div>
+			</div>
+		</div>
+
 		<!-- Saki -->
-		<div class="profile-card saki-card">
+		<div class="profile-card saki-card" id="saki">
 			<div class="profile-emotions">
 				<img src="/saki-1.png" alt="Saki - curious" class="emotion-img" />
 				<img src="/saki-2.png" alt="Saki - laughing" class="emotion-img" />
@@ -31,7 +51,7 @@ import Layout from '../layouts/Layout.astro';
 		</div>
 
 		<!-- Suzu -->
-		<div class="profile-card suzu-card">
+		<div class="profile-card suzu-card" id="suzu">
 			<div class="profile-emotions">
 				<img src="/suzu-1.png" alt="Suzu - happy" class="emotion-img" />
 				<img src="/suzu-2.png" alt="Suzu - playful" class="emotion-img" />
@@ -53,7 +73,7 @@ import Layout from '../layouts/Layout.astro';
 		</div>
 
 		<!-- Chizuro -->
-		<div class="profile-card chizuro-card">
+		<div class="profile-card chizuro-card" id="chizuro">
 			<div class="profile-emotions">
 				<img src="/chizuro-1.png" alt="Chizuro - shy" class="emotion-img" />
 				<img src="/chizuro-2.png" alt="Chizuro - blushing" class="emotion-img" />
@@ -100,9 +120,9 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.close-btn:hover {
-		background: #f8bbd0;
+		background: #F2A6B5;
 		color: #fff;
-		border-color: #f8bbd0;
+		border-color: #F2A6B5;
 	}
 
 	.puchipaws-hero {
@@ -138,7 +158,7 @@ import Layout from '../layouts/Layout.astro';
 		background: rgba(255, 255, 255, 0.7);
 		border-radius: 16px;
 		padding: 2.5rem 2rem;
-		box-shadow: 0 4px 20px rgba(155, 89, 182, 0.1);
+		box-shadow: 0 4px 20px rgba(210, 130, 120, 0.1);
 	}
 
 	.profile-emotions {
@@ -154,6 +174,9 @@ import Layout from '../layouts/Layout.astro';
 		height: auto;
 		object-fit: contain;
 	}
+
+	.rosey-single { justify-content: center; }
+	.rosey-img { flex: 0 0 auto; width: auto; max-width: 260px; }
 
 	.profile-info {
 		flex: 1;
@@ -202,7 +225,7 @@ import Layout from '../layouts/Layout.astro';
 
 	.saki-card .trait { background: #fff3e0; color: #c99a6b; }
 	.suzu-card .trait { background: #e3f2fd; color: #6a9dc4; }
-	.chizuro-card .trait { background: #fce4ec; color: #c48daa; }
+	.chizuro-card .trait { background: #FFF0F0; color: #c48daa; }
 
 	.fun-fact {
 		text-align: center;
@@ -213,7 +236,7 @@ import Layout from '../layouts/Layout.astro';
 
 	.fun-fact p {
 		font-size: 1.1rem;
-		color: #9b59b6;
+		color: #D4816B;
 	}
 
 	@media (max-width: 768px) {
@@ -235,10 +258,32 @@ import Layout from '../layouts/Layout.astro';
 
 		.profile-emotions {
 			justify-content: center;
+			gap: 0.5rem;
+			max-width: 340px;
+			margin: 0 auto;
 		}
 
 		.emotion-img {
-			width: 100px;
+			flex: 1 1 0;
+			width: 0;
+			max-width: 110px;
+		}
+
+		.rosey-single {
+			max-width: 200px;
+		}
+
+		.rosey-img {
+			max-width: 200px;
+		}
+
+		.profile-bio {
+			font-size: 0.95rem;
+			line-height: 1.7;
+		}
+
+		.puchipaws-banner {
+			max-width: 100%;
 		}
 
 		.profile-traits {
@@ -247,6 +292,24 @@ import Layout from '../layouts/Layout.astro';
 
 		.profile-info h2 {
 			font-size: 1.75rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.profile-emotions {
+			gap: 0.35rem;
+		}
+
+		.profile-card {
+			padding: 1.25rem 1rem;
+		}
+
+		.profile-info h2 {
+			font-size: 1.5rem;
+		}
+
+		.profile-role {
+			font-size: 1rem;
 		}
 	}
 </style>

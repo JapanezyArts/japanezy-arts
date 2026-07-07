@@ -370,7 +370,13 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		.sticker-game-section h2 { font-size: 1.75rem; }
-		.game-timer { font-size: 1.2rem; padding: 0.4rem 1rem; }
+		.game-subtitle { font-size: 0.95rem; }
+
+		.game-header { gap: 0.75rem; }
+		.game-timer { font-size: 1.2rem; padding: 0.4rem 1rem; min-width: 0; }
+		.game-score { font-size: 1rem; padding: 0.4rem 1rem; }
+		.game-start-btn { font-size: 0.95rem; padding: 0.6rem 1.5rem; }
+		.game-message { font-size: 1.1rem; }
 
 		.tray-sticker {
 			flex: 0 0 55px;
@@ -381,6 +387,27 @@ import Layout from '../layouts/Layout.astro';
 			width: 60px;
 			height: 60px;
 		}
+	}
+
+	@media (max-width: 480px) {
+		.sticker-game-section {
+			padding: 2rem 0.4rem;
+		}
+
+		.sticker-game-section h2 { font-size: 1.5rem; }
+
+		.game-header { gap: 0.5rem; }
+		.game-timer { font-size: 1.05rem; padding: 0.35rem 0.75rem; }
+		.game-score { font-size: 0.9rem; padding: 0.35rem 0.75rem; }
+		.game-start-btn { font-size: 0.9rem; padding: 0.55rem 1.1rem; }
+		.game-message { font-size: 1rem; }
+
+		.tray-sticker {
+			flex: 0 0 48px;
+			height: 48px;
+		}
+
+		.sticker-tray { padding: 0.6rem 0.4rem; }
 	}
 </style>
 

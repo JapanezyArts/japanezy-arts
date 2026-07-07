@@ -38,9 +38,9 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.close-btn:hover {
-		background: #f8bbd0;
+		background: #F2A6B5;
 		color: #fff;
-		border-color: #f8bbd0;
+		border-color: #F2A6B5;
 	}
 
 	.shoutout-section {
@@ -54,7 +54,7 @@ import Layout from '../layouts/Layout.astro';
 
 	.shoutout-section h2 {
 		font-size: 2.25rem;
-		color: #e53935;
+		color: #D4816B;
 		margin-bottom: 0.5rem;
 	}
 
@@ -75,25 +75,25 @@ import Layout from '../layouts/Layout.astro';
 		width: 100%;
 		max-width: 350px;
 		padding: 0.85rem 1rem;
-		border: 2px solid #ddd;
+		border: 2px solid #FCE4D8;
 		border-radius: 8px;
 		font-size: 1rem;
-		font-family: 'Inter', sans-serif;
+		font-family: 'Baloo 2', cursive;
 		outline: none;
 		transition: border-color 0.2s;
 	}
 
 	.shoutout-input:focus {
-		border-color: #e53935;
+		border-color: #D4816B;
 	}
 
 	.shoutout-submit {
-		background: #e53935;
+		background: #E8879B;
 		color: #fff;
 		padding: 0.85rem 2.5rem;
 		border: none;
 		cursor: pointer;
-		font-family: 'Inter', sans-serif;
+		font-family: 'Baloo 2', cursive;
 		font-size: 1rem;
 		font-weight: 600;
 		border-radius: 6px;
@@ -101,7 +101,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.shoutout-submit:hover {
-		background: #c62828;
+		background: #D4706A;
 	}
 
 	@media (max-width: 768px) {
@@ -111,6 +111,26 @@ import Layout from '../layouts/Layout.astro';
 
 		.shoutout-section h2 {
 			font-size: 1.75rem;
+		}
+
+		.shoutout-subtitle {
+			font-size: 1rem;
+		}
+
+		.shoutout-submit {
+			width: 100%;
+			max-width: 350px;
+			box-sizing: border-box;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.shoutout-section {
+			padding: 2rem 1rem;
+		}
+
+		.shoutout-section h2 {
+			font-size: 1.5rem;
 		}
 	}
 </style>

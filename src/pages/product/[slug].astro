@@ -46,14 +46,6 @@ const { product } = Astro.props;
 					<span class="original-price" id="original-price" style="display: none;"></span>
 				</p>
 				{product.description && <p class="product-description">{product.description}</p>}
-				<button
-					class="add-to-cart-btn"
-					data-name={product.name}
-					data-price={product.price}
-					data-image={product.image}
-				>
-					Add to Cart
-				</button>
 			</div>
 		</div>
 	</section>
@@ -70,7 +62,7 @@ const { product } = Astro.props;
 
 	.back-link {
 		display: inline-block;
-		color: #9b59b6;
+		color: #D4816B;
 		font-weight: 600;
 		font-size: 0.95rem;
 		margin-bottom: 2rem;
@@ -82,7 +74,7 @@ const { product } = Astro.props;
 	}
 
 	.back-link:hover {
-		color: #7d3c98;
+		color: #C9704F;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 	}
 
@@ -92,7 +84,7 @@ const { product } = Astro.props;
 		background: #fff;
 		border-radius: 12px;
 		overflow: hidden;
-		box-shadow: 0 4px 16px rgba(155, 89, 182, 0.15);
+		box-shadow: 0 4px 16px rgba(210, 130, 120, 0.15);
 	}
 
 	.product-image-wrapper {
@@ -170,8 +162,8 @@ const { product } = Astro.props;
 	.product-option {
 		display: inline-block;
 		font-size: 0.8rem;
-		color: #555;
-		background: #f0d4e8;
+		color: #7A5040;
+		background: #FCE4D8;
 		padding: 0.3rem 0.7rem;
 		border-radius: 4px;
 		font-weight: 600;
@@ -187,8 +179,8 @@ const { product } = Astro.props;
 
 	.variant-btn {
 		font-size: 0.8rem;
-		color: #555;
-		background: #f0d4e8;
+		color: #7A5040;
+		background: #FCE4D8;
 		border: 2px solid transparent;
 		padding: 0.4rem 0.8rem;
 		border-radius: 4px;
@@ -198,18 +190,18 @@ const { product } = Astro.props;
 	}
 
 	.variant-btn:hover {
-		background: #e8c0d8;
+		background: #F0C8B8;
 	}
 
 	.variant-btn.active {
-		border-color: #9b59b6;
-		background: #e8c0d8;
+		border-color: #D4816B;
+		background: #F0C8B8;
 	}
 
 	.product-price {
 		font-size: 1.5rem;
 		font-weight: 700;
-		color: #9b59b6;
+		color: #D4816B;
 		margin-bottom: 1rem;
 	}
 
@@ -221,7 +213,7 @@ const { product } = Astro.props;
 	}
 
 	.add-to-cart-btn {
-		background: #d5b3f5;
+		background: #F2A6B5;
 		color: #fff;
 		border: none;
 		padding: 0.85rem 2rem;
@@ -234,7 +226,7 @@ const { product } = Astro.props;
 	}
 
 	.add-to-cart-btn:hover {
-		background: #c9a3eb;
+		background: #E8879B;
 	}
 
 	@media (max-width: 768px) {
@@ -366,32 +358,5 @@ const { product } = Astro.props;
 			updateSaleDisplay(variantBtn.dataset.variantOriginalPrice || '');
 			checkSoldOut();
 		});
-	});
-
-	// Add to cart
-	document.querySelector('.add-to-cart-btn')?.addEventListener('click', (e) => {
-		const btn = e.currentTarget as HTMLButtonElement;
-		if (btn.disabled) return;
-		const activeVariant = document.querySelector('.variant-btn.active') as HTMLButtonElement | null;
-		const item = {
-			name: btn.dataset.name + (activeVariant ? ` (${activeVariant.dataset.variantLabel})` : ''),
-			price: btn.dataset.price,
-			image: btn.dataset.image,
-		};
-		const soldOut: string[] = JSON.parse(localStorage.getItem('japanezy-sold-out') || '[]');
-		if (soldOut.includes(item.name)) {
-			btn.textContent = 'Sold Out';
-			return;
-		}
-		const cart = JSON.parse(localStorage.getItem('japanezy-cart') || '[]');
-		if (cart.some((c: any) => c.name === item.name)) {
-			btn.textContent = 'Already in Cart';
-			setTimeout(() => { btn.textContent = 'Add to Cart'; }, 1500);
-			return;
-		}
-		cart.push(item);
-		localStorage.setItem('japanezy-cart', JSON.stringify(cart));
-		btn.textContent = 'Added!';
-		setTimeout(() => { btn.textContent = 'Add to Cart'; }, 1000);
 	});
 </script>

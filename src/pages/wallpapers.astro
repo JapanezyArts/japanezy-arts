@@ -1,0 +1,569 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Free Wallpapers - Japanezy Arts">
+	<section class="wallpapers-section">
+		<a href="/" class="close-btn" aria-label="Back to home">&times;</a>
+		<h2>Free Device Wallpapers</h2>
+		<p class="wallpapers-subtitle">Download cute PuchiPaws wallpapers for your phone, tablet, or desktop!</p>
+		<p class="wallpapers-instructions">Tap or click a wallpaper, then save the image to your device.</p>
+
+		<div class="device-tabs">
+			<button class="device-tab active" data-device="iphone">iPhone</button>
+			<button class="device-tab" data-device="ipad">iPad</button>
+			<button class="device-tab" data-device="imac">iMac</button>
+		</div>
+
+		<div class="wallpapers-grid" id="iphone-grid">
+			<a href="/puchipaws-iphone-1.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-iphone-1.png" alt="PuchiPaws iPhone Wallpaper 1" />
+			</a>
+			<a href="/puchipaws-iphone-2.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-iphone-2.png" alt="PuchiPaws iPhone Wallpaper 2" />
+			</a>
+			<a href="/puchipaws-iphone-3.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-iphone-3.png" alt="PuchiPaws iPhone Wallpaper 3" />
+			</a>
+			<a href="/puchipaws-iphone-4.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-iphone-4.png" alt="PuchiPaws iPhone Wallpaper 4" />
+			</a>
+			<a href="/puchipaws-iphone-5.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-iphone-5.png" alt="PuchiPaws iPhone Wallpaper 5" />
+			</a>
+			<a href="/puchipaws-iphone-6.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-iphone-6.png" alt="PuchiPaws iPhone Wallpaper 6" />
+			</a>
+			<a href="/puchipaws-iphone-7.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-iphone-7.png" alt="PuchiPaws iPhone Wallpaper 7" />
+			</a>
+			<a href="/puchipaws-iphone-8.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-iphone-8.png" alt="PuchiPaws iPhone Wallpaper 8" />
+			</a>
+			<a href="/puchipaws-iphone-9.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-iphone-9.png" alt="PuchiPaws iPhone Wallpaper 9" />
+			</a>
+		</div>
+
+		<div class="orientation-tabs hidden" id="ipad-orientation">
+			<button class="orientation-tab active" data-orient="horizontal">Horizontal</button>
+			<button class="orientation-tab" data-orient="vertical">Vertical</button>
+		</div>
+
+		<div class="wallpapers-grid hidden" id="ipad-grid">
+			<a href="/puchipaws-ipad-1.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-ipad-1.png" alt="PuchiPaws iPad Wallpaper 1" />
+			</a>
+			<a href="/puchipaws-ipad-2.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-ipad-2.png" alt="PuchiPaws iPad Wallpaper 2" />
+			</a>
+			<a href="/puchipaws-ipad-3.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-ipad-3.png" alt="PuchiPaws iPad Wallpaper 3" />
+			</a>
+			<a href="/puchipaws-ipad-4.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-ipad-4.png" alt="PuchiPaws iPad Wallpaper 4" />
+			</a>
+			<a href="/puchipaws-ipad-5.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-ipad-5.png" alt="PuchiPaws iPad Wallpaper 5" />
+			</a>
+		</div>
+
+		<div class="wallpapers-grid hidden" id="ipad-vertical-grid">
+			<a href="/puchipaws-ipad-6.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-ipad-6.png" alt="PuchiPaws iPad Wallpaper 6" />
+			</a>
+			<a href="/puchipaws-ipad-7.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-ipad-7.png" alt="PuchiPaws iPad Wallpaper 7" />
+			</a>
+			<a href="/puchipaws-ipad-8.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-ipad-8.png" alt="PuchiPaws iPad Wallpaper 8" />
+			</a>
+		</div>
+
+		<div class="wallpapers-grid hidden" id="imac-grid">
+			<a href="/puchipaws-imac-1.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-imac-1.png" alt="PuchiPaws iMac Wallpaper 1" />
+			</a>
+			<a href="/puchipaws-imac-2.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-imac-2.png" alt="PuchiPaws iMac Wallpaper 2" />
+			</a>
+			<a href="/puchipaws-imac-3.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-imac-3.png" alt="PuchiPaws iMac Wallpaper 3" />
+			</a>
+			<a href="/puchipaws-imac-4.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-imac-4.png" alt="PuchiPaws iMac Wallpaper 4" />
+			</a>
+			<a href="/puchipaws-imac-5.png" target="_blank" class="wallpaper-card">
+				<img src="/puchipaws-imac-5.png" alt="PuchiPaws iMac Wallpaper 5" />
+			</a>
+		</div>
+
+		<!-- Fullscreen Save View -->
+		<div class="save-fullscreen" id="save-fullscreen">
+			<button class="save-fullscreen-close" id="save-fullscreen-close">&times;</button>
+			<img src="" alt="Wallpaper" id="save-fullscreen-img" class="save-fullscreen-img" />
+			<p class="save-fullscreen-hint">Tap and hold the image to save to your photos</p>
+		</div>
+
+		<!-- Wallpaper Preview Modal -->
+		<div class="wp-overlay" id="wp-overlay">
+			<div class="wp-modal">
+				<button class="wp-close" id="wp-close">&times;</button>
+				<img src="" alt="Wallpaper Preview" id="wp-preview" class="wp-preview" />
+				<div class="wp-actions">
+					<button id="wp-save" class="wp-btn wp-btn-save">Save to Photos</button>
+					<a href="" id="wp-download" download class="wp-btn wp-btn-download"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF9BB7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="notice">
+			<p class="notice-title">NOTICE</p>
+			<p>These wallpapers are for personal use only.</p>
+			<p>Do not redistribute or use for commercial purposes without permission.</p>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	document.querySelectorAll('.device-tab').forEach(tab => {
+		tab.addEventListener('click', () => {
+			document.querySelectorAll('.device-tab').forEach(t => t.classList.remove('active'));
+			tab.classList.add('active');
+			const device = tab.dataset.device;
+			document.querySelectorAll('.wallpapers-grid').forEach(g => g.classList.add('hidden'));
+			document.getElementById(`${device}-grid`)?.classList.remove('hidden');
+
+			// Show/hide orientation tabs for iPad
+			const orientTabs = document.getElementById('ipad-orientation');
+			if (device === 'ipad') {
+				orientTabs?.classList.remove('hidden');
+				// Reset to horizontal
+				document.querySelectorAll('.orientation-tab').forEach(t => t.classList.remove('active'));
+				document.querySelector('.orientation-tab[data-orient="horizontal"]')?.classList.add('active');
+				document.getElementById('ipad-vertical-grid')?.classList.add('hidden');
+				document.getElementById('ipad-grid')?.classList.remove('hidden');
+			} else {
+				orientTabs?.classList.add('hidden');
+				document.getElementById('ipad-vertical-grid')?.classList.add('hidden');
+			}
+		});
+	});
+
+	document.querySelectorAll('.orientation-tab').forEach(tab => {
+		tab.addEventListener('click', () => {
+			document.querySelectorAll('.orientation-tab').forEach(t => t.classList.remove('active'));
+			tab.classList.add('active');
+			const orient = tab.dataset.orient;
+			document.getElementById('ipad-grid')?.classList.toggle('hidden', orient !== 'horizontal');
+			document.getElementById('ipad-vertical-grid')?.classList.toggle('hidden', orient !== 'vertical');
+		});
+	});
+
+	// Wallpaper preview modal
+	document.querySelectorAll('.wallpaper-card').forEach(card => {
+		card.addEventListener('click', (e) => {
+			e.preventDefault();
+			const imgSrc = card.getAttribute('href');
+			const overlay = document.getElementById('wp-overlay');
+			const preview = document.getElementById('wp-preview');
+			const dlLink = document.getElementById('wp-download');
+			preview.src = imgSrc;
+			dlLink.href = imgSrc;
+			dlLink.download = imgSrc.split('/').pop();
+			overlay.classList.add('open');
+		});
+	});
+
+	document.getElementById('wp-close')?.addEventListener('click', () => {
+		document.getElementById('wp-overlay')?.classList.remove('open');
+	});
+
+	document.getElementById('wp-overlay')?.addEventListener('click', (e) => {
+		if (e.target === e.currentTarget) {
+			e.currentTarget.classList.remove('open');
+		}
+	});
+
+	document.getElementById('wp-save')?.addEventListener('click', () => {
+		const imgSrc = document.getElementById('wp-preview').src;
+		document.getElementById('wp-overlay')?.classList.remove('open');
+		document.getElementById('save-fullscreen')?.classList.add('open');
+		document.getElementById('save-fullscreen-img').src = imgSrc;
+	});
+
+	document.getElementById('save-fullscreen-close')?.addEventListener('click', () => {
+		document.getElementById('save-fullscreen')?.classList.remove('open');
+	});
+</script>
+
+<style is:global>
+	.close-btn {
+		position: absolute;
+		top: 1.5rem;
+		right: 1.5rem;
+		font-size: 2rem;
+		color: #6B3E2E;
+		background: none;
+		border: none;
+		cursor: pointer;
+		text-decoration: none;
+		line-height: 1;
+		opacity: 0.5;
+		transition: opacity 0.2s;
+	}
+	.close-btn:hover {
+		opacity: 1;
+	}
+
+	.wallpapers-section {
+		max-width: 1100px;
+		margin: 2rem auto;
+		padding: 2.5rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.wallpapers-section h2 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 2rem;
+		color: #6B3E2E;
+		margin-bottom: 0.5rem;
+	}
+
+	.wallpapers-subtitle {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		color: #6B3E2E;
+		opacity: 0.7;
+		margin-bottom: 0.25rem;
+	}
+
+	.wallpapers-instructions {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.85rem;
+		color: #FF9BB7;
+		margin-bottom: 1.5rem;
+	}
+
+	.device-tabs {
+		display: flex;
+		justify-content: center;
+		gap: 0.75rem;
+		margin-bottom: 2rem;
+	}
+
+	.device-tab {
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.9rem;
+		font-weight: 700;
+		padding: 0.5rem 1.5rem;
+		border-radius: 10px;
+		border: 2px solid #FF9BB7;
+		background: transparent;
+		color: #FF9BB7;
+		cursor: pointer;
+		transition: all 0.2s;
+	}
+
+	.device-tab:hover {
+		background: #fff0f4;
+	}
+
+	.device-tab.active {
+		background: #FF9BB7;
+		color: #fff;
+	}
+
+	.orientation-tabs {
+		display: flex;
+		justify-content: center;
+		gap: 0.5rem;
+		margin-bottom: 1.25rem;
+	}
+
+	.orientation-tabs.hidden {
+		display: none;
+	}
+
+	.orientation-tab {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.8rem;
+		font-weight: 700;
+		padding: 0.35rem 1rem;
+		border-radius: 8px;
+		border: 1.5px solid #d4a0b9;
+		background: transparent;
+		color: #d4a0b9;
+		cursor: pointer;
+		transition: all 0.2s;
+	}
+
+	.orientation-tab:hover {
+		background: #fff0f4;
+	}
+
+	.orientation-tab.active {
+		background: #d4a0b9;
+		color: #fff;
+	}
+
+	.wallpapers-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+		grid-auto-rows: min-content;
+	}
+
+	.wallpapers-grid.hidden {
+		display: none;
+	}
+
+	.wallpaper-card {
+		display: block;
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 2px 12px rgba(107, 62, 46, 0.1);
+		transition: all 0.25s;
+		text-decoration: none;
+		background: none;
+		line-height: 0;
+		height: fit-content;
+	}
+
+	.wallpaper-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 6px 20px rgba(107, 62, 46, 0.15);
+	}
+
+	.wallpaper-card img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.coming-soon {
+		grid-column: 1 / -1;
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		color: #6B3E2E;
+		opacity: 0.5;
+		padding: 3rem 0;
+	}
+
+	.wp-overlay {
+		display: none;
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.7);
+		z-index: 300;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.wp-overlay.open {
+		display: flex;
+	}
+
+	.wp-modal {
+		background: #fff;
+		border-radius: 20px;
+		padding: 1.5rem;
+		max-width: 400px;
+		width: 90%;
+		position: relative;
+		text-align: center;
+	}
+
+	.wp-close {
+		position: absolute;
+		top: 0.75rem;
+		right: 1rem;
+		font-size: 1.5rem;
+		background: none;
+		border: none;
+		color: #999;
+		cursor: pointer;
+	}
+
+	.wp-close:hover {
+		color: #333;
+	}
+
+	.wp-preview {
+		width: 100%;
+		max-height: 60vh;
+		object-fit: contain;
+		border-radius: 12px;
+		margin-bottom: 1rem;
+	}
+
+	.wp-actions {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: center;
+	}
+
+	.wp-btn {
+		display: inline-flex;
+		align-items: center;
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.85rem;
+		font-weight: 700;
+		padding: 0.6rem 1.5rem;
+		border-radius: 10px;
+		text-decoration: none;
+		transition: all 0.2s;
+		cursor: pointer;
+	}
+
+	.wp-btn-save {
+		background: #FF9BB7;
+		color: #fff;
+		border: 2px solid #FF9BB7;
+		box-shadow: 0 2px 10px rgba(255, 155, 183, 0.3);
+	}
+
+	.wp-btn-save:hover {
+		background: #f0839f;
+		border-color: #f0839f;
+		transform: translateY(-1px);
+	}
+
+	.wp-btn-download {
+		background: #fff;
+		color: #FF9BB7;
+		border: 2px solid #FF9BB7;
+	}
+
+	.wp-btn-download:hover {
+		background: #fff0f4;
+		transform: translateY(-1px);
+	}
+
+
+	.save-fullscreen {
+		display: none;
+		position: fixed;
+		inset: 0;
+		background: #000;
+		z-index: 400;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+	}
+
+	.save-fullscreen.open {
+		display: flex;
+	}
+
+	.save-fullscreen-close {
+		position: absolute;
+		top: 1rem;
+		right: 1.5rem;
+		font-size: 2rem;
+		color: #fff;
+		background: none;
+		border: none;
+		cursor: pointer;
+		z-index: 2;
+	}
+
+	.save-fullscreen-img {
+		max-width: 100%;
+		max-height: 75vh;
+		object-fit: contain;
+		border-radius: 8px;
+	}
+
+	.save-fullscreen-hint {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.9rem;
+		color: #fff;
+		opacity: 0.7;
+		margin-top: 1.5rem;
+		text-align: center;
+	}
+
+	.notice {
+		background: #fff5ee;
+		border-radius: 12px;
+		padding: 1.25rem 1.5rem;
+		max-width: 600px;
+		margin: 2rem auto 0;
+		text-align: left;
+	}
+
+	.notice-title {
+		font-family: 'Baloo 2', cursive;
+		font-weight: 800;
+		color: #6B3E2E;
+		font-size: 0.95rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.notice p {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.8rem;
+		color: #6B3E2E;
+		opacity: 0.7;
+		line-height: 1.6;
+	}
+
+	@media (max-width: 768px) {
+		.wallpapers-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1rem;
+		}
+
+		.wallpapers-section {
+			padding: 1.5rem 1rem;
+		}
+
+		.wallpapers-section h2 {
+			font-size: 1.6rem;
+		}
+
+		.close-btn {
+			top: 1rem;
+			right: 1rem;
+			font-size: 1.75rem;
+		}
+
+		.device-tabs {
+			flex-wrap: wrap;
+			gap: 0.5rem;
+		}
+
+		.wp-modal {
+			padding: 1.25rem 1rem;
+		}
+
+		.wp-actions {
+			flex-direction: column;
+		}
+
+		.wp-btn {
+			width: 100%;
+			box-sizing: border-box;
+			justify-content: center;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.wallpapers-section h2 {
+			font-size: 1.4rem;
+		}
+
+		.device-tab {
+			padding: 0.5rem 1.1rem;
+		}
+
+		.notice {
+			padding: 1rem 1.1rem;
+		}
+	}
+</style>

@@ -22,7 +22,7 @@ import Layout from '../layouts/Layout.astro';
 
 	.thanks-section h2 {
 		font-size: 2.25rem;
-		color: #e53935;
+		color: #D4816B;
 		margin-bottom: 1rem;
 	}
 
@@ -34,12 +34,43 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.thanks-btn {
-		background: #e53935;
+		background: #E8879B;
 		color: #fff;
 		padding: 0.85rem 2rem;
 	}
 
 	.thanks-btn:hover {
-		background: #c62828;
+		background: #D4706A;
+	}
+
+	@media (max-width: 768px) {
+		.thanks-section {
+			padding: 4rem 1.25rem;
+		}
+
+		.thanks-section h2 {
+			font-size: 1.85rem;
+		}
+
+		.thanks-section p {
+			font-size: 1rem;
+		}
+
+		.thanks-btn {
+			display: block;
+			width: 100%;
+			box-sizing: border-box;
+			text-align: center;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.thanks-section {
+			padding: 3rem 1rem;
+		}
+
+		.thanks-section h2 {
+			font-size: 1.6rem;
+		}
 	}
 </style>

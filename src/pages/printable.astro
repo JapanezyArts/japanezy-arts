@@ -47,9 +47,9 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.close-btn:hover {
-		background: #f8bbd0;
+		background: #F2A6B5;
 		color: #fff;
-		border-color: #f8bbd0;
+		border-color: #F2A6B5;
 	}
 
 	.printable-section {
@@ -64,7 +64,7 @@ import Layout from '../layouts/Layout.astro';
 	.printable-section h2 {
 		font-size: 2.25rem;
 		margin-bottom: 0.5rem;
-		color: #7baed4;
+		color: #D4816B;
 	}
 
 	.printable-subtitle {
@@ -90,7 +90,7 @@ import Layout from '../layouts/Layout.astro';
 
 	.print-btn {
 		padding: 0.85rem 2rem;
-		background: #d5b3f5;
+		background: #F2A6B5;
 		color: #fff;
 		border: none;
 		border-radius: 6px;
@@ -98,16 +98,16 @@ import Layout from '../layouts/Layout.astro';
 		font-size: 0.95rem;
 		cursor: pointer;
 		transition: all 0.2s;
-		font-family: 'Inter', sans-serif;
+		font-family: 'Baloo 2', cursive;
 	}
 
 	.print-btn:hover {
-		background: #c9a3eb;
+		background: #E8879B;
 	}
 
 	.fanart-btn {
 		padding: 0.85rem 2rem;
-		background: #f8bbd0;
+		background: #D4816B;
 		color: #fff;
 		border-radius: 6px;
 		font-weight: 600;
@@ -116,7 +116,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.fanart-btn:hover {
-		background: #f4a9c1;
+		background: #C9704F;
 	}
 
 	.secret-video {
@@ -128,7 +128,7 @@ import Layout from '../layouts/Layout.astro';
 
 	.secret-title {
 		font-size: 1.5rem;
-		color: #9b59b6;
+		color: #D4816B;
 		margin-bottom: 0.25rem;
 	}
 
@@ -141,14 +141,14 @@ import Layout from '../layouts/Layout.astro';
 	.secret-player {
 		width: 100%;
 		border-radius: 12px;
-		box-shadow: 0 4px 16px rgba(155, 89, 182, 0.15);
+		box-shadow: 0 4px 16px rgba(210, 130, 120, 0.15);
 	}
 
 	.notice {
 		margin-top: 2rem;
 		padding: 1.25rem 2rem;
 		background: #fff;
-		border: 2px solid #f8bbd0;
+		border: 2px solid #F2A6B5;
 		border-radius: 10px;
 		max-width: 500px;
 		margin-left: auto;
@@ -159,7 +159,7 @@ import Layout from '../layouts/Layout.astro';
 		font-size: 1.1rem;
 		font-weight: 700;
 		letter-spacing: 0.1em;
-		color: #e53935;
+		color: #D4816B;
 		margin-bottom: 0.5rem;
 	}
 
@@ -201,6 +201,36 @@ import Layout from '../layouts/Layout.astro';
 
 		.printable-section h2 {
 			font-size: 1.75rem;
+		}
+
+		.printable-subtitle {
+			font-size: 1rem;
+		}
+
+		.btn-row {
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+
+		.print-btn,
+		.fanart-btn {
+			width: 100%;
+			box-sizing: border-box;
+			text-align: center;
+		}
+
+		.notice {
+			padding: 1.1rem 1.25rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.printable-section {
+			padding: 2rem 1rem;
+		}
+
+		.printable-section h2 {
+			font-size: 1.5rem;
 		}
 	}
 </style>

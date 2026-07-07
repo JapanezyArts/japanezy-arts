@@ -18,8 +18,8 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
 	.shop-hero {
-		background: linear-gradient(135deg, #1a1a1a 0%, #2d2420 50%, #1a1a1a 100%);
-		color: #faf8f5;
+		background: linear-gradient(135deg, #3D2B1F 0%, #5C3D2E 50%, #3D2B1F 100%);
+		color: #FFF5EE;
 		text-align: center;
 		padding: 5rem 2rem;
 	}
@@ -30,7 +30,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.shop-hero p {
-		color: #c4a87c;
+		color: #F2A6B5;
 		font-size: 1.1rem;
 	}
 
@@ -50,15 +50,51 @@ import Layout from '../layouts/Layout.astro';
 	.btn {
 		display: inline-block;
 		padding: 0.85rem 2rem;
-		background: #1a1a1a;
-		color: #faf8f5;
-		border-radius: 4px;
+		background: #D4816B;
+		color: #fff;
+		border-radius: 6px;
 		font-weight: 600;
 		font-size: 0.95rem;
 		transition: background 0.2s;
 	}
 
 	.btn:hover {
-		background: #333;
+		background: #C9704F;
+	}
+
+	@media (max-width: 768px) {
+		.shop-hero {
+			padding: 3rem 1.25rem;
+		}
+
+		.shop-hero h1 {
+			font-size: 2.25rem;
+		}
+
+		.shop-hero p {
+			font-size: 1rem;
+		}
+
+		.shop-section {
+			padding: 3rem 1.25rem;
+		}
+
+		.coming-soon {
+			font-size: 1.1rem;
+		}
+
+		.btn {
+			display: block;
+			width: 100%;
+			box-sizing: border-box;
+			text-align: center;
+			padding: 0.9rem 1rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.shop-hero h1 {
+			font-size: 1.9rem;
+		}
 	}
 </style>

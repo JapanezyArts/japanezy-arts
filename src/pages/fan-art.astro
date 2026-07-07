@@ -60,9 +60,9 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.close-btn:hover {
-		background: #f8bbd0;
+		background: #F2A6B5;
 		color: #fff;
-		border-color: #f8bbd0;
+		border-color: #F2A6B5;
 	}
 
 	.fanart-section {
@@ -76,7 +76,7 @@ import Layout from '../layouts/Layout.astro';
 
 	.fanart-section h2 {
 		font-size: 2.25rem;
-		color: #9b59b6;
+		color: #D4816B;
 		margin-bottom: 0.5rem;
 	}
 
@@ -120,12 +120,12 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.camera-btn {
-		background: #9b59b6;
+		background: #D4816B;
 		color: #fff;
 		padding: 0.75rem 1.5rem;
 		border: none;
 		cursor: pointer;
-		font-family: 'Inter', sans-serif;
+		font-family: 'Baloo 2', cursive;
 		font-weight: 600;
 		font-size: 0.95rem;
 		border-radius: 6px;
@@ -133,16 +133,16 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.camera-btn:hover {
-		background: #8e44ad;
+		background: #C9704F;
 	}
 
 	.capture-btn {
-		background: #e53935;
+		background: #E8879B;
 		color: #fff;
 		padding: 0.75rem 1.5rem;
 		border: none;
 		cursor: pointer;
-		font-family: 'Inter', sans-serif;
+		font-family: 'Baloo 2', cursive;
 		font-weight: 600;
 		font-size: 0.95rem;
 		border-radius: 6px;
@@ -150,16 +150,16 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.capture-btn:hover {
-		background: #c62828;
+		background: #D4706A;
 	}
 
 	.retake-btn {
-		background: #f8bbd0;
+		background: #F2A6B5;
 		color: #fff;
 		padding: 0.75rem 1.5rem;
 		border: none;
 		cursor: pointer;
-		font-family: 'Inter', sans-serif;
+		font-family: 'Baloo 2', cursive;
 		font-weight: 600;
 		font-size: 0.95rem;
 		border-radius: 6px;
@@ -167,7 +167,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.retake-btn:hover {
-		background: #f4a9c1;
+		background: #E8879B;
 	}
 
 	.or-text {
@@ -190,16 +190,16 @@ import Layout from '../layouts/Layout.astro';
 		width: 100%;
 		max-width: 400px;
 		min-height: 120px;
-		border: 3px dashed #d5b3f5;
+		border: 3px dashed #F2A6B5;
 		border-radius: 12px;
 		cursor: pointer;
 		transition: all 0.2s;
-		background: #faf5ff;
+		background: #FFF5EE;
 	}
 
 	.upload-label:hover {
-		border-color: #9b59b6;
-		background: #f3e8ff;
+		border-color: #D4816B;
+		background: #FFE8E0;
 	}
 
 	.upload-label.has-file {
@@ -208,7 +208,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.upload-text {
-		color: #9b59b6;
+		color: #D4816B;
 		font-weight: 600;
 		font-size: 1rem;
 		padding: 1rem;
@@ -222,42 +222,42 @@ import Layout from '../layouts/Layout.astro';
 		width: 100%;
 		max-width: 400px;
 		padding: 0.85rem 1rem;
-		border: 2px solid #ddd;
+		border: 2px solid #FCE4D8;
 		border-radius: 8px;
 		font-size: 1rem;
-		font-family: 'Inter', sans-serif;
+		font-family: 'Baloo 2', cursive;
 		outline: none;
 		transition: border-color 0.2s;
 	}
 
 	.name-input:focus {
-		border-color: #9b59b6;
+		border-color: #D4816B;
 	}
 
 	.letter-input {
 		width: 100%;
 		max-width: 400px;
 		padding: 0.85rem 1rem;
-		border: 2px solid #ddd;
+		border: 2px solid #FCE4D8;
 		border-radius: 8px;
 		font-size: 1rem;
-		font-family: 'Inter', sans-serif;
+		font-family: 'Baloo 2', cursive;
 		outline: none;
 		transition: border-color 0.2s;
 		resize: vertical;
 	}
 
 	.letter-input:focus {
-		border-color: #9b59b6;
+		border-color: #D4816B;
 	}
 
 	.send-btn {
-		background: #d5b3f5;
+		background: #F2A6B5;
 		color: #fff;
 		padding: 0.85rem 2.5rem;
 		border: none;
 		cursor: pointer;
-		font-family: 'Inter', sans-serif;
+		font-family: 'Baloo 2', cursive;
 		font-size: 1rem;
 		font-weight: 600;
 		border-radius: 6px;
@@ -265,7 +265,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.send-btn:hover {
-		background: #c9a3eb;
+		background: #E8879B;
 	}
 
 	.send-btn:disabled {
@@ -280,6 +280,36 @@ import Layout from '../layouts/Layout.astro';
 
 		.fanart-section h2 {
 			font-size: 1.75rem;
+		}
+
+		.fanart-subtitle {
+			font-size: 1rem;
+		}
+
+		.camera-controls {
+			flex-wrap: wrap;
+		}
+
+		.camera-btn,
+		.capture-btn,
+		.retake-btn {
+			flex: 1 1 auto;
+		}
+
+		.send-btn {
+			width: 100%;
+			max-width: 400px;
+			box-sizing: border-box;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.fanart-section {
+			padding: 2rem 1rem;
+		}
+
+		.fanart-section h2 {
+			font-size: 1.5rem;
 		}
 	}
 </style>

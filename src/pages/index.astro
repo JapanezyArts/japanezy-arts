@@ -1,60 +1,272 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { products } from '../data/products';
 ---
 
 <Layout title="Japanezy Arts - Home">
 	<!-- Hero Section -->
 	<section class="hero">
-		<img src="/ja-main-logo.png" alt="Japanezy Arts" class="hero-logo" />
-		<p>Art, paper crafts, and more with tutorials and ASMR</p>
-		<a href="https://www.youtube.com/@JapanezyArts" target="_blank" rel="noopener" class="btn btn-primary">Watch on YouTube</a>
-	</section>
-
-	<!-- Characters Section -->
-	<section class="characters-section">
-		<h2>Meet Puchipaws</h2>
-		<img src="/puchipaws.png" alt="Puchipaws characters" class="characters-banner" />
-		<a href="/printable" class="btn btn-primary" style="margin-top: 2rem;">Free Printable Sheet</a>
-	</section>
-
-	<!-- Videos Section -->
-	<section class="videos-section">
-		<h2>Latest from Japanezy Arts</h2>
-		<h3 class="video-title">Latest Video</h3>
-
-		<div class="video-card">
-			<div class="video-wrapper">
-				<iframe
-					src="https://www.youtube.com/embed/ye-XFUdnoaY"
-					title="Latest Video"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen
-				></iframe>
+		<div class="hero-inner">
+			<div class="hero-text">
+				<h1>
+					<span class="hero-line1">Welcome to the</span><br/>
+					<span class="hero-line2">cozy world of</span><br/>
+					<span class="hero-line3">Japanezy </span><span class="hero-line4">Arts</span>
+				</h1>
+				<p class="hero-sub">Meet Saki, Suzu, and Chizuro, download cute freebies, shop kawaii goodies, and follow along with our art adventures from YouTube.</p>
+				<div class="hero-btns">
+					<a href="/printable" class="btn btn-sakura"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Get Free Downloads</a>
+					<a href="/puchipaws" class="btn btn-outline-pink"><img src="/paw-icon.svg" alt="" width="14" height="14" style="vertical-align:-2px;margin-right:6px;filter:invert(73%) sepia(30%) saturate(1000%) hue-rotate(300deg) brightness(100%) contrast(95%);" />Meet the PuchiPaws</a>
+				</div>
+			</div>
+			<div class="hero-right">
+				<img src="/japanezy-logo-v2.png" alt="Japanezy Arts" class="hero-logo" />
+				<div class="hc-row">
+					<img src="/rosey-hero.png" alt="Rosey" class="hc-rosey" />
+					<img src="/puchipaws-hero.png" alt="PuchiPaws - Suzu, Saki, and Chizuro" class="hc-group" />
+				</div>
 			</div>
 		</div>
+	</section>
 
-		<a href="https://www.youtube.com/@JapanezyArts" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 2rem;">
-			Visit the Full Channel
-		</a>
+	<!-- YouTube Companion -->
+	<section class="yt-companion">
+		<div class="yt-companion-inner">
+			<div class="yt-companion-left">
+				<img src="/yt-play-pink.png" alt="YouTube" class="yt-badge-img" />
+				<div>
+					<h3 class="yt-companion-title">Here from YouTube?<br/>Start here.</h3>
+					<p class="yt-companion-sub">Grab the extras from our latest videos, including printables, sticker sheets, wallpapers, and behind-the-scenes goodies.</p>
+					<a href="https://www.youtube.com/@JapanezyArts?sub_confirmation=1" target="_blank" rel="noopener" class="yt-sub-link">Subscribe on YouTube &rarr;</a>
+				</div>
+			</div>
+			<a href="/printable" class="yt-comp-card">
+				<img src="/freebie-library.png" alt="Freebie Library" />
+				<span class="yt-comp-title">Freebie Library</span>
+				<span class="yt-comp-bottom">
+					<span class="yt-comp-sub">Printables, activity sheets, checklists, and more!</span>
+					<span class="yt-comp-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FF9BB7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+				</span>
+			</a>
+			<a href="/coloring" class="yt-comp-card">
+				<img src="/coloring-pages.png" alt="Coloring Pages" />
+				<span class="yt-comp-title">Coloring Pages</span>
+				<span class="yt-comp-bottom">
+					<span class="yt-comp-sub">Adorable pages to color and enjoy.</span>
+					<span class="yt-comp-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FF9BB7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+				</span>
+			</a>
+			<a href="/fan-art" class="yt-comp-card">
+				<img src="/art-prompts.png" alt="Art Prompts" />
+				<span class="yt-comp-title">Art Prompts</span>
+				<span class="yt-comp-bottom">
+					<span class="yt-comp-sub">Fun prompts to spark your creativity.</span>
+					<span class="yt-comp-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FF9BB7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+				</span>
+			</a>
+			<a href="/wallpapers" class="yt-comp-card">
+				<img src="/wallpapers.png" alt="Wallpapers" />
+				<span class="yt-comp-title">Wallpapers</span>
+				<span class="yt-comp-bottom">
+					<span class="yt-comp-sub">Cute backgrounds for your devices.</span>
+					<span class="yt-comp-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FF9BB7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+				</span>
+			</a>
+		</div>
+
+		<!-- Free Wallpapers Promo Bar -->
+		<div class="signup-bar-inner">
+			<!-- Floating decorations -->
+			<img src="/sparkle-pink.png" alt="" class="signup-deco deco-sparkle1" aria-hidden="true" />
+			<img src="/sparkle-pink.png" alt="" class="signup-deco deco-sparkle2" aria-hidden="true" />
+			<div class="signup-char">
+				<img src="/roseypeeking.png" alt="Rosey" />
+			</div>
+			<div class="signup-text">
+				<h3 class="signup-title">Get Free Wallpapers <img src="/sakura-flower.png" alt="" class="signup-flower" /></h3>
+				<p class="signup-sub">Cute kawaii backgrounds for your phone, tablet, and desktop &mdash; totally free!</p>
+			</div>
+			<a href="/wallpapers" class="signup-btn signup-cta"><img src="/paw-icon.svg" alt="" width="14" height="14" style="vertical-align:-2px;margin-right:5px;filter:brightness(0) invert(1);" />Click Here</a>
+		</div>
+	</section>
+
+	<!-- Meet the PuchiPaws -->
+	<section class="meet">
+		<h2 class="section-title"><img src="/sakura-flower.png" alt="" class="title-flower" /> Meet the PuchiPaws <img src="/sakura-flower.png" alt="" class="title-flower" /></h2>
+		<div class="meet-row">
+			<a href="/puchipaws#suzu" class="meet-card-wrap">
+				<div class="meet-card meet-card-blue">
+					<div class="meet-char-col">
+						<img src="/suzu-single.png" alt="Suzu" class="meet-char" />
+					</div>
+					<div class="meet-text-col">
+						<h3><span class="meet-icon">&#9650;</span> suzu <span class="meet-icon">&#9650;</span></h3>
+						<p class="meet-blurb">Playful, sweet,<br/>and a little mischievous.</p>
+						<span class="meet-btn meet-btn-blue">View Profile <img src="/paw-icon.svg" alt="" class="meet-btn-icon paw-blue" /></span>
+					</div>
+				</div>
+			</a>
+			<a href="/puchipaws#saki" class="meet-card-wrap">
+				<div class="meet-card meet-card-pink">
+					<div class="meet-char-col">
+						<img src="/saki-single.png" alt="Saki" class="meet-char" />
+					</div>
+					<div class="meet-text-col">
+						<h3><span class="meet-icon">&#10047;</span> saki <span class="meet-icon">&#10047;</span></h3>
+						<p class="meet-blurb">Creative, kind,<br/>and smart.</p>
+						<span class="meet-btn meet-btn-pink">View Profile <img src="/paw-icon.svg" alt="" class="meet-btn-icon paw-pink" /></span>
+					</div>
+				</div>
+			</a>
+			<a href="/puchipaws#chizuro" class="meet-card-wrap">
+				<div class="meet-card meet-card-purple">
+					<div class="meet-char-col">
+						<img src="/chizuro-single.png" alt="Chizuro" class="meet-char" />
+					</div>
+					<div class="meet-text-col">
+						<h3><span class="meet-icon">&#9829;</span> chizuro <span class="meet-icon">&#9829;</span></h3>
+						<p class="meet-blurb">Calm, quiet,<br/>and possessive.</p>
+						<span class="meet-btn meet-btn-purple">View Profile <img src="/paw-icon.svg" alt="" class="meet-btn-icon paw-purple" /></span>
+					</div>
+				</div>
+			</a>
+		</div>
+	</section>
+
+	<!-- Shop Preview (hidden until store is ready)
+	<section class="products" id="products">
+		<div class="products-header">
+			<h2 class="section-title">Cute things<br/>for happy days</h2>
+			<a href="/shop" class="btn btn-sakura btn-sm">Visit the Shop</a>
+		</div>
+		<div class="products-scroll">
+			{products.map((product) => (
+				<a href={`/product/${product.slug}`} class="prod-card">
+					<div class="prod-img">
+						<img src={product.image} alt={product.name} />
+					</div>
+					<div class="prod-info">
+						<span class="prod-name">{product.name}</span>
+						<span class="prod-price">{product.price}</span>
+					</div>
+				</a>
+			))}
+		</div>
+	</section>
+	-->
+
+	<!-- Latest from the Channel -->
+	<section class="latest">
+		<div class="latest-inner">
+			<div class="latest-left">
+				<img src="/yt-play-pink.png" alt="YouTube" class="latest-yt-icon" />
+				<h2 class="latest-title">Latest from<br/>the channel</h2>
+				<a href="https://www.youtube.com/@JapanezyArts" target="_blank" rel="noopener" class="btn btn-sakura latest-yt-btn"><img src="/yt-play-pink.png" alt="" width="16" height="16" style="margin-right:6px;filter:brightness(0) invert(1);" />Watch on YouTube</a>
+			</div>
+			<div class="latest-videos" id="latest-videos">
+				<!-- Fallback static content, replaced by JS -->
+				<a href="https://www.youtube.com/watch?v=3hJ4ZVumxEk" target="_blank" rel="noopener" class="latest-vid-card">
+					<div class="latest-thumb">
+						<img src="https://img.youtube.com/vi/3hJ4ZVumxEk/mqdefault.jpg" alt="Capybara Drawing Time-Lapse" />
+					</div>
+					<h4>Capybara Drawing Time-Lapse</h4>
+					<p>A speedy kawaii capybara sketch!</p>
+				</a>
+				<a href="https://www.youtube.com/watch?v=FdisBeWRiVo" target="_blank" rel="noopener" class="latest-vid-card">
+					<div class="latest-thumb">
+						<img src="https://img.youtube.com/vi/FdisBeWRiVo/mqdefault.jpg" alt="DIY Soot Sprite Trinket" />
+					</div>
+					<h4>DIY Soot Sprite Trinket</h4>
+					<p>Studio Ghibli kawaii DIY!</p>
+				</a>
+				<a href="https://www.youtube.com/watch?v=N4Det5Jqutg" target="_blank" rel="noopener" class="latest-vid-card">
+					<div class="latest-thumb">
+						<img src="https://img.youtube.com/vi/N4Det5Jqutg/mqdefault.jpg" alt="Drawing Challenge: Roblox Hamster" />
+					</div>
+					<h4>Drawing Challenge: Roblox Hamster</h4>
+					<p>Procreate kawaii art challenge!</p>
+				</a>
+			</div>
+
+			<script>
+				(async function loadLatestVideos() {
+					try {
+						const CHANNEL_ID = 'UC9__kLGuwRYOk9a6IK-ddNw';
+						const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+						const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`);
+						if (!res.ok) return;
+						const xml = await res.text();
+						const parser = new DOMParser();
+						const doc = parser.parseFromString(xml, 'text/xml');
+						const entries = doc.querySelectorAll('entry');
+
+						const videos = [];
+						for (const entry of entries) {
+							const link = entry.querySelector('link[rel="alternate"]')?.getAttribute('href') || '';
+							if (link.includes('/shorts/')) continue;
+							const title = entry.querySelector('title').textContent;
+							const videoId = entry.querySelector('id').textContent.split(':').pop();
+							videos.push({ title, videoId });
+							if (videos.length === 3) break;
+						}
+						if (videos.length < 3) return;
+
+						const container = document.getElementById('latest-videos');
+						container.innerHTML = videos.map(v => `
+							<a href="https://www.youtube.com/watch?v=${v.videoId}" target="_blank" rel="noopener" class="latest-vid-card">
+								<div class="latest-thumb">
+									<img src="https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg" alt="${v.title}" />
+								</div>
+								<h4>${v.title}</h4>
+							</a>`).join('');
+					} catch (e) {
+						// fallback to static content
+					}
+				})();
+			</script>
+		</div>
+	</section>
+
+	<!-- Share Your Creations -->
+	<section class="share">
+		<div class="share-inner">
+			<div class="share-left">
+				<h2>Share your<br/>cute creations</h2>
+				<p>Colored a page? Drew one of the PuchiPaws? Tag us for a chance to be featured!</p>
+				<div class="share-btns">
+					<a href="/printable" class="btn btn-sakura">Get the Printable</a>
+					<a href="/fan-art" class="btn btn-cocoa">Submit Your Art</a>
+				</div>
+			</div>
+			<div class="share-right">
+				<img src="/puchipaws-clear.png" alt="PuchiPaws" />
+			</div>
+		</div>
+	</section>
+
+	<!-- Final CTA Banner -->
+	<section class="bottom-banner">
+		<div class="banner-inner">
+			<h2>Ready to enter the cute little world?</h2>
+			<p>Let's create something kawaii together</p>
+			<div class="banner-btns">
+				<a href="/puchipaws" class="btn btn-white">Meet the PuchiPaws</a>
+			</div>
+		</div>
+		<div class="banner-char-left">
+			<img src="/saki-peeking.png" alt="Saki peeking" />
+		</div>
+		<div class="banner-char-right">
+			<img src="/chizuro-peeking.png" alt="Chizuro peeking" />
+		</div>
 	</section>
 
 	<!-- About Section -->
-	<section class="about-section" id="about">
-		<div class="about-content">
-			<h2>About Me</h2>
-			<p>
-				Japanezy Arts is a creative channel dedicated to kawaii artwork.
-				We offer a series of handmade paper crafts/artwork and designs.
-			</p>
+	<section class="about" id="about">
+		<div class="about-inner">
+			<h2>About Japanezy Arts</h2>
+			<p>Japanezy Arts is a creative channel dedicated to kawaii artwork. We offer a series of handmade paper crafts/artwork and designs.</p>
 		</div>
-	</section>
-
-	<!-- Subscribe Section -->
-	<section class="subscribe-section">
-		<h2>Subscribe</h2>
-		<button id="subscribe-btn" class="btn subscribe-btn">Subscribe on YouTube</button>
-		<p class="subscribe-note">Subscribe for a shoutout!</p>
 	</section>
 
 	<!-- Shoutout Popup -->
@@ -72,181 +284,1086 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
-	/* Hero */
+	/* ===== BRAND COLORS =====
+	   Blush Pink: #FFD9E3
+	   Sakura Pink: #FF9BB7
+	   Warm Cream: #FFF3D6
+	   Soft Gold: #FFD166
+	   Sky Blue: #AFCBFF
+	   Lavender: #CDBBFF
+	   Cocoa Brown: #6B3E2E
+	   Cloud White: #FFFFFF
+	*/
+
+	/* ===== HERO ===== */
 	.hero {
+		position: relative;
+		z-index: 0;
+		background: url('/header-bg.png') center top / cover no-repeat;
+		padding: 6rem 2rem 0;
+		padding-bottom: 0;
+		overflow: hidden;
+		margin-top: -80px;
+	}
+
+	.hero-inner {
+		max-width: 1100px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-text {
+		flex: 1;
+		min-width: 0;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
 		text-align: center;
-		padding: 4rem 2rem;
-		min-height: 60vh;
+	}
+
+	.hero-text h1 {
+		line-height: 1.15;
+		margin-bottom: 1.2rem;
+	}
+
+	.hero-line1 {
+		font-family: 'Baloo 2', cursive;
+		font-size: clamp(1.4rem, 3vw, 2rem);
+		color: #6B3E2E;
+		font-weight: 800;
+	}
+
+	.hero-line2 {
+		font-family: 'Baloo 2', cursive;
+		font-size: clamp(1.8rem, 4.5vw, 3rem);
+		color: #E8879B;
+		font-weight: 800;
+		paint-order: stroke fill;
+		-webkit-text-stroke: 4px #C2687D;
+		text-shadow:
+			0 1px 0 #B85C70,
+			0 2px 0 #AE5065,
+			0 3px 0 #A4455A,
+			0 4px 0 #9A3A4F,
+			0 5px 8px rgba(150, 50, 70, 0.3);
+	}
+
+	.hero-line3 {
+		font-family: 'Baloo 2', cursive;
+		font-size: clamp(2.2rem, 5.5vw, 3.75rem);
+		color: #E8879B;
+		font-weight: 800;
+		paint-order: stroke fill;
+		-webkit-text-stroke: 4px #C2687D;
+		text-shadow:
+			0 1px 0 #B85C70,
+			0 2px 0 #AE5065,
+			0 3px 0 #A4455A,
+			0 4px 0 #9A3A4F,
+			0 5px 8px rgba(150, 50, 70, 0.3);
+	}
+
+	.hero-line4 {
+		font-family: 'Baloo 2', cursive;
+		font-size: clamp(2.2rem, 5.5vw, 3.75rem);
+		color: #F0C87A;
+		font-weight: 800;
+		paint-order: stroke fill;
+		-webkit-text-stroke: 4px #C9A055;
+		text-shadow:
+			0 1px 0 #B8904A,
+			0 2px 0 #A8803F,
+			0 3px 0 #987034,
+			0 4px 0 #886029,
+			0 5px 8px rgba(150, 100, 40, 0.3);
+	}
+
+	.hero-sub {
+		font-family: 'Nunito', sans-serif;
+		font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+		color: #6B3E2E;
+		line-height: 1.7;
+		margin-bottom: 1.5rem;
+		max-width: 400px;
+		opacity: 0.85;
+	}
+
+
+	.hero-btns {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+
+
+	.hero-right {
+		flex: 0 1 auto;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		position: relative;
-		z-index: 1;
 	}
 
 	.hero-logo {
-		height: 600px;
+		height: clamp(140px, 20vw, 250px);
 		width: auto;
-		margin-bottom: 1.5rem;
+		margin-bottom: 0.5rem;
+		position: relative;
+		z-index: 4;
 	}
 
-	.hero p {
-		font-size: clamp(1rem, 2vw, 1.25rem);
-		color: #7a6b7a;
-		margin-bottom: 2rem;
+	.hc-row {
+		width: min(620px, 52vw);
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		gap: 2%;
+		position: relative;
+		z-index: 2;
 	}
 
-	/* Buttons */
+	.hc-rosey {
+		width: 28%;
+		height: auto;
+		object-fit: contain;
+		filter: drop-shadow(0 4px 16px rgba(107, 62, 46, 0.14));
+		position: relative;
+		z-index: 3;
+		transform: translateX(1.25rem);
+	}
+
+	.hc-group {
+		width: 68%;
+		height: auto;
+		object-fit: contain;
+		filter: drop-shadow(0 4px 16px rgba(107, 62, 46, 0.12));
+		position: relative;
+		z-index: 2;
+	}
+
+	/* ===== BUTTONS ===== */
 	.btn {
-		display: inline-block;
-		padding: 0.85rem 2rem;
-		border-radius: 6px;
-		font-weight: 600;
-		font-size: 0.95rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.55rem 1.2rem;
+		border-radius: 10px;
+		font-weight: 700;
+		font-size: clamp(0.75rem, 0.9vw, 0.85rem);
+		transition: all 0.2s;
+		text-align: center;
+		cursor: pointer;
+		border: none;
+		font-family: 'Baloo 2', cursive;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.btn-sm {
+		padding: 0.5rem 1.25rem;
+		font-size: 0.82rem;
+	}
+
+	.btn-sakura {
+		background: #FF9BB7;
+		color: #fff;
+		box-shadow: 0 2px 10px rgba(255, 155, 183, 0.3);
+	}
+
+	.btn-sakura:hover {
+		background: #F0839F;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 16px rgba(255, 155, 183, 0.4);
+	}
+
+	.btn-cocoa {
+		background: #6B3E2E;
+		color: #fff;
+		box-shadow: 0 2px 10px rgba(107, 62, 46, 0.2);
+	}
+
+	.btn-cocoa:hover {
+		background: #5A3325;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 16px rgba(107, 62, 46, 0.3);
+	}
+
+	.btn-outline-pink {
+		background: #fff;
+		color: #FF9BB7;
+		border: 2px solid #FF9BB7;
+		box-shadow: 0 2px 10px rgba(255, 155, 183, 0.15);
+	}
+
+	.btn-outline-pink:hover {
+		background: #FFF0F4;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 16px rgba(255, 155, 183, 0.3);
+	}
+
+	.btn-white {
+		background: #fff;
+		color: #6B3E2E;
+		box-shadow: 0 2px 10px rgba(107, 62, 46, 0.1);
+	}
+
+	.btn-white:hover {
+		background: #FFF3D6;
+		transform: translateY(-2px);
+	}
+
+	/* ===== YOUTUBE COMPANION ===== */
+	.yt-companion {
+		background: #FBF5F3;
+		padding: 0.75rem 2rem 0.5rem;
+		position: relative;
+		z-index: 1;
+		overflow: visible;
+	}
+
+	.yt-companion-inner {
+		max-width: 1100px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.yt-companion-left {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		flex: 0 0 260px;
+	}
+
+	.yt-badge-img {
+		width: 44px;
+		height: auto;
+		flex-shrink: 0;
+		margin-top: 0.2rem;
+	}
+
+	.yt-companion-title {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.05rem;
+		color: #6B3E2E;
+		line-height: 1.3;
+		font-weight: 800;
+		margin: 0;
+	}
+
+
+	.yt-companion-sub {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.78rem;
+		color: #6B3E2E;
+		opacity: 0.65;
+		line-height: 1.5;
+		margin: 0.25rem 0 0.4rem;
+	}
+
+	.yt-sub-link {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.8rem;
+		color: #FF9BB7;
+		font-weight: 700;
+	}
+
+	.yt-sub-link:hover {
+		color: #F0839F;
+	}
+
+	.yt-comp-card {
+		flex: 1;
+		background: #FFF8FA;
+		border-radius: 16px;
+		padding: 0.5rem 0.5rem 0.4rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.2rem;
+		border: 1px solid rgba(255, 155, 183, 0.15);
+		transition: all 0.25s;
+	}
+
+	.yt-comp-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 4px 16px rgba(255, 155, 183, 0.18);
+	}
+
+	.yt-comp-card img {
+		width: 100%;
+		max-width: none;
+		height: auto;
+		object-fit: contain;
+		margin-bottom: 0.25rem;
+	}
+
+	.yt-comp-title {
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.82rem;
+		font-weight: 800;
+		color: #6B3E2E;
+		align-self: stretch;
+		text-align: left;
+	}
+
+	.yt-comp-bottom {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		align-self: stretch;
+	}
+
+	.yt-comp-sub {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.55rem;
+		color: #6B3E2E;
+		opacity: 0.6;
+		line-height: 1.3;
+		text-align: left;
+		flex: 1;
+	}
+
+	.yt-comp-arrow {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 20px;
+		height: 20px;
+		min-width: 20px;
+		border-radius: 50%;
+		border: 1.5px solid #FF9BB7;
 		transition: all 0.2s;
 	}
 
-	.btn-primary {
-		background: #d5b3f5;
-		color: #fff;
+	.yt-comp-card:hover .yt-comp-arrow {
+		background: #FF9BB7;
 	}
 
-	.btn-primary:hover {
-		background: #c9a3eb;
+	.yt-comp-card:hover .yt-comp-arrow svg {
+		stroke: #fff;
 	}
 
-	/* Videos Section */
-	.videos-section {
-		padding: 4rem 2rem;
-		max-width: 800px;
-		margin: 0 auto;
-		text-align: center;
-		position: relative;
-		z-index: 1;
-	}
-
-	.videos-section h2 {
-		font-size: 2.25rem;
-		margin-bottom: 0.5rem;
-		color: #333;
-	}
-
-	.video-title {
-		color: #555;
-		font-size: 1.25rem;
-		margin-bottom: 2rem;
-	}
-
-	.video-card {
-		background: #fff;
-		border-radius: 12px;
+	.yt-card {
+		border-radius: 16px;
 		overflow: hidden;
-		box-shadow: 0 4px 16px rgba(155, 89, 182, 0.15);
+		box-shadow: 0 2px 12px rgba(107, 62, 46, 0.08);
 	}
 
-	.video-wrapper {
+	.yt-card-wrapper {
 		position: relative;
 		padding-bottom: 56.25%;
 		height: 0;
 	}
 
-	.video-wrapper iframe {
+	.yt-card-wrapper iframe {
 		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
+		top: 0; left: 0;
+		width: 100%; height: 100%;
 	}
 
-	/* Characters Section */
-	.characters-section {
-		padding: 4rem 2rem;
-		text-align: center;
+	/* ===== SIGNUP BAR ===== */
+	.signup-bar-inner {
+		max-width: 1100px;
+		margin: 0.5rem auto 0;
+		background: #F5DDE2;
+		border-radius: 16px;
+		padding: 0.5rem 1.5rem 0.5rem 140px;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		position: relative;
+	}
+
+	/* Floating decorations */
+	.signup-deco {
+		position: absolute;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.deco-heart1 {
+		width: 28px;
+		left: 2%;
+		top: -18px;
+		opacity: 1;
+		transform: rotate(-15deg);
+	}
+
+	.deco-heart2 {
+		width: 20px;
+		left: 10%;
+		top: 4px;
+		opacity: 0.85;
+		transform: rotate(10deg);
+	}
+
+	.deco-heart3 {
+		width: 22px;
+		left: 5%;
+		bottom: -10px;
+		opacity: 0.75;
+		transform: rotate(-5deg);
+	}
+
+	.deco-heart4 {
+		width: 16px;
+		right: 20%;
+		top: -12px;
+		opacity: 0.8;
+		transform: rotate(20deg);
+	}
+
+	.deco-heart5 {
+		width: 18px;
+		right: 4%;
+		bottom: -8px;
+		opacity: 0.7;
+		transform: rotate(-10deg);
+	}
+
+	.deco-sparkle1 {
+		width: 35px;
+		right: 12%;
+		top: -18px;
+		opacity: 1;
+	}
+
+	.deco-sparkle2 {
+		width: 28px;
+		left: 30%;
+		top: -14px;
+		opacity: 0.85;
+	}
+
+	.deco-sparkle3 {
+		width: 30px;
+		right: 2%;
+		top: 50%;
+		transform: translateY(-50%);
+		opacity: 0.8;
+	}
+
+	.deco-sparkle4 {
+		width: 24px;
+		left: 52%;
+		bottom: -12px;
+		opacity: 0.7;
+	}
+
+	.deco-flower1 {
+		width: 20px;
+		right: 7%;
+		bottom: 4px;
+		opacity: 0.85;
+	}
+
+	.deco-flower2 {
+		width: 16px;
+		left: 40%;
+		bottom: 2px;
+		opacity: 0.7;
+	}
+
+	.signup-char {
+		position: absolute;
+		left: -5px;
+		bottom: 0;
+		z-index: 2;
+	}
+
+	.signup-char img {
+		height: 100px;
+		width: auto;
+		display: block;
+	}
+
+	.signup-text {
+		flex: 1;
+		min-width: 0;
 		position: relative;
 		z-index: 1;
-		max-width: 900px;
-		margin: 0 auto;
 	}
 
-	.characters-section h2 {
-		font-size: 2.25rem;
-		margin-bottom: 2rem;
-		color: #333;
-	}
-
-	.characters-banner {
-		width: 100%;
-		max-width: 800px;
-		height: auto;
-		border-radius: 12px;
-	}
-
-	/* About Section */
-	.about-section {
-		background: rgba(255, 255, 255, 0.5);
-		padding: 5rem 2rem;
-		position: relative;
-		z-index: 1;
-	}
-
-	.about-content {
-		max-width: 700px;
-		margin: 0 auto;
-		text-align: center;
-	}
-
-	.about-content h2 {
-		font-size: 2.25rem;
-		margin-bottom: 1.5rem;
-		color: #333;
-	}
-
-	.about-content p {
-		font-size: 1.1rem;
-		line-height: 1.8;
-		color: #555;
-	}
-
-	/* Subscribe Section */
-	.subscribe-section {
-		padding: 3rem 2rem;
-		text-align: center;
-		position: relative;
-		z-index: 1;
-	}
-
-	.subscribe-section h2 {
-		font-size: 2.25rem;
-		color: #e53935;
-		margin-bottom: 1.5rem;
-	}
-
-	.subscribe-btn {
-		background: #e53935;
-		color: #fff;
-		font-size: 1.1rem;
-		padding: 1rem 2.5rem;
-	}
-
-	.subscribe-btn:hover {
-		background: #c62828;
-	}
-
-	.subscribe-note {
-		margin-top: 1rem;
-		color: #e53935;
+	.signup-title {
+		font-family: 'Baloo 2', cursive;
 		font-size: 1rem;
-		font-weight: 600;
+		font-weight: 800;
+		color: #6B3E2E;
+		margin: 0 0 0.1rem;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		white-space: nowrap;
 	}
 
-	.subscribe-btn {
+	.signup-flower {
+		width: 24px;
+		height: 24px;
+		object-fit: contain;
+	}
+
+	.signup-sub {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.68rem;
+		color: #6B3E2E;
+		opacity: 0.7;
+		line-height: 1.4;
+		margin: 0;
+	}
+
+	.signup-form {
+		display: flex;
+		align-items: center;
+		gap: 0;
+		flex: 0 0 auto;
+		background: #fff;
+		border-radius: 12px;
+		padding: 0.25rem;
+		box-shadow: 0 2px 8px rgba(107, 62, 46, 0.06);
+		position: relative;
+		z-index: 1;
+	}
+
+	.signup-input {
+		border: none;
+		outline: none;
+		padding: 0.6rem 1rem;
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.82rem;
+		color: #6B3E2E;
+		background: transparent;
+		width: 200px;
+	}
+
+	.signup-input::placeholder {
+		color: #6B3E2E;
+		opacity: 0.4;
+	}
+
+	.signup-btn {
+		display: inline-flex;
+		align-items: center;
+		background: #E8879B;
+		color: #fff;
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.82rem;
+		font-weight: 700;
+		padding: 0.55rem 1.25rem;
+		border-radius: 10px;
 		border: none;
 		cursor: pointer;
-		font-family: 'Inter', sans-serif;
+		white-space: nowrap;
+		transition: background 0.2s;
 	}
 
-	/* Shoutout Popup */
+	.signup-btn:hover {
+		background: #D4706A;
+	}
+
+	.signup-cta {
+		flex: 0 0 auto;
+		text-decoration: none;
+	}
+
+	/* ===== SECTION TITLES ===== */
+	.section-title {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.5rem;
+		color: #6B3E2E;
+		text-align: center;
+		margin-bottom: 1.5rem;
+		font-weight: 800;
+	}
+
+	/* ===== MEET THE PUCHIPAWS ===== */
+	.title-flower {
+		width: 18px;
+		height: 18px;
+		object-fit: contain;
+		vertical-align: middle;
+	}
+
+	.meet {
+		padding: 1rem 2rem 2rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.meet-row {
+		display: flex;
+		gap: 1.5rem;
+		justify-content: center;
+		align-items: flex-start;
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.meet-card-wrap {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		position: relative;
+		flex: 1;
+		max-width: 360px;
+		text-decoration: none;
+		transition: all 0.25s;
+	}
+
+	.meet-card-wrap:hover {
+		transform: translateY(-4px);
+	}
+
+	.meet-card {
+		display: flex;
+		align-items: flex-end;
+		background: #f5f0f3;
+		border-radius: 16px;
+		padding: 0.5rem 1rem 0.5rem 0;
+		width: 100%;
+		border: 1px solid rgba(0,0,0,0.05);
+		box-shadow: 0 2px 10px rgba(107, 62, 46, 0.06);
+		overflow: visible;
+	}
+
+	.meet-card-wrap:hover .meet-card {
+		box-shadow: 0 4px 16px rgba(107, 62, 46, 0.12);
+	}
+
+	.meet-char-col {
+		flex-shrink: 0;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		width: 120px;
+	}
+
+	.meet-char {
+		height: 190px;
+		width: auto;
+		position: relative;
+		z-index: 2;
+		margin-top: -50px;
+	}
+
+	.meet-text-col {
+		flex: 1;
+		text-align: center;
+		padding: 0.5rem 0;
+	}
+
+	.meet-card h3 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.2rem;
+		font-weight: 800;
+		text-transform: lowercase;
+		letter-spacing: 0.5px;
+		margin-bottom: 0.15rem;
+	}
+
+	.meet-card-blue, .meet-card-pink, .meet-card-purple { background: #fdf8f9; }
+	.meet-card-blue h3 { color: #5B8BD4; }
+	.meet-card-pink h3 { color: #E8879B; }
+	.meet-card-purple h3 { color: #9B7EC8; }
+
+	.meet-icon {
+		font-size: 0.7rem;
+		vertical-align: middle;
+	}
+
+	.meet-card-blue .meet-icon { color: #5B8BD4; }
+	.meet-card-pink .meet-icon { color: #E8879B; }
+	.meet-card-purple .meet-icon { color: #9B7EC8; }
+
+	.meet-blurb {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.75rem;
+		color: #6B3E2E;
+		opacity: 0.7;
+		line-height: 1.5;
+		margin-bottom: 0.5rem;
+	}
+
+	.meet-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.75rem;
+		font-weight: 700;
+		padding: 0.3rem 0.9rem;
+		border-radius: 8px;
+		border: 2px solid;
+		background: transparent;
+	}
+
+	.meet-btn-icon {
+		width: 12px;
+		height: 12px;
+	}
+	.paw-blue {
+		filter: invert(52%) sepia(60%) saturate(400%) hue-rotate(185deg) brightness(90%) contrast(90%);
+	}
+	.paw-pink {
+		filter: invert(65%) sepia(30%) saturate(600%) hue-rotate(310deg) brightness(95%) contrast(90%);
+	}
+	.paw-purple {
+		filter: invert(55%) sepia(30%) saturate(500%) hue-rotate(230deg) brightness(90%) contrast(90%);
+	}
+
+	.meet-btn-blue { color: #5B8BD4; border-color: #5B8BD4; }
+	.meet-btn-pink { color: #E8879B; border-color: #E8879B; }
+	.meet-btn-purple { color: #9B7EC8; border-color: #9B7EC8; }
+
+	.meet-btn { transition: all 0.2s; }
+	.meet-btn-blue:hover { background: #5B8BD4; color: #fff; }
+	.meet-btn-pink:hover { background: #E8879B; color: #fff; }
+	.meet-btn-purple:hover { background: #9B7EC8; color: #fff; }
+	.meet-btn:hover .meet-btn-icon { filter: brightness(0) invert(1) !important; }
+
+	/* ===== PRODUCTS ===== */
+	.products {
+		padding: 2.5rem 2rem;
+		position: relative;
+		z-index: 1;
+		background: #fff;
+		border-radius: 32px 32px 0 0;
+	}
+
+	.products-header {
+		max-width: 1100px;
+		margin: 0 auto 1.25rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.products-header .section-title {
+		text-align: left;
+		margin-bottom: 0;
+	}
+
+	.products-scroll {
+		display: flex;
+		gap: 1rem;
+		overflow-x: auto;
+		padding: 0.5rem 0 1rem;
+		max-width: 1100px;
+		margin: 0 auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.products-scroll::-webkit-scrollbar {
+		height: 5px;
+	}
+	.products-scroll::-webkit-scrollbar-track {
+		background: #FFD9E3;
+		border-radius: 3px;
+	}
+	.products-scroll::-webkit-scrollbar-thumb {
+		background: #FF9BB7;
+		border-radius: 3px;
+	}
+
+	.prod-card {
+		flex: 0 0 175px;
+		background: #FFF8FA;
+		border-radius: 20px;
+		padding: 0.75rem;
+		transition: all 0.25s;
+		scroll-snap-align: start;
+		border: 1px solid rgba(255, 155, 183, 0.12);
+	}
+
+	.prod-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 6px 20px rgba(255, 155, 183, 0.15);
+	}
+
+	.prod-img {
+		width: 100%;
+		aspect-ratio: 1;
+		border-radius: 14px;
+		overflow: hidden;
+		margin-bottom: 0.5rem;
+	}
+
+	.prod-img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.prod-info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+	}
+
+	.prod-name {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.8rem;
+		color: #6B3E2E;
+		font-weight: 700;
+		line-height: 1.3;
+	}
+
+	.prod-price {
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.85rem;
+		color: #FF9BB7;
+		font-weight: 800;
+	}
+
+	/* ===== LATEST ===== */
+	.latest {
+		padding: 1.5rem 2rem;
+		position: relative;
+		z-index: 1;
+		background: #f9f1f1;
+	}
+
+	.latest-inner {
+		max-width: 1100px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+	}
+
+	.latest-left {
+		flex: 0 0 200px;
+	}
+
+	.latest-yt-icon {
+		width: 44px;
+		height: auto;
+		margin-bottom: 0.75rem;
+	}
+
+	.latest-title {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.3rem;
+		font-weight: 800;
+		color: #6B3E2E;
+		line-height: 1.2;
+		margin-bottom: 0.3rem;
+	}
+
+	.latest-sub {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.8rem;
+		color: #6B3E2E;
+		opacity: 0.6;
+		margin-bottom: 1rem;
+	}
+
+	.latest-yt-btn {
+		font-size: 0.8rem;
+		padding: 0.5rem 1rem;
+	}
+
+	.latest-videos {
+		flex: 1;
+		display: flex;
+		gap: 1rem;
+	}
+
+	.latest-vid-card {
+		flex: 1;
+		text-decoration: none;
+		transition: transform 0.2s;
+	}
+
+	.latest-vid-card:hover {
+		transform: translateY(-3px);
+	}
+
+	.latest-thumb {
+		border-radius: 12px;
+		overflow: hidden;
+		margin-bottom: 0.5rem;
+	}
+
+	.latest-thumb img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.latest-vid-card h4 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.85rem;
+		font-weight: 800;
+		color: #6B3E2E;
+		line-height: 1.3;
+		margin-bottom: 0.15rem;
+	}
+
+	.latest-vid-card p {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.72rem;
+		color: #6B3E2E;
+		opacity: 0.6;
+	}
+
+	/* ===== SHARE ===== */
+	.share {
+		padding: 2.5rem 2rem;
+		position: relative;
+		z-index: 1;
+		background: #fff;
+		border-radius: 32px;
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+
+	.share-inner {
+		max-width: 1100px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		gap: 3rem;
+	}
+
+	.share-left {
+		flex: 1;
+	}
+
+	.share-left h2 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.8rem;
+		color: #6B3E2E;
+		margin-bottom: 0.75rem;
+		line-height: 1.2;
+		font-weight: 800;
+	}
+
+	.share-left p {
+		font-family: 'Nunito', sans-serif;
+		color: #6B3E2E;
+		margin-bottom: 1.25rem;
+		font-size: 0.95rem;
+		line-height: 1.7;
+		opacity: 0.8;
+	}
+
+	.share-btns {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+	}
+
+	.share-right {
+		flex: 0 0 auto;
+	}
+
+	.share-right img {
+		height: clamp(160px, 22vw, 280px);
+		width: auto;
+	}
+
+	/* ===== BOTTOM BANNER ===== */
+	.bottom-banner {
+		background: linear-gradient(135deg, #FFD9E3 0%, #FF9BB7 50%, #FF85A8 100%);
+		padding: 3rem 2rem;
+		position: relative;
+		z-index: 1;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 32px;
+		max-width: 1100px;
+		margin: 2rem auto;
+	}
+
+	.banner-inner {
+		text-align: center;
+		position: relative;
+		z-index: 2;
+		flex: 1;
+		max-width: 520px;
+	}
+
+	.banner-inner h2 {
+		font-family: 'Baloo 2', cursive;
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		color: #fff;
+		margin-bottom: 0.5rem;
+		line-height: 1.2;
+	}
+
+	.banner-inner p {
+		font-family: 'Nunito', sans-serif;
+		color: rgba(255, 255, 255, 0.9);
+		margin-bottom: 1.25rem;
+		font-size: 0.95rem;
+	}
+
+	.banner-btns {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.banner-char-left, .banner-char-right {
+		flex: 0 0 auto;
+		position: relative;
+		z-index: 1;
+		align-self: flex-end;
+		margin-bottom: -3rem;
+	}
+
+	.banner-char-left img, .banner-char-right img {
+		height: clamp(120px, 18vw, 200px);
+		width: auto;
+		filter: drop-shadow(0 4px 16px rgba(107, 62, 46, 0.15));
+	}
+
+	/* ===== ABOUT ===== */
+	.about {
+		background: rgba(255, 255, 255, 0.6);
+		padding: 3rem 2rem;
+		position: relative;
+		z-index: 1;
+		border-radius: 32px;
+		max-width: 1100px;
+		margin: 0 auto 2rem;
+	}
+
+	.about-inner {
+		max-width: 650px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.about-inner h2 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.5rem;
+		margin-bottom: 0.75rem;
+		color: #6B3E2E;
+	}
+
+	.about-inner p {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.95rem;
+		line-height: 1.8;
+		color: #6B3E2E;
+		opacity: 0.8;
+	}
+
+	/* ===== SHOUTOUT POPUP ===== */
 	.shoutout-overlay {
 		display: none;
 		position: fixed;
@@ -257,18 +1374,16 @@ import Layout from '../layouts/Layout.astro';
 		justify-content: center;
 	}
 
-	.shoutout-overlay.open {
-		display: flex;
-	}
+	.shoutout-overlay.open { display: flex; }
 
 	.shoutout-modal {
 		background: #fff;
-		border-radius: 16px;
+		border-radius: 28px;
 		padding: 2.5rem 2rem;
 		text-align: center;
 		position: relative;
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-		max-width: 400px;
+		box-shadow: 0 8px 32px rgba(107, 62, 46, 0.2);
+		max-width: 380px;
 		width: 90%;
 	}
 
@@ -282,102 +1397,328 @@ import Layout from '../layouts/Layout.astro';
 		color: #999;
 		cursor: pointer;
 	}
-
-	.shoutout-close:hover {
-		color: #333;
-	}
+	.shoutout-close:hover { color: #6B3E2E; }
 
 	.shoutout-title {
-		font-size: 1.5rem;
-		color: #e53935;
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.4rem;
+		color: #FF9BB7;
 		margin-bottom: 0.5rem;
 	}
 
 	.shoutout-text {
-		font-size: 1.1rem;
-		color: #555;
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		color: #6B3E2E;
 		margin-bottom: 1.5rem;
+		opacity: 0.7;
 	}
 
 	.shoutout-buttons {
 		display: flex;
-		gap: 1rem;
+		gap: 0.75rem;
 		justify-content: center;
 	}
 
 	.shoutout-yes {
-		background: #e53935;
+		background: #FF9BB7;
 		color: #fff;
-		padding: 0.75rem 2rem;
+		padding: 0.65rem 1.75rem;
 	}
-
-	.shoutout-yes:hover {
-		background: #c62828;
-	}
+	.shoutout-yes:hover { background: #F0839F; }
 
 	.shoutout-no {
-		background: #ddd;
-		color: #555;
-		padding: 0.75rem 2rem;
-		border: none;
-		cursor: pointer;
-		font-family: 'Inter', sans-serif;
+		background: #FFD9E3;
+		color: #6B3E2E;
+		padding: 0.65rem 1.75rem;
+	}
+	.shoutout-no:hover { background: #FFC8D5; }
+
+	/* ===== MOBILE ===== */
+	@media (max-width: 768px) {
+		.hero {
+			padding: 1.5rem 1.25rem 0;
+		}
+
+		.hero-inner {
+			flex-direction: column;
+			text-align: center;
+			gap: 1rem;
+		}
+
+		.hero-sub {
+			max-width: none;
+		}
+
+		.hero-btns {
+			justify-content: center;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.btn {
+			width: 100%;
+			max-width: 280px;
+		}
+
+		.hero-right {
+			align-items: center;
+		}
+
+		.hero-logo { height: 130px; margin-bottom: 0.25rem; }
+		.hc-row { width: min(430px, 94vw); }
+		.hc-rosey { transform: translateX(0.75rem); }
+
+		.yt-companion-inner {
+			flex-wrap: wrap;
+			gap: 0.75rem;
+		}
+
+		.yt-companion-left {
+			flex: 1 1 100%;
+			flex-direction: column;
+			gap: 0.5rem;
+			text-align: center;
+		}
+
+		.yt-comp-card {
+			flex: 1 1 calc(50% - 0.5rem);
+			min-width: 0;
+		}
+
+		.yt-comp-card img {
+			max-width: none;
+		}
+
+		.signup-bar-inner {
+			flex-direction: column;
+			text-align: center;
+			padding: 4.5rem 1rem 0.75rem;
+			gap: 0.5rem;
+		}
+
+		.signup-char {
+			left: 50%;
+			bottom: auto;
+			top: -50px;
+			transform: translateX(-50%);
+		}
+
+		.signup-char img {
+			height: 100px;
+		}
+
+		.signup-deco {
+			opacity: 0.5;
+		}
+
+		.signup-form {
+			width: 100%;
+			flex-direction: column;
+		}
+
+		.signup-input {
+			width: 100%;
+		}
+
+		.signup-btn {
+			width: 100%;
+			justify-content: center;
+		}
+
+		.meet-row {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.meet-card-wrap {
+			max-width: 100%;
+		}
+
+		.meet-char {
+			height: 100px;
+		}
+
+		.meet-char-col {
+			width: 90px;
+		}
+
+		.products-header {
+			flex-direction: column;
+			gap: 0.75rem;
+			text-align: center;
+		}
+
+		.products-header .section-title {
+			text-align: center;
+		}
+
+		.prod-card {
+			flex: 0 0 150px;
+		}
+
+		.share {
+			border-radius: 24px;
+			margin: 0 0.5rem;
+		}
+
+		.latest-inner {
+			flex-direction: column;
+			text-align: center;
+		}
+
+		.latest-left {
+			flex: none;
+		}
+
+		.latest-videos {
+			flex-direction: column;
+		}
+
+		.share-inner {
+			flex-direction: column;
+			text-align: center;
+		}
+
+		.share-btns {
+			justify-content: center;
+		}
+
+		.share-right img {
+			height: 160px;
+		}
+
+		.bottom-banner {
+			flex-direction: column;
+			text-align: center;
+			border-radius: 24px;
+			margin: 1.5rem 0.5rem;
+			padding: 2rem 1.5rem;
+		}
+
+		.banner-char-left, .banner-char-right {
+			display: none;
+		}
+
+		.about {
+			border-radius: 24px;
+			margin: 0 0.5rem 1.5rem;
+		}
+
+		/* --- extra mobile safety / polish --- */
+		.hero-logo {
+			max-width: 100%;
+		}
+
+		.hc-row {
+			max-width: 100%;
+		}
+
+		.yt-companion,
+		.meet,
+		.latest {
+			padding-left: 1.25rem;
+			padding-right: 1.25rem;
+		}
+
+		.signup-title {
+			white-space: normal;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		.section-title {
+			font-size: 1.35rem;
+		}
+
+		.latest-title {
+			font-size: 1.2rem;
+		}
+
+		.latest-vid-card img,
+		.share-right img,
+		.meet-char,
+		.yt-comp-card img {
+			max-width: 100%;
+		}
 	}
 
-	.shoutout-no:hover {
-		background: #ccc;
+	@media (max-width: 480px) {
+		.hero {
+			padding: 1.25rem 1rem 0;
+		}
+
+		.hero-logo {
+			height: 110px;
+		}
+
+		.hc-row {
+			width: 96vw;
+		}
+
+		.hero-sub {
+			font-size: 0.85rem;
+		}
+
+		.section-title {
+			font-size: 1.25rem;
+		}
+
+		.share-left h2 {
+			font-size: 1.5rem;
+		}
+
+		.about-inner h2 {
+			font-size: 1.3rem;
+		}
+
+		.yt-companion-title {
+			font-size: 1rem;
+		}
+
+		.meet-char {
+			height: 90px;
+		}
+
+		.meet-char-col {
+			width: 78px;
+		}
+
+		.meet-card h3 {
+			font-size: 1.05rem;
+		}
+
+		.btn {
+			max-width: 100%;
+		}
+
+		.share,
+		.about {
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+		}
+
+		.meet {
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+
+		.bottom-banner {
+			padding: 1.75rem 1.25rem;
+		}
 	}
+
 </style>
 
 <script>
-	const subscribeBtn = document.getElementById('subscribe-btn');
 	const overlay = document.getElementById('shoutout-overlay');
 	const closeBtn = document.getElementById('shoutout-close');
 	const noBtn = document.getElementById('shoutout-no');
-
-	subscribeBtn?.addEventListener('click', () => {
-		window.open('https://www.youtube.com/@JapanezyArts?sub_confirmation=1', '_blank');
-		overlay?.classList.add('open');
-	});
 
 	closeBtn?.addEventListener('click', () => overlay?.classList.remove('open'));
 	noBtn?.addEventListener('click', () => overlay?.classList.remove('open'));
 	overlay?.addEventListener('click', (e) => {
 		if (e.target === overlay) overlay.classList.remove('open');
 	});
+
 </script>
-
-<style>
-	@media (max-width: 768px) {
-		.hero {
-			padding: 2.5rem 1.25rem;
-			min-height: 45vh;
-		}
-
-		.hero-logo {
-			height: 300px;
-		}
-
-		.characters-section {
-			padding: 2.5rem 1rem;
-		}
-
-		.characters-section h2 {
-			font-size: 1.75rem;
-		}
-
-		.videos-section,
-		.about-section {
-			padding: 2.5rem 1rem;
-		}
-
-		.videos-section h2,
-		.about-content h2 {
-			font-size: 1.75rem;
-		}
-
-		.about-content p {
-			font-size: 1rem;
-		}
-	}
-</style>

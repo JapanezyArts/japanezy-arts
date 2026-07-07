@@ -1,0 +1,437 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// The Japanezy Arts feed + the profile-picture options (same pieces)
+const artworks = [
+	{ src: "/art-chikawa.jpg", title: "Chikawa" },
+	{ src: "/art-suzu.jpg", title: "Suzu" },
+	{ src: "/art-capybara.jpg", title: "Watermelon Capybara" },
+	{ src: "/art-water.jpg", title: "Sparkling Ice Water" },
+	{ src: "/art-cake.jpg", title: "Strawberry Shortcake" },
+	{ src: "/art-catpaw.jpg", title: "CatPaw Gummies" },
+	{ src: "/art-picnic.jpg", title: "Picnic by Mount Fuji" },
+	{ src: "/art-hamster.jpg", title: "Hamster" },
+	{ src: "/art-mew.jpg", title: "Mew & Teddy" },
+	{ src: "/art-mewpikachu.jpg", title: "Mew & Pikachu" },
+	{ src: "/art-noob.jpg", title: "Roblox Noob" },
+	{ src: "/art-petdango.jpg", title: "Pet Dango" },
+	{ src: "/art-pika.jpg", title: "Pikachu" },
+	{ src: "/art-saki-art.jpg", title: "Saki" },
+	{ src: "/art-boba.jpg", title: "Sparkly Boba Tea" },
+];
+---
+
+<Layout title="Artkai - Japanezy Arts">
+	<section class="ak">
+		<!-- WELCOME -->
+		<div class="ak-view ak-welcome" id="view-welcome">
+			<span class="ak-logo">♥</span>
+			<h1 class="ak-welcome-title">Welcome to Artkai</h1>
+			<p class="ak-welcome-sub">Make a profile and follow along with the latest art from Japanezy Arts ✨</p>
+			<button class="ak-btn" id="btn-start">Get Started</button>
+		</div>
+
+		<!-- SETUP -->
+		<div class="ak-view ak-setup" id="view-setup" hidden>
+			<h2 class="ak-setup-title">Make your username &amp; select a profile picture</h2>
+			<input class="ak-username" id="input-username" type="text" maxlength="20" placeholder="Choose a username" />
+			<p class="ak-pick-label">Pick your profile picture:</p>
+			<div class="ak-avatars" id="avatar-grid">
+				{artworks.map((a) => (
+					<button class="ak-avatar-opt" data-src={a.src} aria-label="Choose this avatar">
+						<img src={a.src} alt="" />
+					</button>
+				))}
+			</div>
+			<button class="ak-btn" id="btn-create">Enter Artkai</button>
+			<p class="ak-error" id="setup-error"></p>
+		</div>
+
+		<!-- FEED -->
+		<div class="ak-view ak-feed" id="view-feed" hidden>
+			<button class="ak-secret-btn" id="secret-btn"><span aria-hidden="true">🤫</span> Secret Video</button>
+			<button class="ak-you-chip" id="you-chip" title="Log out and make a new profile">
+				<img id="you-avatar" src="" alt="Your profile picture" />
+				<span id="you-name"></span>
+				<span class="ak-logout-ico" aria-hidden="true">⎋</span>
+			</button>
+
+			<header class="ak-profile">
+				<div class="ak-avatar"><img src="/rosey.png" alt="Japanezy Arts" /></div>
+				<div class="ak-profile-meta">
+					<h2>@japanezyarts</h2>
+					<p><strong>{artworks.length}</strong> posts · Latest art ✨</p>
+				</div>
+			</header>
+
+			<div class="ak-grid">
+				{artworks.map((a) => (
+					<button class="ak-post" data-src={a.src} data-title={a.title} aria-label={`View ${a.title}`}>
+						<img src={a.src} alt={a.title} loading="lazy" />
+					</button>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Viewer -->
+	<div class="ak-lb-overlay" id="lb-overlay" role="dialog" aria-modal="true">
+		<div class="ak-lb-modal">
+			<button class="ak-lb-close" id="lb-close" aria-label="Close">&times;</button>
+			<div class="ak-lb-img"><img id="lb-img" src="" alt="" /></div>
+			<p class="ak-lb-title" id="lb-title"></p>
+		</div>
+	</div>
+
+	<!-- Secret video popup -->
+	<div class="ak-video-overlay" id="video-overlay" role="dialog" aria-modal="true">
+		<div class="ak-video-modal">
+			<button class="ak-video-close" id="video-close" aria-label="Close">&times;</button>
+			<div class="ak-video-frame">
+				<iframe id="secret-iframe" src="" title="Secret Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.ak {
+		max-width: 720px;
+		margin: 0 auto;
+		padding: 2.5rem 1.25rem 5rem;
+		position: relative;
+		min-height: 60vh;
+	}
+
+	.ak-view { animation: akfade 0.3s ease; }
+	@keyframes akfade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+	/* WELCOME */
+	.ak-welcome { text-align: center; padding-top: 2rem; }
+	.ak-logo {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 90px;
+		height: 90px;
+		background: linear-gradient(135deg, #FF9BB7, #c48daa);
+		color: #fff;
+		font-size: 3rem;
+		font-weight: 800;
+		font-family: 'Baloo 2', cursive;
+		border-radius: 26px;
+		box-shadow: 0 8px 22px rgba(255, 155, 183, 0.5);
+		margin-bottom: 1.5rem;
+	}
+	.ak-welcome-title { font-size: clamp(2rem, 5vw, 3rem); color: #d96c85; margin-bottom: 0.75rem; }
+	.ak-welcome-sub { color: #7a6b74; font-size: 1.1rem; max-width: 440px; margin: 0 auto 2rem; }
+
+	.ak-btn {
+		background: #FF9BB7;
+		color: #fff;
+		font-family: 'Baloo 2', cursive;
+		font-weight: 700;
+		font-size: 1.05rem;
+		padding: 0.8rem 2.25rem;
+		border: none;
+		border-radius: 14px;
+		cursor: pointer;
+		box-shadow: 0 5px 16px rgba(255, 155, 183, 0.45);
+		transition: background 0.2s, transform 0.15s;
+	}
+	.ak-btn:hover { background: #F0839F; transform: translateY(-2px); }
+
+	/* SETUP */
+	.ak-setup { text-align: center; }
+	.ak-setup-title { font-size: clamp(1.5rem, 3.5vw, 2.1rem); color: #d96c85; margin-bottom: 1.5rem; }
+	.ak-username {
+		width: 100%;
+		max-width: 340px;
+		padding: 0.8rem 1.1rem;
+		border: 2px solid #f3c6d5;
+		border-radius: 12px;
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		color: #6B3E2E;
+		outline: none;
+		margin-bottom: 1.75rem;
+	}
+	.ak-username:focus { border-color: #FF9BB7; }
+	.ak-pick-label { font-weight: 700; color: #6B3E2E; margin-bottom: 1rem; }
+	.ak-avatars {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+		gap: 0.75rem;
+		margin-bottom: 1.75rem;
+	}
+	.ak-avatar-opt {
+		aspect-ratio: 1 / 1;
+		border: 3px solid transparent;
+		border-radius: 50%;
+		overflow: hidden;
+		padding: 0;
+		cursor: pointer;
+		background: #fff0f5;
+		transition: border-color 0.15s, transform 0.15s;
+	}
+	.ak-avatar-opt img { width: 100%; height: 100%; object-fit: cover; display: block; }
+	.ak-avatar-opt:hover { transform: scale(1.05); }
+	.ak-avatar-opt.selected { border-color: #FF9BB7; transform: scale(1.05); }
+	.ak-error { color: #e53935; font-weight: 600; margin-top: 0.9rem; min-height: 1.2em; }
+
+	/* FEED */
+	.ak-you-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		position: absolute;
+		top: 1rem;
+		right: 1.25rem;
+		background: #fff0f5;
+		padding: 0.3rem 0.75rem 0.3rem 0.35rem;
+		border-radius: 999px;
+		border: 1px solid #f3c6d5;
+		cursor: pointer;
+		transition: background 0.15s;
+	}
+	.ak-you-chip:hover { background: #ffe0ec; }
+	.ak-you-chip img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; border: 2px solid #FF9BB7; }
+	.ak-you-chip span { font-family: 'Baloo 2', cursive; font-weight: 700; color: #d96c85; font-size: 0.85rem; }
+	.ak-logout-ico { color: #c48daa; font-size: 0.95rem; font-weight: 700; }
+
+	.ak-profile {
+		display: flex;
+		align-items: center;
+		gap: clamp(1.25rem, 5vw, 3rem);
+		padding: 1.5rem 0.5rem 2rem;
+		border-bottom: 1px solid #f3d9e2;
+		margin-bottom: 2rem;
+	}
+	.ak-avatar {
+		flex: 0 0 auto;
+		width: clamp(84px, 18vw, 120px);
+		height: clamp(84px, 18vw, 120px);
+		border-radius: 50%;
+		overflow: hidden;
+		border: 4px solid #FF9BB7;
+		background: #ffe6ec;
+	}
+	.ak-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+	.ak-profile-meta h2 { color: #6B3E2E; font-size: clamp(1.3rem, 3vw, 1.8rem); margin-bottom: 0.5rem; }
+	.ak-profile-meta strong { color: #d96c85; }
+
+	.ak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+	.ak-post { border: none; padding: 0; background: #fff0f5; cursor: pointer; border-radius: 4px; overflow: hidden; }
+	.ak-post img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; transition: transform 0.2s; }
+	.ak-post:hover img { transform: scale(1.05); }
+
+	/* Viewer */
+	.ak-lb-overlay {
+		position: fixed;
+		inset: 0;
+		background: rgba(60, 30, 40, 0.6);
+		backdrop-filter: blur(3px);
+		display: none;
+		align-items: center;
+		justify-content: center;
+		z-index: 1000;
+		padding: 1.5rem;
+	}
+	.ak-lb-overlay.open { display: flex; }
+	.ak-lb-modal { background: #fff; border-radius: 22px; padding: 1.5rem; max-width: 420px; width: 100%; text-align: center; position: relative; }
+	.ak-lb-close { position: absolute; top: 0.6rem; right: 0.9rem; background: none; border: none; font-size: 1.9rem; color: #c48daa; cursor: pointer; line-height: 1; }
+	.ak-lb-img { background: #fff0f5; border-radius: 16px; padding: 1rem; margin-bottom: 0.9rem; }
+	.ak-lb-img img { max-width: 100%; max-height: 55vh; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; }
+	.ak-lb-title { font-weight: 700; color: #d96c85; font-size: 1.15rem; }
+
+	/* Secret video button + popup */
+	.ak-secret-btn {
+		position: absolute;
+		top: 1rem;
+		left: 1.25rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		background: linear-gradient(135deg, #c48daa, #FF9BB7);
+		color: #fff;
+		font-family: 'Baloo 2', cursive;
+		font-weight: 700;
+		font-size: 0.82rem;
+		padding: 0.45rem 0.95rem;
+		border: none;
+		border-radius: 999px;
+		cursor: pointer;
+		box-shadow: 0 4px 12px rgba(196, 141, 170, 0.45);
+		z-index: 5;
+	}
+
+	.ak-video-overlay {
+		position: fixed;
+		inset: 0;
+		background: rgba(30, 15, 20, 0.8);
+		backdrop-filter: blur(3px);
+		display: none;
+		align-items: center;
+		justify-content: center;
+		z-index: 1100;
+		padding: 1.5rem;
+	}
+	.ak-video-overlay.open { display: flex; }
+	.ak-video-modal { position: relative; width: min(880px, 100%); }
+	.ak-video-frame {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		border-radius: 16px;
+		overflow: hidden;
+		background: #000;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+	}
+	.ak-video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+	.ak-video-close { position: absolute; top: -2.75rem; right: 0; background: none; border: none; color: #fff; font-size: 2rem; line-height: 1; cursor: pointer; }
+
+	@media (max-width: 768px) {
+		.ak { padding: 2.5rem 1rem 4rem; }
+
+		.ak-welcome { padding-top: 1rem; }
+		.ak-welcome-sub { font-size: 1rem; }
+
+		.ak-secret-btn {
+			top: 0.75rem;
+			left: 0.75rem;
+			font-size: 0.72rem;
+			padding: 0.4rem 0.7rem;
+		}
+
+		.ak-you-chip {
+			top: 0.75rem;
+			right: 0.75rem;
+			max-width: 42%;
+			padding: 0.25rem 0.6rem 0.25rem 0.3rem;
+		}
+		.ak-you-chip img { width: 26px; height: 26px; }
+		.ak-you-chip span {
+			font-size: 0.78rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.ak-profile { flex-direction: column; text-align: center; gap: 1rem; padding-top: 3.25rem; }
+		.ak-avatar { width: 88px; height: 88px; }
+
+		.ak-grid { gap: 4px; }
+
+		.ak-avatars {
+			grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+			gap: 0.6rem;
+		}
+
+		.ak-video-close { top: -2.5rem; right: 0.25rem; }
+	}
+
+	@media (max-width: 480px) {
+		.ak-logo { width: 76px; height: 76px; font-size: 2.5rem; }
+
+		.ak-username { padding: 0.7rem 1rem; }
+
+		.ak-lb-overlay, .ak-video-overlay { padding: 1rem; }
+		.ak-lb-modal { padding: 1.25rem; }
+		.ak-lb-img img { max-height: 48vh; }
+
+		.ak-avatars { grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); }
+	}
+</style>
+
+<script>
+	const PROFILE_KEY = 'artkai-profile';
+
+	const views = {
+		welcome: document.getElementById('view-welcome'),
+		setup: document.getElementById('view-setup'),
+		feed: document.getElementById('view-feed'),
+	};
+
+	function getProfile() {
+		try { return JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null'); } catch { return null; }
+	}
+
+	function show(name: 'welcome' | 'setup' | 'feed') {
+		(Object.keys(views) as Array<keyof typeof views>).forEach((k) => {
+			views[k]?.toggleAttribute('hidden', k !== name);
+		});
+	}
+
+	// ---- Welcome ----
+	document.getElementById('btn-start')?.addEventListener('click', () => show('setup'));
+
+	// ---- Setup ----
+	let selectedAvatar = '';
+	document.querySelectorAll('.ak-avatar-opt').forEach((opt) => {
+		opt.addEventListener('click', () => {
+			document.querySelectorAll('.ak-avatar-opt').forEach((o) => o.classList.remove('selected'));
+			opt.classList.add('selected');
+			selectedAvatar = opt.getAttribute('data-src') || '';
+		});
+	});
+
+	document.getElementById('btn-create')?.addEventListener('click', () => {
+		const username = (document.getElementById('input-username') as HTMLInputElement).value.trim();
+		const err = document.getElementById('setup-error');
+		if (!username) { if (err) err.textContent = 'Please choose a username!'; return; }
+		if (!selectedAvatar) { if (err) err.textContent = 'Please pick a profile picture!'; return; }
+		localStorage.setItem(PROFILE_KEY, JSON.stringify({ username, avatar: selectedAvatar }));
+		enterFeed();
+	});
+
+	// ---- Feed ----
+	function enterFeed() {
+		const profile = getProfile();
+		if (!profile) { show('welcome'); return; }
+		(document.getElementById('you-avatar') as HTMLImageElement).src = profile.avatar;
+		document.getElementById('you-name')!.textContent = '@' + profile.username;
+		show('feed');
+	}
+
+	// ---- Viewer ----
+	const overlay = document.getElementById('lb-overlay');
+	const lbImg = document.getElementById('lb-img') as HTMLImageElement;
+	const lbTitle = document.getElementById('lb-title');
+	document.querySelectorAll('.ak-post').forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const src = btn.getAttribute('data-src') || '';
+			const title = btn.getAttribute('data-title') || '';
+			if (lbImg) { lbImg.src = src; lbImg.alt = title; }
+			if (lbTitle) lbTitle.textContent = title;
+			overlay?.classList.add('open');
+		});
+	});
+	function closeLb() { overlay?.classList.remove('open'); }
+	document.getElementById('lb-close')?.addEventListener('click', closeLb);
+	overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeLb(); });
+
+	// ---- Secret video ----
+	const videoOverlay = document.getElementById('video-overlay');
+	const videoIframe = document.getElementById('secret-iframe') as HTMLIFrameElement;
+	const SECRET_EMBED = 'https://www.youtube.com/embed/kqlBr6-f6_Y?autoplay=1&rel=0';
+	document.getElementById('secret-btn')?.addEventListener('click', () => {
+		if (videoIframe) videoIframe.src = SECRET_EMBED;
+		videoOverlay?.classList.add('open');
+	});
+	function closeVideo() { videoOverlay?.classList.remove('open'); if (videoIframe) videoIframe.src = ''; }
+	document.getElementById('video-close')?.addEventListener('click', closeVideo);
+	videoOverlay?.addEventListener('click', (e) => { if (e.target === videoOverlay) closeVideo(); });
+
+	document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeLb(); closeVideo(); } });
+
+	// ---- Log out (delete profile & make a new one) ----
+	document.getElementById('you-chip')?.addEventListener('click', () => {
+		if (confirm('Log out and make a new profile?')) {
+			localStorage.removeItem(PROFILE_KEY);
+			show('welcome');
+		}
+	});
+
+	// ---- Init ----
+	if (getProfile()) { enterFeed(); } else { show('welcome'); }
+</script>
