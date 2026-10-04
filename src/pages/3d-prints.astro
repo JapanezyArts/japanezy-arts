@@ -1,0 +1,247 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// 3D print showcase + downloadable model files.
+// To add a print: drop the photo and the model file into `public/prints/`,
+// then add an entry below. `file` is the model you used to print it (STL/3MF/etc.).
+// Example:
+//   { image: '/prints/my-melody.jpg', title: 'My Melody', file: '/prints/my-melody.stl', fileLabel: 'STL' },
+type Print = { image: string; title: string; file?: string; fileLabel?: string };
+
+const prints: Print[] = [
+	// Add your 3D prints here ↑
+];
+---
+
+<Layout title="3D Prints - Japanezy Arts">
+	<section class="prints-section">
+		<a href="/" class="close-btn" aria-label="Back to home">&times;</a>
+		<h2>3D Prints</h2>
+		<p class="prints-subtitle">Photos of things I've 3D printed — plus the files I used to make them!</p>
+
+		{prints.length > 0 ? (
+			<div class="prints-grid">
+				{prints.map((print) => (
+					<div class="print-card">
+						<a href={print.image} target="_blank" rel="noopener" class="print-thumb">
+							<img src={print.image} alt={print.title} />
+						</a>
+						<div class="print-info">
+							<h4>{print.title}</h4>
+							{print.file && (
+								<a href={print.file} download class="btn print-download">
+									<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+									Download {print.fileLabel ?? 'File'}
+								</a>
+							)}
+						</div>
+					</div>
+				))}
+			</div>
+		) : (
+			<div class="prints-empty">
+				<img src="/paw-icon.svg" alt="" width="40" height="40" class="prints-empty-paw" />
+				<p>Coming soon! Check back for photos of my 3D prints and the files I used to make them.</p>
+			</div>
+		)}
+
+		<div class="notice">
+			<p class="notice-title">NOTICE</p>
+			<p>These files are for personal use only.</p>
+			<p>Do not redistribute or use for commercial purposes without permission.</p>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.close-btn {
+		position: absolute;
+		top: 1.5rem;
+		right: 1.5rem;
+		font-size: 2rem;
+		color: #6B3E2E;
+		background: none;
+		border: none;
+		cursor: pointer;
+		text-decoration: none;
+		line-height: 1;
+		opacity: 0.5;
+		transition: opacity 0.2s;
+	}
+	.close-btn:hover {
+		opacity: 1;
+	}
+
+	.prints-section {
+		max-width: 1100px;
+		margin: 2rem auto;
+		padding: 2.5rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.prints-section h2 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 2rem;
+		color: #6B3E2E;
+		margin-bottom: 0.5rem;
+	}
+
+	.prints-subtitle {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		color: #6B3E2E;
+		opacity: 0.7;
+		margin-bottom: 2rem;
+	}
+
+	.prints-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+		grid-auto-rows: min-content;
+	}
+
+	.print-card {
+		display: flex;
+		flex-direction: column;
+		border-radius: 16px;
+		overflow: hidden;
+		background: #fff;
+		box-shadow: 0 2px 12px rgba(107, 62, 46, 0.1);
+		transition: all 0.25s;
+	}
+
+	.print-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 6px 20px rgba(107, 62, 46, 0.15);
+	}
+
+	.print-thumb {
+		display: block;
+		line-height: 0;
+	}
+
+	.print-thumb img {
+		width: 100%;
+		height: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		display: block;
+	}
+
+	.print-info {
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.print-info h4 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1rem;
+		color: #6B3E2E;
+		margin: 0;
+	}
+
+	.print-download {
+		display: inline-flex;
+		align-items: center;
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.85rem;
+		font-weight: 700;
+		padding: 0.55rem 1.25rem;
+		border-radius: 10px;
+		text-decoration: none;
+		background: #FF9BB7;
+		color: #fff;
+		border: 2px solid #FF9BB7;
+		box-shadow: 0 2px 10px rgba(255, 155, 183, 0.3);
+		transition: all 0.2s;
+	}
+
+	.print-download:hover {
+		background: #f0839f;
+		border-color: #f0839f;
+		transform: translateY(-1px);
+	}
+
+	.prints-empty {
+		padding: 3rem 1.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.prints-empty-paw {
+		opacity: 0.4;
+		margin-bottom: 1rem;
+	}
+
+	.prints-empty p {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		color: #6B3E2E;
+		opacity: 0.6;
+		max-width: 420px;
+		margin: 0 auto;
+		line-height: 1.6;
+	}
+
+	.notice {
+		background: #fff5ee;
+		border-radius: 12px;
+		padding: 1.25rem 1.5rem;
+		max-width: 600px;
+		margin: 2rem auto 0;
+		text-align: left;
+	}
+
+	.notice-title {
+		font-family: 'Baloo 2', cursive;
+		font-weight: 800;
+		color: #6B3E2E;
+		font-size: 0.95rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.notice p {
+		font-family: 'Nunito', sans-serif;
+		font-size: 0.8rem;
+		color: #6B3E2E;
+		opacity: 0.7;
+		line-height: 1.6;
+	}
+
+	@media (max-width: 768px) {
+		.prints-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1rem;
+		}
+
+		.prints-section {
+			padding: 1.5rem 1rem;
+		}
+
+		.prints-section h2 {
+			font-size: 1.6rem;
+		}
+
+		.close-btn {
+			top: 1rem;
+			right: 1rem;
+			font-size: 1.75rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.prints-section h2 {
+			font-size: 1.4rem;
+		}
+
+		.notice {
+			padding: 1rem 1.1rem;
+		}
+	}
+</style>
