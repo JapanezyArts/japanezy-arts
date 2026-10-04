@@ -203,8 +203,11 @@ import { products } from '../data/products';
 						const videos = [];
 						for (const entry of entries) {
 							const link = entry.querySelector('link[rel="alternate"]')?.getAttribute('href') || '';
-							if (link.includes('/shorts/')) continue;
-							const title = entry.querySelector('title').textContent;
+							const rawTitle = entry.querySelector('title').textContent;
+							// "Latest from the channel" is long-form videos only — skip Shorts.
+							// The feed never uses /shorts/ links, so detect Shorts by the #shorts hashtag.
+							if (link.includes('/shorts/') || /#shorts?\b/i.test(rawTitle)) continue;
+							const title = rawTitle.replace(/#[^\s#]+/g, '').replace(/\s+/g, ' ').trim();
 							const videoId = entry.querySelector('id').textContent.split(':').pop();
 							videos.push({ title, videoId });
 							if (videos.length === 3) break;
