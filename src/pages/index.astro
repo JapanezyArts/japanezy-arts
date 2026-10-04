@@ -160,73 +160,33 @@ import { products } from '../data/products';
 		<div class="latest-inner">
 			<div class="latest-left">
 				<img src="/yt-play-pink.png" alt="YouTube" class="latest-yt-icon" />
-				<h2 class="latest-title">Latest from<br/>the channel</h2>
+				<h2 class="latest-title">Newest<br/>Videos</h2>
 				<a href="https://www.youtube.com/@JapanezyArts" target="_blank" rel="noopener" class="btn btn-sakura latest-yt-btn"><img src="/yt-play-pink.png" alt="" width="16" height="16" style="margin-right:6px;filter:brightness(0) invert(1);" />Watch on YouTube</a>
 			</div>
 			<div class="latest-videos" id="latest-videos">
-				<!-- Fallback static content, replaced by JS -->
-				<a href="https://www.youtube.com/watch?v=Oe9azjo7Mas" target="_blank" rel="noopener" class="latest-vid-card">
+				<!-- Long-form videos only (Shorts live on the /shorts page). Newest first. -->
+				<a href="https://www.youtube.com/watch?v=ZrDOV2lZ5SY" target="_blank" rel="noopener" class="latest-vid-card">
 					<div class="latest-thumb">
-						<img src="https://img.youtube.com/vi/Oe9azjo7Mas/mqdefault.jpg" alt="Kawaii Kandi Bone Tutorial" />
+						<img src="https://img.youtube.com/vi/ZrDOV2lZ5SY/mqdefault.jpg" alt="Drawing a Subscriber's OC (ft. Rosey)" />
 					</div>
-					<h4>Kawaii Kandi Bone Tutorial</h4>
-					<p>A spooky-cute kandi tutorial!</p>
+					<h4>Drawing a Subscriber's OC (ft. Rosey)</h4>
+					<p>I draw a subscriber's OC with Rosey!</p>
 				</a>
-				<a href="https://www.youtube.com/watch?v=Sr1jUwteLnc" target="_blank" rel="noopener" class="latest-vid-card">
+				<a href="https://www.youtube.com/watch?v=3hJ4ZVumxEk" target="_blank" rel="noopener" class="latest-vid-card">
 					<div class="latest-thumb">
-						<img src="https://img.youtube.com/vi/Sr1jUwteLnc/mqdefault.jpg" alt="Pinterest Decides What I Draw" />
+						<img src="https://img.youtube.com/vi/3hJ4ZVumxEk/mqdefault.jpg" alt="Capybara Drawing Time-Lapse" />
 					</div>
-					<h4>Pinterest Decides What I Draw</h4>
-					<p>Pinterest picks my next drawing!</p>
+					<h4>Capybara Drawing Time-Lapse</h4>
+					<p>A speedy kawaii capybara sketch!</p>
 				</a>
-				<a href="https://www.youtube.com/watch?v=j_yhlwIaHeI" target="_blank" rel="noopener" class="latest-vid-card">
+				<a href="https://www.youtube.com/watch?v=FdisBeWRiVo" target="_blank" rel="noopener" class="latest-vid-card">
 					<div class="latest-thumb">
-						<img src="https://img.youtube.com/vi/j_yhlwIaHeI/mqdefault.jpg" alt="Unboxing Dreaming Hippers" />
+						<img src="https://img.youtube.com/vi/FdisBeWRiVo/mqdefault.jpg" alt="DIY Soot Sprite Trinket" />
 					</div>
-					<h4>Unboxing Dreaming Hippers</h4>
-					<p>A cute Sonny Angel blind box!</p>
+					<h4>DIY Soot Sprite Trinket</h4>
+					<p>Studio Ghibli kawaii DIY!</p>
 				</a>
 			</div>
-
-			<script>
-				(async function loadLatestVideos() {
-					try {
-						const CHANNEL_ID = 'UC9__kLGuwRYOk9a6IK-ddNw';
-						const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
-						const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`);
-						if (!res.ok) return;
-						const xml = await res.text();
-						const parser = new DOMParser();
-						const doc = parser.parseFromString(xml, 'text/xml');
-						const entries = doc.querySelectorAll('entry');
-
-						const videos = [];
-						for (const entry of entries) {
-							const link = entry.querySelector('link[rel="alternate"]')?.getAttribute('href') || '';
-							const rawTitle = entry.querySelector('title').textContent;
-							// "Latest from the channel" is long-form videos only — skip Shorts.
-							// The feed never uses /shorts/ links, so detect Shorts by the #shorts hashtag.
-							if (link.includes('/shorts/') || /#shorts?\b/i.test(rawTitle)) continue;
-							const title = rawTitle.replace(/#[^\s#]+/g, '').replace(/\s+/g, ' ').trim();
-							const videoId = entry.querySelector('id').textContent.split(':').pop();
-							videos.push({ title, videoId });
-							if (videos.length === 3) break;
-						}
-						if (videos.length < 3) return;
-
-						const container = document.getElementById('latest-videos');
-						container.innerHTML = videos.map(v => `
-							<a href="https://www.youtube.com/watch?v=${v.videoId}" target="_blank" rel="noopener" class="latest-vid-card">
-								<div class="latest-thumb">
-									<img src="https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg" alt="${v.title}" />
-								</div>
-								<h4>${v.title}</h4>
-							</a>`).join('');
-					} catch (e) {
-						// fallback to static content
-					}
-				})();
-			</script>
 		</div>
 	</section>
 
