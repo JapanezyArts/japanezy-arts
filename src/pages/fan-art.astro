@@ -22,9 +22,10 @@ import Layout from '../layouts/Layout.astro';
 
 		<p class="or-text">— or upload a photo —</p>
 
-		<form id="fanart-form" class="fanart-form">
+		<form id="fanart-form" class="fanart-form" action="https://formsubmit.co/scarlettsburt@icloud.com" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="_subject" value="New Fan Art from Japanezy Arts!" />
 			<input type="hidden" name="_captcha" value="false" />
+			<input type="hidden" name="_next" value="https://japanezyarts.com/drawing-thanks" />
 
 			<label class="upload-label" id="upload-label">
 				<span class="upload-text" id="upload-text">Tap to upload a photo</span>
@@ -404,33 +405,27 @@ import Layout from '../layouts/Layout.astro';
 	const form = document.getElementById('fanart-form') as HTMLFormElement;
 	const sendBtn = document.getElementById('send-btn') as HTMLButtonElement;
 
-	form?.addEventListener('submit', async (e) => {
-		e.preventDefault();
-
+	form?.addEventListener('submit', (e) => {
 		// Must have either a camera photo or uploaded file
 		if (!capturedFile && (!uploadInput.files || uploadInput.files.length === 0)) {
+			e.preventDefault();
 			alert('Please take a photo or upload an image first!');
 			return;
 		}
 
+		// If the photo came from the camera, inject it into the file input so it's
+		// part of the native multipart submit. FormSubmit only attaches files on a
+		// standard form POST — its /ajax/ endpoint silently drops attachments, which
+		// is why the letter arrived but the image never did.
+		if (capturedFile) {
+			const dt = new DataTransfer();
+			dt.items.add(capturedFile);
+			uploadInput.files = dt.files;
+		}
+
 		sendBtn.disabled = true;
 		sendBtn.textContent = 'Sending...';
-
-		const formData = new FormData(form);
-
-		// If photo was taken with camera, add it as the attachment
-		if (capturedFile) {
-			formData.set('attachment', capturedFile);
-		}
-
-		try {
-			await fetch('https://formsubmit.co/ajax/scarlettsburt@icloud.com', {
-				method: 'POST',
-				body: formData,
-			});
-		} catch (err) {
-			// Still redirect
-		}
-		window.location.href = '/drawing-thanks';
+		// Let the form submit natively to FormSubmit (multipart/form-data, so the
+		// image is attached); it redirects to the _next thank-you page on success.
 	});
 </script>
