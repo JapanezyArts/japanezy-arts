@@ -1,0 +1,161 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// A collection of art prompts to spark ideas. Add or edit freely.
+const prompts: string[] = [
+	"Draw your favorite animal as a tiny chef.",
+	"Invent a brand-new PuchiPaws friend.",
+	"Turn today's mood into a cute character.",
+	"Design a dessert that doesn't exist yet.",
+	"Draw a cat living inside a teacup.",
+	"Illustrate a bubble tea with its own personality.",
+	"Draw the weather outside as a little creature.",
+	"Design a cozy room for a tiny dragon.",
+	"Reimagine your favorite snack as a mascot.",
+	"Draw something kawaii using only three colors.",
+	"Design an outfit for a marshmallow.",
+	"Draw a plant that grows candy.",
+	"Turn a simple shape into a character.",
+	"Draw your dream bedroom floating in the clouds.",
+	"Create a sticker of your pet as a superhero.",
+	"Draw a robot whose only job is watering houseplants.",
+	"Illustrate a fruit wearing a fancy hat.",
+	"Design a cozy café run by forest animals.",
+];
+---
+
+<Layout title="Art Prompts - Japanezy Arts">
+	<section class="prompts-section">
+		<a href="/" class="close-btn" aria-label="Back to home">&times;</a>
+		<h2>Art Prompts</h2>
+		<p class="prompts-subtitle">Stuck? Grab a prompt and keep your creative energy going! 🎨</p>
+
+		<div class="prompts-grid">
+			{prompts.map((prompt, i) => (
+				<div class="prompt-card">
+					<span class="prompt-num">{i + 1}</span>
+					<p class="prompt-text">{prompt}</p>
+				</div>
+			))}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.close-btn {
+		position: absolute;
+		top: 1.5rem;
+		right: 1.5rem;
+		font-size: 2rem;
+		color: #6B3E2E;
+		background: none;
+		border: none;
+		cursor: pointer;
+		text-decoration: none;
+		line-height: 1;
+		opacity: 0.5;
+		transition: opacity 0.2s;
+	}
+	.close-btn:hover {
+		opacity: 1;
+	}
+
+	.prompts-section {
+		max-width: 1100px;
+		margin: 2rem auto;
+		padding: 2.5rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.prompts-section h2 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 2rem;
+		color: #6B3E2E;
+		margin-bottom: 0.5rem;
+	}
+
+	.prompts-subtitle {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		color: #6B3E2E;
+		opacity: 0.7;
+		margin-bottom: 2rem;
+	}
+
+	.prompts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		gap: 1.5rem;
+		text-align: left;
+	}
+
+	.prompt-card {
+		position: relative;
+		background: #fff;
+		border-radius: 18px;
+		padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+		box-shadow: 0 2px 12px rgba(107, 62, 46, 0.1);
+		border: 2px solid #ffe3ec;
+		transition: all 0.25s;
+	}
+
+	.prompt-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 6px 20px rgba(107, 62, 46, 0.15);
+	}
+
+	.prompt-num {
+		position: absolute;
+		top: 1.25rem;
+		left: 1.1rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.9rem;
+		height: 1.9rem;
+		border-radius: 50%;
+		background: #FF9BB7;
+		color: #fff;
+		font-family: 'Baloo 2', cursive;
+		font-weight: 800;
+		font-size: 0.85rem;
+	}
+
+	.prompt-text {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		font-weight: 600;
+		color: #6B3E2E;
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	@media (max-width: 768px) {
+		.prompts-grid {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.prompts-section {
+			padding: 1.5rem 1rem;
+		}
+
+		.prompts-section h2 {
+			font-size: 1.6rem;
+		}
+
+		.close-btn {
+			top: 1rem;
+			right: 1rem;
+			font-size: 1.75rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.prompts-section h2 {
+			font-size: 1.4rem;
+		}
+	}
+</style>
