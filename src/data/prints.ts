@@ -39,6 +39,7 @@ export const prints: Print[] = [
 			'/prints/suzu-figurine-1.png',
 			'/prints/suzu-figurine-2.png',
 		],
+		model: '/prints/suzu-figurine.glb',
 		// Download file coming soon — the STL is too large to host directly.
 		about:
 			"A 3D-printable figurine of Suzu, the playful blue PuchiPaw with a big fluffy tail! Shown here as a painted render and the raw printable model. A downloadable file is coming soon.",
