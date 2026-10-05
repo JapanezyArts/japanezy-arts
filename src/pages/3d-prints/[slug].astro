@@ -1,0 +1,280 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { prints } from '../../data/prints';
+
+export function getStaticPaths() {
+	return prints.map((print) => ({
+		params: { slug: print.slug },
+		props: { print },
+	}));
+}
+
+const { print } = Astro.props;
+const aboutName = print.name ?? print.title;
+---
+
+<Layout title={`${print.title} - Japanezy Arts`}>
+	<section class="pd-page">
+		<a href="/3d-prints" class="pd-back">&larr; Back to 3D Prints</a>
+
+		<div class="pd-detail">
+			<!-- Gallery / carousel -->
+			<div class="pd-gallery">
+				<div class="pd-main">
+					{print.images.length > 1 && (
+						<button class="pd-arrow pd-prev" id="pd-prev" aria-label="Previous photo">&lsaquo;</button>
+					)}
+					<img id="pd-main-img" src={print.images[0]} alt={print.title} />
+					{print.images.length > 1 && (
+						<button class="pd-arrow pd-next" id="pd-next" aria-label="Next photo">&rsaquo;</button>
+					)}
+				</div>
+
+				{print.images.length > 1 && (
+					<div class="pd-thumbs" id="pd-thumbs">
+						{print.images.map((img, i) => (
+							<button class={`pd-thumb ${i === 0 ? 'active' : ''}`} data-index={i} data-src={img} aria-label={`Photo ${i + 1}`}>
+								<img src={img} alt="" />
+							</button>
+						))}
+					</div>
+				)}
+			</div>
+
+			<!-- Info / buy box -->
+			<div class="pd-info">
+				<h1 class="pd-title">{print.title}</h1>
+				{print.file ? (
+					<a href={print.file} download class="pd-download">
+						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+						Download{print.fileLabel ? ` ${print.fileLabel}` : ''}
+					</a>
+				) : (
+					<span class="pd-download pd-download-soon">Download coming soon</span>
+				)}
+			</div>
+		</div>
+
+		<!-- About -->
+		<div class="pd-about">
+			<h2>About the {aboutName}</h2>
+			<p>{print.about}</p>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	const mainImg = document.getElementById('pd-main-img') as HTMLImageElement | null;
+	const thumbs = Array.from(document.querySelectorAll('.pd-thumb')) as HTMLElement[];
+	const sources = thumbs.map((t) => t.dataset.src || '');
+	let current = 0;
+
+	function show(index: number) {
+		if (!mainImg || sources.length === 0) return;
+		current = (index + sources.length) % sources.length;
+		mainImg.src = sources[current];
+		thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
+	}
+
+	thumbs.forEach((t) => {
+		t.addEventListener('click', () => show(Number(t.dataset.index)));
+	});
+	document.getElementById('pd-prev')?.addEventListener('click', () => show(current - 1));
+	document.getElementById('pd-next')?.addEventListener('click', () => show(current + 1));
+</script>
+
+<style>
+	.pd-page {
+		max-width: 1000px;
+		margin: 2rem auto;
+		padding: 2rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.pd-back {
+		display: inline-block;
+		color: #6B3E2E;
+		font-family: 'Baloo 2', cursive;
+		font-weight: 700;
+		font-size: 0.95rem;
+		margin-bottom: 1.5rem;
+		background: #fff;
+		padding: 0.55rem 1.1rem;
+		border-radius: 10px;
+		text-decoration: none;
+		box-shadow: 0 2px 10px rgba(107, 62, 46, 0.1);
+		transition: all 0.2s;
+	}
+	.pd-back:hover {
+		transform: translateY(-1px);
+		box-shadow: 0 4px 14px rgba(107, 62, 46, 0.15);
+	}
+
+	.pd-detail {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2.5rem;
+		align-items: start;
+	}
+
+	/* Gallery */
+	.pd-main {
+		position: relative;
+		background: #fff;
+		border-radius: 20px;
+		overflow: hidden;
+		box-shadow: 0 2px 16px rgba(107, 62, 46, 0.1);
+		line-height: 0;
+	}
+
+	.pd-main img {
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		display: block;
+	}
+
+	.pd-arrow {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 42px;
+		height: 42px;
+		border-radius: 50%;
+		border: none;
+		background: rgba(255, 255, 255, 0.9);
+		color: #6B3E2E;
+		font-size: 1.6rem;
+		line-height: 1;
+		cursor: pointer;
+		box-shadow: 0 2px 10px rgba(107, 62, 46, 0.18);
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.2s;
+	}
+	.pd-arrow:hover {
+		background: #FF9BB7;
+		color: #fff;
+	}
+	.pd-prev { left: 0.75rem; }
+	.pd-next { right: 0.75rem; }
+
+	.pd-thumbs {
+		display: flex;
+		gap: 0.6rem;
+		margin-top: 0.9rem;
+		flex-wrap: wrap;
+	}
+
+	.pd-thumb {
+		width: 68px;
+		height: 68px;
+		border-radius: 12px;
+		overflow: hidden;
+		border: 2px solid transparent;
+		background: #fff;
+		padding: 0;
+		cursor: pointer;
+		line-height: 0;
+		transition: all 0.2s;
+		box-shadow: 0 1px 6px rgba(107, 62, 46, 0.1);
+	}
+	.pd-thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.pd-thumb.active {
+		border-color: #FF9BB7;
+	}
+
+	/* Info */
+	.pd-title {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.9rem;
+		color: #6B3E2E;
+		margin: 0 0 1.5rem;
+		line-height: 1.2;
+	}
+
+	.pd-download {
+		display: inline-flex;
+		align-items: center;
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.05rem;
+		font-weight: 700;
+		padding: 0.85rem 2rem;
+		border-radius: 14px;
+		text-decoration: none;
+		background: #FF9BB7;
+		color: #fff;
+		border: 2px solid #FF9BB7;
+		box-shadow: 0 3px 14px rgba(255, 155, 183, 0.35);
+		transition: all 0.2s;
+		cursor: pointer;
+	}
+	.pd-download:hover {
+		background: #f0839f;
+		border-color: #f0839f;
+		transform: translateY(-1px);
+	}
+	.pd-download-soon {
+		background: #f3e7df;
+		color: #a98b7d;
+		border-color: #f3e7df;
+		box-shadow: none;
+		cursor: default;
+	}
+	.pd-download-soon:hover {
+		background: #f3e7df;
+		transform: none;
+	}
+
+	/* About */
+	.pd-about {
+		margin-top: 3rem;
+		background: #fff;
+		border-radius: 20px;
+		padding: 2rem;
+		box-shadow: 0 2px 16px rgba(107, 62, 46, 0.08);
+	}
+	.pd-about h2 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.4rem;
+		color: #6B3E2E;
+		margin: 0 0 0.75rem;
+	}
+	.pd-about p {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		color: #6B3E2E;
+		opacity: 0.85;
+		line-height: 1.7;
+		margin: 0;
+	}
+
+	@media (max-width: 768px) {
+		.pd-page {
+			padding: 1.5rem 1rem;
+		}
+		.pd-detail {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+		.pd-title {
+			font-size: 1.5rem;
+		}
+		.pd-download {
+			width: 100%;
+			box-sizing: border-box;
+			justify-content: center;
+		}
+		.pd-about {
+			margin-top: 2rem;
+			padding: 1.5rem;
+		}
+	}
+</style>

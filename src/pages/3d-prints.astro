@@ -1,16 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-// 3D print showcase + downloadable model files.
-// To add a print: drop the photo and the model file into `public/prints/`,
-// then add an entry below. `file` is the model you used to print it (STL/3MF/etc.).
-// Example:
-//   { image: '/prints/my-melody.jpg', title: 'My Melody', file: '/prints/my-melody.stl', fileLabel: 'STL' },
-type Print = { image: string; title: string; file?: string; fileLabel?: string };
-
-const prints: Print[] = [
-	{ image: '/prints/chizuro-figurine.png', title: 'Chizuro Figurine - No AMS', file: '/prints/chizuro-figurine.3mf', fileLabel: '3MF' },
-];
+import { prints } from '../data/prints';
 ---
 
 <Layout title="3D Prints - Japanezy Arts">
@@ -22,20 +12,14 @@ const prints: Print[] = [
 		{prints.length > 0 ? (
 			<div class="prints-grid">
 				{prints.map((print) => (
-					<div class="print-card">
-						<a href={print.image} target="_blank" rel="noopener" class="print-thumb">
-							<img src={print.image} alt={print.title} />
-						</a>
+					<a href={`/3d-prints/${print.slug}`} class="print-card">
+						<div class="print-thumb">
+							<img src={print.images[0]} alt={print.title} />
+						</div>
 						<div class="print-info">
 							<h4>{print.title}</h4>
-							{print.file && (
-								<a href={print.file} download class="btn print-download">
-									<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-									Download {print.fileLabel ?? 'File'}
-								</a>
-							)}
 						</div>
-					</div>
+					</a>
 				))}
 			</div>
 		) : (
@@ -94,7 +78,6 @@ const prints: Print[] = [
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 		gap: 1.5rem;
-		margin-bottom: 2rem;
 		grid-auto-rows: min-content;
 	}
 
@@ -106,6 +89,7 @@ const prints: Print[] = [
 		background: #fff;
 		box-shadow: 0 2px 12px rgba(107, 62, 46, 0.1);
 		transition: all 0.25s;
+		text-decoration: none;
 	}
 
 	.print-card:hover {
@@ -128,10 +112,7 @@ const prints: Print[] = [
 
 	.print-info {
 		padding: 1rem;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.75rem;
+		text-align: center;
 	}
 
 	.print-info h4 {
@@ -139,28 +120,6 @@ const prints: Print[] = [
 		font-size: 1rem;
 		color: #6B3E2E;
 		margin: 0;
-	}
-
-	.print-download {
-		display: inline-flex;
-		align-items: center;
-		font-family: 'Baloo 2', cursive;
-		font-size: 0.85rem;
-		font-weight: 700;
-		padding: 0.55rem 1.25rem;
-		border-radius: 10px;
-		text-decoration: none;
-		background: #FF9BB7;
-		color: #fff;
-		border: 2px solid #FF9BB7;
-		box-shadow: 0 2px 10px rgba(255, 155, 183, 0.3);
-		transition: all 0.2s;
-	}
-
-	.print-download:hover {
-		background: #f0839f;
-		border-color: #f0839f;
-		transform: translateY(-1px);
 	}
 
 	.prints-empty {
