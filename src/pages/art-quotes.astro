@@ -1,0 +1,168 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// A collection of art & creativity quotes. Add or edit freely.
+type Quote = { text: string; author: string };
+
+const quotes: Quote[] = [
+	{ text: "Every artist was first an amateur.", author: "Ralph Waldo Emerson" },
+	{ text: "Creativity takes courage.", author: "Henri Matisse" },
+	{ text: "Every child is an artist. The problem is how to remain an artist once we grow up.", author: "Pablo Picasso" },
+	{ text: "Art is not what you see, but what you make others see.", author: "Edgar Degas" },
+	{ text: "I dream my painting and I paint my dream.", author: "Vincent van Gogh" },
+	{ text: "Color is a power which directly influences the soul.", author: "Wassily Kandinsky" },
+	{ text: "Creativity is intelligence having fun.", author: "Albert Einstein" },
+	{ text: "You can't use up creativity. The more you use, the more you have.", author: "Maya Angelou" },
+	{ text: "Learn the rules like a pro, so you can break them like an artist.", author: "Pablo Picasso" },
+	{ text: "Great things are done by a series of small things brought together.", author: "Vincent van Gogh" },
+	{ text: "Have no fear of perfection — you'll never reach it.", author: "Salvador Dalí" },
+	{ text: "Art washes away from the soul the dust of everyday life.", author: "Pablo Picasso" },
+	{ text: "Imagination is more important than knowledge.", author: "Albert Einstein" },
+	{ text: "Art is the only way to run away without leaving home.", author: "Twyla Tharp" },
+	{ text: "Painting is just another way of keeping a diary.", author: "Pablo Picasso" },
+	{ text: "Nothing is a waste of time if you use the experience wisely.", author: "Auguste Rodin" },
+];
+---
+
+<Layout title="Art Quotes - Japanezy Arts">
+	<section class="quotes-section">
+		<a href="/" class="close-btn" aria-label="Back to home">&times;</a>
+		<h2>Art Quotes</h2>
+		<p class="quotes-subtitle">A little inspiration to spark your creativity. ✨</p>
+
+		<div class="quotes-grid">
+			{quotes.map((quote) => (
+				<figure class="quote-card">
+					<span class="quote-mark" aria-hidden="true">&ldquo;</span>
+					<blockquote class="quote-text">{quote.text}</blockquote>
+					<figcaption class="quote-author">— {quote.author}</figcaption>
+				</figure>
+			))}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.close-btn {
+		position: absolute;
+		top: 1.5rem;
+		right: 1.5rem;
+		font-size: 2rem;
+		color: #6B3E2E;
+		background: none;
+		border: none;
+		cursor: pointer;
+		text-decoration: none;
+		line-height: 1;
+		opacity: 0.5;
+		transition: opacity 0.2s;
+	}
+	.close-btn:hover {
+		opacity: 1;
+	}
+
+	.quotes-section {
+		max-width: 1100px;
+		margin: 2rem auto;
+		padding: 2.5rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.quotes-section h2 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 2rem;
+		color: #6B3E2E;
+		margin-bottom: 0.5rem;
+	}
+
+	.quotes-subtitle {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		color: #6B3E2E;
+		opacity: 0.7;
+		margin-bottom: 2rem;
+	}
+
+	.quotes-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		gap: 1.5rem;
+		text-align: left;
+	}
+
+	.quote-card {
+		position: relative;
+		margin: 0;
+		background: #fff;
+		border-radius: 18px;
+		padding: 2.25rem 1.5rem 1.5rem;
+		box-shadow: 0 2px 12px rgba(107, 62, 46, 0.1);
+		border: 2px solid #ffe3ec;
+		transition: all 0.25s;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.quote-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 6px 20px rgba(107, 62, 46, 0.15);
+	}
+
+	.quote-mark {
+		position: absolute;
+		top: 0.5rem;
+		left: 1rem;
+		font-family: 'Baloo 2', cursive;
+		font-size: 3rem;
+		line-height: 1;
+		color: #FF9BB7;
+		opacity: 0.5;
+	}
+
+	.quote-text {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		font-weight: 600;
+		color: #6B3E2E;
+		line-height: 1.5;
+		margin: 0 0 1rem;
+		flex-grow: 1;
+	}
+
+	.quote-author {
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: #FF9BB7;
+		text-align: right;
+	}
+
+	@media (max-width: 768px) {
+		.quotes-grid {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.quotes-section {
+			padding: 1.5rem 1rem;
+		}
+
+		.quotes-section h2 {
+			font-size: 1.6rem;
+		}
+
+		.close-btn {
+			top: 1rem;
+			right: 1rem;
+			font-size: 1.75rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.quotes-section h2 {
+			font-size: 1.4rem;
+		}
+	}
+</style>
