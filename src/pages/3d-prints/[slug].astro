@@ -11,6 +11,9 @@ export function getStaticPaths() {
 
 const { print } = Astro.props;
 const aboutName = print.name ?? print.title;
+const modelIndex = print.images.length;
+const slideCount = print.images.length + (print.model ? 1 : 0);
+const hasMultiple = slideCount > 1;
 ---
 
 <Layout title={`${print.title} - Japanezy Arts`}>
@@ -21,22 +24,50 @@ const aboutName = print.name ?? print.title;
 			<!-- Gallery / carousel -->
 			<div class="pd-gallery">
 				<div class="pd-main">
-					{print.images.length > 1 && (
+					{hasMultiple && (
 						<button class="pd-arrow pd-prev" id="pd-prev" aria-label="Previous photo">&lsaquo;</button>
 					)}
-					<img id="pd-main-img" src={print.images[0]} alt={print.title} />
-					{print.images.length > 1 && (
+					<div class="pd-slides">
+						{print.images.map((img, i) => (
+							<img class={`pd-slide ${i === 0 ? 'active' : ''}`} data-index={i} src={img} alt={print.title} />
+						))}
+						{print.model && (
+							<model-viewer
+								class="pd-slide"
+								data-index={modelIndex}
+								src={print.model}
+								alt={`Interactive 3D model of ${print.title}`}
+								camera-controls
+								touch-action="pan-y"
+								auto-rotate
+								auto-rotate-delay="0"
+								rotation-per-second="24deg"
+								shadow-intensity="0.6"
+								exposure="1.1"
+								loading="eager"
+								reveal="auto"
+								poster={print.images[0]}
+							></model-viewer>
+						)}
+					</div>
+					{hasMultiple && (
 						<button class="pd-arrow pd-next" id="pd-next" aria-label="Next photo">&rsaquo;</button>
 					)}
 				</div>
 
-				{print.images.length > 1 && (
+				{hasMultiple && (
 					<div class="pd-thumbs" id="pd-thumbs">
 						{print.images.map((img, i) => (
-							<button class={`pd-thumb ${i === 0 ? 'active' : ''}`} data-index={i} data-src={img} aria-label={`Photo ${i + 1}`}>
+							<button class={`pd-thumb ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Photo ${i + 1}`}>
 								<img src={img} alt="" />
 							</button>
 						))}
+						{print.model && (
+							<button class="pd-thumb pd-thumb-3d" data-index={modelIndex} aria-label="Interactive 3D model">
+								<img src={print.images[0]} alt="" />
+								<span class="pd-3d-badge">3D</span>
+							</button>
+						)}
 					</div>
 				)}
 			</div>
@@ -64,15 +95,20 @@ const aboutName = print.name ?? print.title;
 </Layout>
 
 <script>
-	const mainImg = document.getElementById('pd-main-img') as HTMLImageElement | null;
+	// Only pull in the (heavy) 3D viewer library on pages that actually have a model.
+	if (document.querySelector('model-viewer')) {
+		import('@google/model-viewer');
+	}
+
+	const slides = Array.from(document.querySelectorAll('.pd-slide')) as HTMLElement[];
 	const thumbs = Array.from(document.querySelectorAll('.pd-thumb')) as HTMLElement[];
-	const sources = thumbs.map((t) => t.dataset.src || '');
 	let current = 0;
 
 	function show(index: number) {
-		if (!mainImg || sources.length === 0) return;
-		current = (index + sources.length) % sources.length;
-		mainImg.src = sources[current];
+		const n = slides.length;
+		if (n === 0) return;
+		current = (index + n) % n;
+		slides.forEach((s, i) => s.classList.toggle('active', i === current));
 		thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
 	}
 
@@ -128,11 +164,30 @@ const aboutName = print.name ?? print.title;
 		line-height: 0;
 	}
 
-	.pd-main img {
+	.pd-slides {
+		position: relative;
 		width: 100%;
 		aspect-ratio: 1 / 1;
-		object-fit: cover;
+	}
+
+	.pd-slide {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		display: none;
+	}
+	.pd-slide.active {
 		display: block;
+	}
+
+	img.pd-slide {
+		object-fit: cover;
+	}
+
+	model-viewer.pd-slide {
+		background: #fff;
+		--poster-color: #ffffff;
 	}
 
 	.pd-arrow {
@@ -189,6 +244,24 @@ const aboutName = print.name ?? print.title;
 	}
 	.pd-thumb.active {
 		border-color: #FF9BB7;
+	}
+
+	.pd-thumb-3d {
+		position: relative;
+	}
+	.pd-3d-badge {
+		position: absolute;
+		bottom: 3px;
+		right: 3px;
+		background: #6B3E2E;
+		color: #fff;
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.6rem;
+		font-weight: 800;
+		line-height: 1;
+		padding: 2px 5px;
+		border-radius: 6px;
+		letter-spacing: 0.02em;
 	}
 
 	/* Info */

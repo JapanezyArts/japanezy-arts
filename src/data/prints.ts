@@ -6,6 +6,8 @@ export interface Print {
 	name?: string;
 	/** Gallery images — the first one is used as the listing thumbnail. */
 	images: string[];
+	/** Optional interactive 3D model (GLB) shown as an extra carousel slide. */
+	model?: string;
 	/** Downloadable model file (STL/3MF/etc.). */
 	file?: string;
 	/** Short label for the download button, e.g. "3MF" or "STL". */
@@ -23,6 +25,7 @@ export const prints: Print[] = [
 			'/prints/chizuro-figurine-1.png',
 			'/prints/chizuro-figurine-2.png',
 		],
+		model: '/prints/chizuro-figurine.glb',
 		file: '/prints/chizuro-figurine.3mf',
 		fileLabel: '3MF',
 		about:
