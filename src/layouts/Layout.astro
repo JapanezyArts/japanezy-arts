@@ -401,8 +401,11 @@ const { title = "Japanezy Arts" } = Astro.props;
 
 			// Check if they can spin on load
 			checkSpinAvailability();
+		</script>
 
-			// Hamburger menu toggle
+		<!-- Nav hamburger toggle — kept in its own script so an error in any
+		     other script can never break the mobile menu. -->
+		<script>
 			const hamburger = document.getElementById('hamburger');
 			const navLinks = document.getElementById('nav-links');
 			hamburger?.addEventListener('click', () => {
@@ -412,11 +415,10 @@ const { title = "Japanezy Arts" } = Astro.props;
 			// Close menu when a nav link is clicked
 			navLinks?.querySelectorAll('a, button').forEach(link => {
 				link.addEventListener('click', () => {
-					navLinks.classList.remove('open');
+					navLinks?.classList.remove('open');
 					hamburger?.classList.remove('open');
 				});
 			});
-
 		</script>
 	</body>
 </html>
