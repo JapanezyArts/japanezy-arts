@@ -51,6 +51,7 @@ export const prints: Print[] = [
 		name: 'Saki Figurine',
 		images: [
 			'/prints/saki-figurine-1.png',
+			'/prints/saki-figurine-2.png',
 		],
 		model: '/prints/saki-figurine.glb',
 		file: '/prints/saki-figurine.3mf',
