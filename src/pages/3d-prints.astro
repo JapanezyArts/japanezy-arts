@@ -44,12 +44,6 @@ const prints: Print[] = [
 				<p>Coming soon! Check back for photos of my 3D prints and the files I used to make them.</p>
 			</div>
 		)}
-
-		<div class="notice">
-			<p class="notice-title">NOTICE</p>
-			<p>These files are for personal use only.</p>
-			<p>Do not redistribute or use for commercial purposes without permission.</p>
-		</div>
 	</section>
 </Layout>
 
@@ -189,31 +183,6 @@ const prints: Print[] = [
 		line-height: 1.6;
 	}
 
-	.notice {
-		background: #fff5ee;
-		border-radius: 12px;
-		padding: 1.25rem 1.5rem;
-		max-width: 600px;
-		margin: 2rem auto 0;
-		text-align: left;
-	}
-
-	.notice-title {
-		font-family: 'Baloo 2', cursive;
-		font-weight: 800;
-		color: #6B3E2E;
-		font-size: 0.95rem;
-		margin-bottom: 0.4rem;
-	}
-
-	.notice p {
-		font-family: 'Nunito', sans-serif;
-		font-size: 0.8rem;
-		color: #6B3E2E;
-		opacity: 0.7;
-		line-height: 1.6;
-	}
-
 	@media (max-width: 768px) {
 		.prints-grid {
 			grid-template-columns: repeat(2, 1fr);
@@ -238,10 +207,6 @@ const prints: Print[] = [
 	@media (max-width: 480px) {
 		.prints-section h2 {
 			font-size: 1.4rem;
-		}
-
-		.notice {
-			padding: 1rem 1.1rem;
 		}
 	}
 </style>
