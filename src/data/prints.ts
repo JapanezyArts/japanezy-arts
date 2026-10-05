@@ -40,8 +40,9 @@ export const prints: Print[] = [
 			'/prints/suzu-figurine-2.png',
 		],
 		model: '/prints/suzu-figurine.glb',
-		// Download file coming soon — the STL is too large to host directly.
+		file: '/prints/suzu-figurine.3mf',
+		fileLabel: '3MF',
 		about:
-			"A 3D-printable figurine of Suzu, the playful blue PuchiPaw with a big fluffy tail! Shown here as a painted render and the raw printable model. A downloadable file is coming soon.",
+			"A 3D-printable figurine of Suzu, the playful blue PuchiPaw with a big fluffy tail! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and show off your favorite fluffy PuchiPaw!",
 	},
 ];
