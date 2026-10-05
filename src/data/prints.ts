@@ -45,4 +45,17 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable figurine of Suzu, the playful blue PuchiPaw with a big fluffy tail! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and show off your favorite fluffy PuchiPaw!",
 	},
+	{
+		slug: 'saki-figurine',
+		title: 'Saki Figurine',
+		name: 'Saki Figurine',
+		images: [
+			'/prints/saki-figurine-1.png',
+		],
+		model: '/prints/saki-figurine.glb',
+		file: '/prints/saki-figurine.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable figurine of Saki, the sweet and creative PuchiPaw kitty with her little flower! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and show off your favorite PuchiPaw!",
+	},
 ];
