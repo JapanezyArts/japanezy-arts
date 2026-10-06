@@ -162,4 +162,19 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable Saki paw dish — a kawaii cat-paw trinket tray with Saki peeking over the top! Perfect for rings, earrings, or other little treasures. The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
 	},
+	{
+		slug: 'suzu-paw-dish',
+		title: 'Suzu Paw Dish',
+		name: 'Suzu Paw Dish',
+		images: [
+			'/prints/suzu-paw-dish-1.png',
+			'/prints/suzu-paw-dish-2.png',
+		],
+		model: '/prints/suzu-paw-dish.glb',
+		cameraOrbit: '0deg 68deg 110%',
+		file: '/prints/suzu-paw-dish.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable Suzu paw dish — a kawaii cat-paw trinket tray with Suzu peeking over the top! Perfect for rings, earrings, or other little treasures. The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
+	},
 ];
