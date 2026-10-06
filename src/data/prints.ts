@@ -10,10 +10,8 @@ export interface Print {
 	model?: string;
 	/** Optional initial model-viewer camera orbit, e.g. "0deg 60deg 110%". */
 	cameraOrbit?: string;
-	/** Downloadable model file for the default (No AMS / single-colour) version. */
+	/** Downloadable model file (STL/3MF/etc.). */
 	file?: string;
-	/** Optional AMS (multi-colour) version of the model file. */
-	fileAms?: string;
 	/** Short label for the download button, e.g. "3MF" or "STL". */
 	fileLabel?: string;
 	/** Longer description shown in the "About" section on the detail page. */
@@ -23,7 +21,7 @@ export interface Print {
 export const prints: Print[] = [
 	{
 		slug: 'rosey-figurine',
-		title: 'Rosey Figurine - No AMS',
+		title: 'Rosey Figurine',
 		name: 'Rosey Figurine',
 		images: [
 			'/prints/rosey-figurine-1.png',
@@ -37,7 +35,7 @@ export const prints: Print[] = [
 	},
 	{
 		slug: 'momo-figurine',
-		title: 'Momo Figurine - No AMS',
+		title: 'Momo Figurine',
 		name: 'Momo Figurine',
 		images: [
 			'/prints/momo-figurine-1.png',
@@ -51,7 +49,7 @@ export const prints: Print[] = [
 	},
 	{
 		slug: 'saki-figurine',
-		title: 'Saki Figurine - No AMS',
+		title: 'Saki Figurine',
 		name: 'Saki Figurine',
 		images: [
 			'/prints/saki-figurine-1.png',
@@ -65,7 +63,7 @@ export const prints: Print[] = [
 	},
 	{
 		slug: 'chizuro-figurine',
-		title: 'Chizuro Figurine - No AMS',
+		title: 'Chizuro Figurine',
 		name: 'Chizuro Figurine',
 		images: [
 			'/prints/chizuro-figurine-1.png',
@@ -75,11 +73,11 @@ export const prints: Print[] = [
 		file: '/prints/chizuro-figurine.3mf',
 		fileLabel: '3MF',
 		about:
-			"A cute 3D-printable figurine of Chizuro, one of the PuchiPaws! This version is designed to print without an AMS — no multi-color setup or filament swapping needed, just print and go. The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it if you like, and display your favorite sleepy PuchiPaw!",
+			"A cute 3D-printable figurine of Chizuro, one of the PuchiPaws! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it if you like, and display your favorite sleepy PuchiPaw!",
 	},
 	{
 		slug: 'suzu-figurine',
-		title: 'Suzu Figurine - No AMS',
+		title: 'Suzu Figurine',
 		name: 'Suzu Figurine',
 		images: [
 			'/prints/suzu-figurine-1.png',
@@ -93,7 +91,7 @@ export const prints: Print[] = [
 	},
 	{
 		slug: 'rosey-curry-figurine',
-		title: 'Rosey Curry Figurine - No AMS',
+		title: 'Rosey Curry Figurine',
 		name: 'Rosey Curry Figurine',
 		images: [
 			'/prints/rosey-curry-figurine-1.png',
@@ -108,7 +106,7 @@ export const prints: Print[] = [
 	},
 	{
 		slug: 'puchipaws-dango-figurine',
-		title: 'PuchiPaws Dango Figurine - No AMS',
+		title: 'PuchiPaws Dango Figurine',
 		name: 'PuchiPaws Dango Figurine',
 		images: [
 			'/prints/puchipaws-dango-figurine-1.png',
@@ -122,7 +120,7 @@ export const prints: Print[] = [
 	},
 	{
 		slug: 'saki-omurice-figurine',
-		title: 'Saki Omurice Figurine - No AMS',
+		title: 'Saki Omurice Figurine',
 		name: 'Saki Omurice Figurine',
 		images: [
 			'/prints/saki-omurice-figurine-1.png',
@@ -137,7 +135,7 @@ export const prints: Print[] = [
 	},
 	{
 		slug: 'momo-taiyaki-figurine',
-		title: 'Momo Taiyaki Figurine - No AMS',
+		title: 'Momo Taiyaki Figurine',
 		name: 'Momo Taiyaki Figurine',
 		images: [
 			'/prints/momo-taiyaki-figurine-1.png',

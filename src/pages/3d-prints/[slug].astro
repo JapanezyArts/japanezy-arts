@@ -75,16 +75,12 @@ const hasMultiple = slideCount > 1;
 
 			<!-- Info / buy box -->
 			<div class="pd-info">
-				<h1 class="pd-title">{aboutName} - <span id="pd-variant">No AMS</span></h1>
+				<h1 class="pd-title">{print.title}</h1>
 
-				<div class="pd-variants" data-file-noams={print.file ?? ''} data-file-ams={print.fileAms ?? ''} data-filelabel={print.fileLabel ?? 'File'}>
-					<button class="pd-variant-btn active" data-variant="noams">No AMS</button>
-					<button class="pd-variant-btn" data-variant="ams">Want AMS</button>
-				</div>
 
-				<a id="pd-download" href={print.file} download class="pd-download">
+				<a href={print.file} download class="pd-download">
 					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-					<span class="pd-dl-text">Download {print.fileLabel ?? 'File'}</span>
+					Download{print.fileLabel ? ` ${print.fileLabel}` : ''}
 				</a>
 
 				<!-- About -->
@@ -121,37 +117,6 @@ const hasMultiple = slideCount > 1;
 	document.getElementById('pd-prev')?.addEventListener('click', () => show(current - 1));
 	document.getElementById('pd-next')?.addEventListener('click', () => show(current + 1));
 
-	// No AMS / AMS variant toggle
-	const variantBox = document.querySelector('.pd-variants') as HTMLElement | null;
-	const dl = document.getElementById('pd-download') as HTMLAnchorElement | null;
-	const variantLabel = document.getElementById('pd-variant');
-	if (variantBox && dl) {
-		const files: Record<string, string> = {
-			noams: variantBox.dataset.fileNoams || '',
-			ams: variantBox.dataset.fileAms || '',
-		};
-		const flabel = variantBox.dataset.filelabel || 'File';
-		const dlText = dl.querySelector('.pd-dl-text');
-		const btns = Array.from(variantBox.querySelectorAll('.pd-variant-btn')) as HTMLElement[];
-		const selectVariant = (v: string) => {
-			btns.forEach((b) => b.classList.toggle('active', b.dataset.variant === v));
-			if (variantLabel) variantLabel.textContent = v === 'ams' ? 'AMS' : 'No AMS';
-			const f = files[v];
-			if (f) {
-				dl.setAttribute('href', f);
-				dl.setAttribute('download', '');
-				dl.classList.remove('pd-download-soon');
-				if (dlText) dlText.textContent = 'Download ' + flabel;
-			} else {
-				dl.removeAttribute('href');
-				dl.removeAttribute('download');
-				dl.classList.add('pd-download-soon');
-				if (dlText) dlText.textContent = (v === 'ams' ? 'AMS' : 'No AMS') + ' version coming soon';
-			}
-		};
-		btns.forEach((b) => b.addEventListener('click', () => selectVariant(b.dataset.variant || 'noams')));
-		selectVariant('noams');
-	}
 </script>
 
 <style>
@@ -308,31 +273,6 @@ const hasMultiple = slideCount > 1;
 		line-height: 1.2;
 	}
 
-	.pd-variants {
-		display: flex;
-		gap: 0.5rem;
-		margin-bottom: 1rem;
-	}
-
-	.pd-variant-btn {
-		font-family: 'Baloo 2', cursive;
-		font-weight: 700;
-		font-size: 0.85rem;
-		padding: 0.5rem 1.2rem;
-		border-radius: 10px;
-		border: 2px solid #FF9BB7;
-		background: #fff;
-		color: #FF9BB7;
-		cursor: pointer;
-		transition: all 0.2s;
-	}
-	.pd-variant-btn:hover {
-		background: #fff0f4;
-	}
-	.pd-variant-btn.active {
-		background: #FF9BB7;
-		color: #fff;
-	}
 
 	.pd-download {
 		display: inline-flex;
