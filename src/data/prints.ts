@@ -117,4 +117,18 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable dango stack of all three PuchiPaws — Saki, Suzu, and Chizuro skewered like cute kawaii dango! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and display the whole PuchiPaws trio!",
 	},
+	{
+		slug: 'saki-omurice-figurine',
+		title: 'Saki Omurice Figurine - No AMS',
+		name: 'Saki Omurice Figurine',
+		images: [
+			'/prints/saki-omurice-figurine-1.png',
+			'/prints/saki-omurice-figurine-2.png',
+		],
+		model: '/prints/saki-omurice-figurine.glb',
+		file: '/prints/saki-omurice-figurine.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable Saki omurice figurine — the sweet PuchiPaw kitty peeking over a fluffy omurice with a ketchup heart! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and serve up some cuteness!",
+	},
 ];
