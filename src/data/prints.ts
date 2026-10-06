@@ -75,4 +75,18 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable figurine of Rosey! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and give Rosey a home on your shelf!",
 	},
+	{
+		slug: 'momo-figurine',
+		title: 'Momo Figurine - No AMS',
+		name: 'Momo Figurine',
+		images: [
+			'/prints/momo-figurine-1.png',
+			'/prints/momo-figurine-2.png',
+		],
+		model: '/prints/momo-figurine.glb',
+		file: '/prints/momo-figurine.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable figurine of Momo (Doodlemo) — my very own character! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and bring Momo home!",
+	},
 ];
