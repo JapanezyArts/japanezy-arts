@@ -177,4 +177,18 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable Suzu paw dish — a kawaii cat-paw trinket tray with Suzu peeking over the top! Perfect for rings, earrings, or other little treasures. The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
 	},
+	{
+		slug: 'chizuro-charm',
+		title: 'Chizuro Pocket Pet Charm',
+		name: 'Chizuro Pocket Pet Charm',
+		images: [
+			'/prints/chizuro-charm-1.png',
+			'/prints/chizuro-charm-2.png',
+		],
+		model: '/prints/chizuro-charm.glb',
+		file: '/prints/chizuro-charm.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable Chizuro pocket pet charm — a cute little Chizuro pendant to clip onto your bag, keys, or zipper! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
+	},
 ];
