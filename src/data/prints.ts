@@ -147,4 +147,19 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable Momo taiyaki figurine — Momo (Doodlemo) peeking out of a cute fish-shaped taiyaki! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and enjoy this sweet treat!",
 	},
+	{
+		slug: 'saki-paw-dish',
+		title: 'Saki Paw Dish',
+		name: 'Saki Paw Dish',
+		images: [
+			'/prints/saki-paw-dish-1.png',
+			'/prints/saki-paw-dish-2.png',
+		],
+		model: '/prints/saki-paw-dish.glb',
+		cameraOrbit: '0deg 68deg 110%',
+		file: '/prints/saki-paw-dish.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable Saki paw dish — a kawaii cat-paw trinket tray with Saki peeking over the top! Perfect for rings, earrings, or other little treasures. The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
+	},
 ];
