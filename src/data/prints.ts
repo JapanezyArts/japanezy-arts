@@ -103,4 +103,18 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable Rosey curry figurine — our fluffy Yorkie shaped in rice, nestled in a plate of kawaii curry with carrots and potato! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and serve up some cuteness!",
 	},
+	{
+		slug: 'puchipaws-dango-figurine',
+		title: 'PuchiPaws Dango Figurine - No AMS',
+		name: 'PuchiPaws Dango Figurine',
+		images: [
+			'/prints/puchipaws-dango-figurine-1.png',
+			'/prints/puchipaws-dango-figurine-2.png',
+		],
+		model: '/prints/puchipaws-dango-figurine.glb',
+		file: '/prints/puchipaws-dango-figurine.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable dango stack of all three PuchiPaws — Saki, Suzu, and Chizuro skewered like cute kawaii dango! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and display the whole PuchiPaws trio!",
+	},
 ];
