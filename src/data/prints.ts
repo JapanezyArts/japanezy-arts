@@ -234,4 +234,18 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable Momo paint palette charm — Momo (Doodlemo) peeking over a kawaii artist's palette, perfect for clipping onto your bag or keys! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
 	},
+	{
+		slug: 'saki-flower-charm',
+		title: 'Saki Flower Charm',
+		name: 'Saki Flower Charm',
+		images: [
+			'/prints/saki-flower-charm-1.png',
+			'/prints/saki-flower-charm-2.png',
+		],
+		model: '/prints/saki-flower-charm.glb',
+		file: '/prints/saki-flower-charm.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable Saki flower charm — the sweet PuchiPaw kitty with her little flower, ready to clip onto your bag or keys! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
+	},
 ];
