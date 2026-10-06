@@ -219,4 +219,18 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable Chizuro envelope charm — a sweet little love-letter envelope with Chizuro peeking out, ready to clip onto your bag or keys! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
 	},
+	{
+		slug: 'momo-palette-charm',
+		title: 'Momo Paint Palette Charm',
+		name: 'Momo Paint Palette Charm',
+		images: [
+			'/prints/momo-palette-charm-1.png',
+			'/prints/momo-palette-charm-2.png',
+		],
+		model: '/prints/momo-palette-charm.glb',
+		file: '/prints/momo-palette-charm.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable Momo paint palette charm — Momo (Doodlemo) peeking over a kawaii artist's palette, perfect for clipping onto your bag or keys! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
+	},
 ];
