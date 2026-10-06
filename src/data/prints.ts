@@ -205,4 +205,18 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable Rosey paint tube charm — a kawaii paint-tube pendant featuring Rosey, perfect for clipping onto your bag or keys! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
 	},
+	{
+		slug: 'chizuro-envelope-charm',
+		title: 'Chizuro Envelope Charm',
+		name: 'Chizuro Envelope Charm',
+		images: [
+			'/prints/chizuro-envelope-charm-1.png',
+			'/prints/chizuro-envelope-charm-2.png',
+		],
+		model: '/prints/chizuro-envelope-charm.glb',
+		file: '/prints/chizuro-envelope-charm.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable Chizuro envelope charm — a sweet little love-letter envelope with Chizuro peeking out, ready to clip onto your bag or keys! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
+	},
 ];
