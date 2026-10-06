@@ -8,6 +8,8 @@ export interface Print {
 	images: string[];
 	/** Optional interactive 3D model (GLB) shown as an extra carousel slide. */
 	model?: string;
+	/** Optional initial model-viewer camera orbit, e.g. "0deg 60deg 110%". */
+	cameraOrbit?: string;
 	/** Downloadable model file for the default (No AMS / single-colour) version. */
 	file?: string;
 	/** Optional AMS (multi-colour) version of the model file. */
@@ -126,6 +128,7 @@ export const prints: Print[] = [
 			'/prints/saki-omurice-figurine-2.png',
 		],
 		model: '/prints/saki-omurice-figurine.glb',
+		cameraOrbit: '0deg 68deg 110%',
 		file: '/prints/saki-omurice-figurine.3mf',
 		fileLabel: '3MF',
 		about:
