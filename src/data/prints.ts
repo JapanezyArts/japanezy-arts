@@ -68,6 +68,7 @@ export const prints: Print[] = [
 		images: [
 			'/prints/chizuro-figurine-1.png',
 			'/prints/chizuro-figurine-2.png',
+			'/prints/chizuro-figurine-3.jpg',
 		],
 		model: '/prints/chizuro-figurine.glb',
 		file: '/prints/chizuro-figurine.3mf',
