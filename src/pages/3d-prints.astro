@@ -14,7 +14,7 @@ import { prints } from '../data/prints';
 				{prints.map((print) => (
 					<a href={`/3d-prints/${print.slug}`} class="print-card">
 						<div class="print-thumb">
-							<img src={print.images[0]} alt={print.title} />
+							<img src={print.images[0]} alt={print.title} loading="lazy" decoding="async" />
 						</div>
 						<div class="print-info">
 							<h4>{print.title}</h4>
