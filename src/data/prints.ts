@@ -20,48 +20,6 @@ export interface Print {
 
 export const prints: Print[] = [
 	{
-		slug: 'chizuro-figurine',
-		title: 'Chizuro Figurine - No AMS',
-		name: 'Chizuro Figurine',
-		images: [
-			'/prints/chizuro-figurine-1.png',
-			'/prints/chizuro-figurine-2.png',
-		],
-		model: '/prints/chizuro-figurine.glb',
-		file: '/prints/chizuro-figurine.3mf',
-		fileLabel: '3MF',
-		about:
-			"A cute 3D-printable figurine of Chizuro, one of the PuchiPaws! This version is designed to print without an AMS — no multi-color setup or filament swapping needed, just print and go. The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it if you like, and display your favorite sleepy PuchiPaw!",
-	},
-	{
-		slug: 'suzu-figurine',
-		title: 'Suzu Figurine - No AMS',
-		name: 'Suzu Figurine',
-		images: [
-			'/prints/suzu-figurine-1.png',
-			'/prints/suzu-figurine-2.png',
-		],
-		model: '/prints/suzu-figurine.glb',
-		file: '/prints/suzu-figurine.3mf',
-		fileLabel: '3MF',
-		about:
-			"A 3D-printable figurine of Suzu, the playful blue PuchiPaw with a big fluffy tail! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and show off your favorite fluffy PuchiPaw!",
-	},
-	{
-		slug: 'saki-figurine',
-		title: 'Saki Figurine - No AMS',
-		name: 'Saki Figurine',
-		images: [
-			'/prints/saki-figurine-1.png',
-			'/prints/saki-figurine-2.png',
-		],
-		model: '/prints/saki-figurine.glb',
-		file: '/prints/saki-figurine.3mf',
-		fileLabel: '3MF',
-		about:
-			"A 3D-printable figurine of Saki, the sweet and creative PuchiPaw kitty with her little flower! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and show off your favorite PuchiPaw!",
-	},
-	{
 		slug: 'rosey-figurine',
 		title: 'Rosey Figurine - No AMS',
 		name: 'Rosey Figurine',
@@ -88,5 +46,47 @@ export const prints: Print[] = [
 		fileLabel: '3MF',
 		about:
 			"A 3D-printable figurine of Momo (Doodlemo) — my very own character! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and bring Momo home!",
+	},
+	{
+		slug: 'saki-figurine',
+		title: 'Saki Figurine - No AMS',
+		name: 'Saki Figurine',
+		images: [
+			'/prints/saki-figurine-1.png',
+			'/prints/saki-figurine-2.png',
+		],
+		model: '/prints/saki-figurine.glb',
+		file: '/prints/saki-figurine.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable figurine of Saki, the sweet and creative PuchiPaw kitty with her little flower! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and show off your favorite PuchiPaw!",
+	},
+	{
+		slug: 'chizuro-figurine',
+		title: 'Chizuro Figurine - No AMS',
+		name: 'Chizuro Figurine',
+		images: [
+			'/prints/chizuro-figurine-1.png',
+			'/prints/chizuro-figurine-2.png',
+		],
+		model: '/prints/chizuro-figurine.glb',
+		file: '/prints/chizuro-figurine.3mf',
+		fileLabel: '3MF',
+		about:
+			"A cute 3D-printable figurine of Chizuro, one of the PuchiPaws! This version is designed to print without an AMS — no multi-color setup or filament swapping needed, just print and go. The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it if you like, and display your favorite sleepy PuchiPaw!",
+	},
+	{
+		slug: 'suzu-figurine',
+		title: 'Suzu Figurine - No AMS',
+		name: 'Suzu Figurine',
+		images: [
+			'/prints/suzu-figurine-1.png',
+			'/prints/suzu-figurine-2.png',
+		],
+		model: '/prints/suzu-figurine.glb',
+		file: '/prints/suzu-figurine.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable figurine of Suzu, the playful blue PuchiPaw with a big fluffy tail! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and show off your favorite fluffy PuchiPaw!",
 	},
 ];
