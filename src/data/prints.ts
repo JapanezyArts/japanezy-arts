@@ -89,4 +89,18 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable figurine of Suzu, the playful blue PuchiPaw with a big fluffy tail! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and show off your favorite fluffy PuchiPaw!",
 	},
+	{
+		slug: 'rosey-curry-figurine',
+		title: 'Rosey Curry Figurine - No AMS',
+		name: 'Rosey Curry Figurine',
+		images: [
+			'/prints/rosey-curry-figurine-1.png',
+			'/prints/rosey-curry-figurine-2.png',
+		],
+		model: '/prints/rosey-curry-figurine.glb',
+		file: '/prints/rosey-curry-figurine.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable Rosey curry figurine — our fluffy Yorkie shaped in rice, nestled in a plate of kawaii curry with carrots and potato! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and serve up some cuteness!",
+	},
 ];
