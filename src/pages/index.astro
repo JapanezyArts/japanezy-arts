@@ -22,6 +22,7 @@ import { products } from '../data/products';
 			<div class="hero-right">
 				<img src="/japanezy-logo-v2.png" alt="Japanezy Arts" class="hero-logo" />
 				<div class="hc-row">
+					<img src="/oc-waving.png" alt="Momo (Doodlemo)" class="hc-oc" />
 					<img src="/rosey-hero.png" alt="Rosey" class="hc-rosey" />
 					<img src="/puchipaws-hero.png" alt="PuchiPaws - Suzu, Saki, and Chizuro" class="hc-group" />
 				</div>
@@ -384,7 +385,7 @@ import { products } from '../data/products';
 	}
 
 	.hc-row {
-		width: min(620px, 52vw);
+		width: min(720px, 58vw);
 		display: flex;
 		align-items: flex-end;
 		justify-content: center;
@@ -393,18 +394,26 @@ import { products } from '../data/products';
 		z-index: 2;
 	}
 
-	.hc-rosey {
-		width: 28%;
+	.hc-oc {
+		width: 23%;
 		height: auto;
 		object-fit: contain;
 		filter: drop-shadow(0 4px 16px rgba(107, 62, 46, 0.14));
 		position: relative;
 		z-index: 3;
-		transform: translateX(1.25rem);
+	}
+
+	.hc-rosey {
+		width: 23%;
+		height: auto;
+		object-fit: contain;
+		filter: drop-shadow(0 4px 16px rgba(107, 62, 46, 0.14));
+		position: relative;
+		z-index: 3;
 	}
 
 	.hc-group {
-		width: 68%;
+		width: 50%;
 		height: auto;
 		object-fit: contain;
 		filter: drop-shadow(0 4px 16px rgba(107, 62, 46, 0.12));
@@ -1430,8 +1439,7 @@ import { products } from '../data/products';
 		}
 
 		.hero-logo { height: 130px; margin-bottom: 0.25rem; }
-		.hc-row { width: min(430px, 94vw); }
-		.hc-rosey { transform: translateX(0.75rem); }
+		.hc-row { width: min(460px, 96vw); }
 
 		.yt-companion-inner {
 			flex-wrap: wrap;

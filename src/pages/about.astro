@@ -25,6 +25,12 @@ const facts = [
 				</div>
 			))}
 		</div>
+
+		<div class="about-oc">
+			<h3>Meet Momo 🌱</h3>
+			<img src="/oc-reference.png" alt="Momo (Doodlemo) character reference" class="oc-ref-img" />
+			<p>Hi, I'm Momo — also known as <strong>Doodlemo</strong>! This is my very own character and the main character that represents me: the face behind all the Japanezy Arts cuteness.</p>
+		</div>
 	</section>
 </Layout>
 
@@ -118,6 +124,41 @@ const facts = [
 		font-weight: 600;
 		color: #6B3E2E;
 		line-height: 1.4;
+	}
+
+	.about-oc {
+		margin-top: 2.5rem;
+		background: #fff;
+		border: 2px solid #ffe3ec;
+		border-radius: 20px;
+		padding: 2rem 1.5rem;
+		box-shadow: 0 2px 12px rgba(107, 62, 46, 0.1);
+	}
+
+	.about-oc h3 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.5rem;
+		color: #6B3E2E;
+		margin: 0 0 1rem;
+	}
+
+	.oc-ref-img {
+		width: 100%;
+		max-width: 620px;
+		height: auto;
+		display: block;
+		margin: 0 auto 1.25rem;
+		border-radius: 14px;
+	}
+
+	.about-oc p {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1.05rem;
+		color: #6B3E2E;
+		opacity: 0.85;
+		line-height: 1.7;
+		max-width: 560px;
+		margin: 0 auto;
 	}
 
 	@media (max-width: 600px) {
