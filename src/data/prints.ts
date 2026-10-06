@@ -135,4 +135,18 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable Saki omurice figurine — the sweet PuchiPaw kitty peeking over a fluffy omurice with a ketchup heart! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and serve up some cuteness!",
 	},
+	{
+		slug: 'momo-taiyaki-figurine',
+		title: 'Momo Taiyaki Figurine - No AMS',
+		name: 'Momo Taiyaki Figurine',
+		images: [
+			'/prints/momo-taiyaki-figurine-1.png',
+			'/prints/momo-taiyaki-figurine-2.png',
+		],
+		model: '/prints/momo-taiyaki-figurine.glb',
+		file: '/prints/momo-taiyaki-figurine.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable Momo taiyaki figurine — Momo (Doodlemo) peeking out of a cute fish-shaped taiyaki! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it, paint it, and enjoy this sweet treat!",
+	},
 ];
