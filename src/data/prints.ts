@@ -100,6 +100,7 @@ export const prints: Print[] = [
 			'/prints/rosey-curry-figurine-2.png',
 		],
 		model: '/prints/rosey-curry-figurine.glb',
+		cameraOrbit: '0deg 68deg 110%',
 		file: '/prints/rosey-curry-figurine.3mf',
 		fileLabel: '3MF',
 		about:
