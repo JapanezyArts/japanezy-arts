@@ -8,8 +8,10 @@ export interface Print {
 	images: string[];
 	/** Optional interactive 3D model (GLB) shown as an extra carousel slide. */
 	model?: string;
-	/** Downloadable model file (STL/3MF/etc.). */
+	/** Downloadable model file for the default (No AMS / single-colour) version. */
 	file?: string;
+	/** Optional AMS (multi-colour) version of the model file. */
+	fileAms?: string;
 	/** Short label for the download button, e.g. "3MF" or "STL". */
 	fileLabel?: string;
 	/** Longer description shown in the "About" section on the detail page. */
@@ -33,7 +35,7 @@ export const prints: Print[] = [
 	},
 	{
 		slug: 'suzu-figurine',
-		title: 'Suzu Figurine',
+		title: 'Suzu Figurine - No AMS',
 		name: 'Suzu Figurine',
 		images: [
 			'/prints/suzu-figurine-1.png',
@@ -47,7 +49,7 @@ export const prints: Print[] = [
 	},
 	{
 		slug: 'saki-figurine',
-		title: 'Saki Figurine',
+		title: 'Saki Figurine - No AMS',
 		name: 'Saki Figurine',
 		images: [
 			'/prints/saki-figurine-1.png',
@@ -61,7 +63,7 @@ export const prints: Print[] = [
 	},
 	{
 		slug: 'rosey-figurine',
-		title: 'Rosey Figurine',
+		title: 'Rosey Figurine - No AMS',
 		name: 'Rosey Figurine',
 		images: [
 			'/prints/rosey-figurine-1.png',
