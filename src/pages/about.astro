@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Fun facts — edit these values anytime.
+const facts = [
+	{ label: 'Favorite Animal', value: 'Capybara', emoji: '🐾' },
+	{ label: 'Favorite Color', value: 'Pink', emoji: '🎀' },
+	{ label: 'Interest', value: 'Drawing, 3D printing & collecting kawaii figures', emoji: '✨' },
+	{ label: 'Favorite Anime/Show', value: 'Sailor Moon', emoji: '📺' },
+];
+---
+
+<Layout title="About - Japanezy Arts">
+	<section class="about-page">
+		<a href="/" class="close-btn" aria-label="Back to home">&times;</a>
+		<h2>About Japanezy Arts</h2>
+		<p class="about-intro">Japanezy Arts is a creative channel dedicated to kawaii artwork — handmade paper crafts, original PuchiPaws characters, free printables, 3D prints, and lots of cute art adventures on YouTube!</p>
+
+		<div class="facts-grid">
+			{facts.map((f) => (
+				<div class="fact-card">
+					<span class="fact-emoji">{f.emoji}</span>
+					<span class="fact-label">{f.label}</span>
+					<span class="fact-value">{f.value}</span>
+				</div>
+			))}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.close-btn {
+		position: absolute;
+		top: 1.5rem;
+		right: 1.5rem;
+		font-size: 2rem;
+		color: #6B3E2E;
+		background: none;
+		border: none;
+		cursor: pointer;
+		text-decoration: none;
+		line-height: 1;
+		opacity: 0.5;
+		transition: opacity 0.2s;
+	}
+	.close-btn:hover {
+		opacity: 1;
+	}
+
+	.about-page {
+		max-width: 800px;
+		margin: 2rem auto;
+		padding: 2.5rem 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.about-page h2 {
+		font-family: 'Baloo 2', cursive;
+		font-size: 2rem;
+		color: #6B3E2E;
+		margin-bottom: 0.75rem;
+	}
+
+	.about-intro {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1.05rem;
+		color: #6B3E2E;
+		opacity: 0.85;
+		line-height: 1.7;
+		max-width: 620px;
+		margin: 0 auto 2.5rem;
+	}
+
+	.facts-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.25rem;
+		text-align: left;
+	}
+
+	.fact-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		background: #fff;
+		border: 2px solid #ffe3ec;
+		border-radius: 18px;
+		padding: 1.5rem;
+		box-shadow: 0 2px 12px rgba(107, 62, 46, 0.1);
+		transition: all 0.25s;
+	}
+
+	.fact-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 6px 20px rgba(107, 62, 46, 0.15);
+	}
+
+	.fact-emoji {
+		font-size: 1.8rem;
+		line-height: 1;
+		margin-bottom: 0.4rem;
+	}
+
+	.fact-label {
+		font-family: 'Baloo 2', cursive;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.03em;
+		text-transform: uppercase;
+		color: #FF9BB7;
+	}
+
+	.fact-value {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1.05rem;
+		font-weight: 600;
+		color: #6B3E2E;
+		line-height: 1.4;
+	}
+
+	@media (max-width: 600px) {
+		.facts-grid {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.about-page {
+			padding: 1.5rem 1rem;
+		}
+
+		.about-page h2 {
+			font-size: 1.6rem;
+		}
+
+		.close-btn {
+			top: 1rem;
+			right: 1rem;
+			font-size: 1.75rem;
+		}
+	}
+</style>
