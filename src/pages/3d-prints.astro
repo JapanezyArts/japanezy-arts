@@ -9,6 +9,25 @@ import { prints } from '../data/prints';
 		<h2>3D Prints</h2>
 		<p class="prints-subtitle">Free downloadable files of your favorite characters!</p>
 
+		<!-- Limited Edition corner tab (always visible; the popup covers it when open) -->
+		<button class="le-tab" id="le-tab" aria-label="Limited edition once-a-month print">
+			<span class="le-tab-emoji" aria-hidden="true">🎃</span>
+			<span class="le-tab-text">Limited Edition<br /><small>Once-a-Month Print</small></span>
+		</button>
+
+		<!-- Halloween limited-edition popup -->
+		<div class="le-overlay" id="le-overlay" role="dialog" aria-modal="true" aria-labelledby="le-title">
+			<div class="le-modal">
+				<button class="le-close" id="le-close" aria-label="Close">&times;</button>
+				<div class="le-bats" aria-hidden="true"><span>🦇</span><span>🦇</span><span>🦇</span></div>
+				<div class="le-pumpkin" aria-hidden="true">🎃</div>
+				<span class="le-badge">Limited Edition</span>
+				<h2 class="le-title" id="le-title">This Month: Halloween! 👻</h2>
+				<p class="le-text">A spooky-cute limited print you can only download for <strong>one week every month</strong>. Grab it before it vanishes into the night! 🕸️</p>
+				<button class="le-cta" id="le-cta">Ooooh, spooky! 🦇</button>
+			</div>
+		</div>
+
 		{prints.length > 0 ? (
 			<div class="prints-grid">
 				{prints.map((print) => (
@@ -48,6 +67,145 @@ import { prints } from '../data/prints';
 	}
 	.close-btn:hover {
 		opacity: 1;
+	}
+
+	/* ===== Limited Edition corner tab ===== */
+	.le-tab {
+		position: fixed;
+		top: 92px;
+		left: 14px;
+		z-index: 90;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.55rem 0.9rem;
+		border: none;
+		border-radius: 14px;
+		cursor: pointer;
+		font-family: 'Baloo 2', cursive;
+		color: #fff;
+		text-align: left;
+		line-height: 1.05;
+		background: linear-gradient(135deg, #4a2b7a, #7a3fb0);
+		box-shadow: 0 4px 16px rgba(74, 43, 122, 0.4);
+		border: 2px solid #ff8c1a;
+		transition: transform 0.2s, box-shadow 0.2s;
+		animation: le-tab-pulse 2.4s ease-in-out infinite;
+	}
+	.le-tab:hover {
+		transform: translateY(-2px) scale(1.03);
+		box-shadow: 0 6px 22px rgba(255, 140, 26, 0.5);
+	}
+	.le-tab-emoji { font-size: 1.6rem; }
+	.le-tab-text { font-size: 0.78rem; font-weight: 700; }
+	.le-tab-text small { font-size: 0.64rem; font-weight: 600; opacity: 0.85; }
+	@keyframes le-tab-pulse {
+		0%, 100% { box-shadow: 0 4px 16px rgba(74, 43, 122, 0.4); }
+		50% { box-shadow: 0 4px 22px rgba(255, 140, 26, 0.6); }
+	}
+
+	/* ===== Halloween popup ===== */
+	.le-overlay {
+		display: none;
+		position: fixed;
+		inset: 0;
+		z-index: 400;
+		background: rgba(20, 6, 30, 0.78);
+		backdrop-filter: blur(4px);
+		-webkit-backdrop-filter: blur(4px);
+		align-items: center;
+		justify-content: center;
+		padding: 1.25rem;
+	}
+	.le-overlay.open { display: flex; animation: le-fade 0.25s ease; }
+	@keyframes le-fade { from { opacity: 0; } to { opacity: 1; } }
+
+	.le-modal {
+		position: relative;
+		max-width: 420px;
+		width: 100%;
+		text-align: center;
+		padding: 2.5rem 1.75rem 2rem;
+		border-radius: 24px;
+		color: #fff5e9;
+		background: radial-gradient(circle at 50% 0%, #3d2459, #241038 70%);
+		border: 3px solid #ff8c1a;
+		box-shadow: 0 0 40px rgba(255, 140, 26, 0.45), inset 0 0 30px rgba(123, 63, 176, 0.4);
+		animation: le-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+	@keyframes le-pop { from { transform: scale(0.8) translateY(10px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+
+	.le-close {
+		position: absolute;
+		top: 0.6rem;
+		right: 0.9rem;
+		background: none;
+		border: none;
+		color: #ffd9a8;
+		font-size: 1.8rem;
+		line-height: 1;
+		cursor: pointer;
+		opacity: 0.8;
+	}
+	.le-close:hover { opacity: 1; color: #ff8c1a; }
+
+	.le-bats { font-size: 1.3rem; letter-spacing: 0.6rem; opacity: 0.9; }
+	.le-bats span { display: inline-block; animation: le-float 3s ease-in-out infinite; }
+	.le-bats span:nth-child(2) { animation-delay: 0.4s; }
+	.le-bats span:nth-child(3) { animation-delay: 0.8s; }
+	@keyframes le-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+	.le-pumpkin { font-size: 3.6rem; margin: 0.3rem 0 0.4rem; animation: le-wiggle 2.5s ease-in-out infinite; }
+	@keyframes le-wiggle { 0%,100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+
+	.le-badge {
+		display: inline-block;
+		background: #ff8c1a;
+		color: #2a1038;
+		font-family: 'Baloo 2', cursive;
+		font-weight: 800;
+		font-size: 0.72rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		padding: 0.25rem 0.8rem;
+		border-radius: 999px;
+		margin-bottom: 0.6rem;
+	}
+	.le-title {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.6rem;
+		margin: 0 0 0.6rem;
+		color: #ffce7a;
+		text-shadow: 0 2px 8px rgba(255, 140, 26, 0.4);
+	}
+	.le-text {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		line-height: 1.6;
+		margin: 0 0 1.4rem;
+		opacity: 0.92;
+	}
+	.le-text strong { color: #ffce7a; }
+	.le-cta {
+		font-family: 'Baloo 2', cursive;
+		font-weight: 700;
+		font-size: 1rem;
+		padding: 0.7rem 1.8rem;
+		border: none;
+		border-radius: 14px;
+		cursor: pointer;
+		color: #2a1038;
+		background: linear-gradient(135deg, #ffb24d, #ff8c1a);
+		box-shadow: 0 4px 16px rgba(255, 140, 26, 0.5);
+		transition: transform 0.2s;
+	}
+	.le-cta:hover { transform: translateY(-2px) scale(1.04); }
+
+	@media (max-width: 600px) {
+		.le-tab { top: auto; bottom: 14px; padding: 0.5rem 0.75rem; }
+		.le-tab-emoji { font-size: 1.3rem; }
+		.le-modal { padding: 2.25rem 1.25rem 1.75rem; }
+		.le-title { font-size: 1.35rem; }
 	}
 
 	.prints-section {
@@ -169,3 +327,21 @@ import { prints } from '../data/prints';
 		}
 	}
 </style>
+
+<script>
+	const overlay = document.getElementById('le-overlay');
+	const tab = document.getElementById('le-tab');
+	const open = () => overlay?.classList.add('open');
+	const close = () => {
+		overlay?.classList.remove('open');
+		try { sessionStorage.setItem('le-seen', '1'); } catch (e) {}
+	};
+	document.getElementById('le-close')?.addEventListener('click', close);
+	document.getElementById('le-cta')?.addEventListener('click', close);
+	overlay?.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+	tab?.addEventListener('click', open);
+	// Auto-open once per browsing session so it greets visitors without nagging on refresh.
+	let seen = false;
+	try { seen = sessionStorage.getItem('le-seen') === '1'; } catch (e) {}
+	if (!seen) open();
+</script>
