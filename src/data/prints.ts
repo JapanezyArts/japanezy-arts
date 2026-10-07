@@ -26,6 +26,7 @@ export const prints: Print[] = [
 		images: [
 			'/prints/rosey-figurine-1.png',
 			'/prints/rosey-figurine-2.png',
+			'/prints/rosey-figurine-3.jpg',
 		],
 		model: '/prints/rosey-figurine.glb',
 		file: '/prints/rosey-figurine.3mf',
@@ -83,6 +84,7 @@ export const prints: Print[] = [
 		images: [
 			'/prints/suzu-figurine-1.png',
 			'/prints/suzu-figurine-2.png',
+			'/prints/suzu-figurine-3.jpg',
 		],
 		model: '/prints/suzu-figurine.glb',
 		file: '/prints/suzu-figurine.3mf',
@@ -97,6 +99,7 @@ export const prints: Print[] = [
 		images: [
 			'/prints/rosey-curry-figurine-1.png',
 			'/prints/rosey-curry-figurine-2.png',
+			'/prints/rosey-curry-figurine-3.jpg',
 		],
 		model: '/prints/rosey-curry-figurine.glb',
 		cameraOrbit: '0deg 68deg 110%',
