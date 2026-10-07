@@ -248,4 +248,18 @@ export const prints: Print[] = [
 		about:
 			"A 3D-printable Saki flower charm — the sweet PuchiPaw kitty with her little flower, ready to clip onto your bag or keys! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
 	},
+	{
+		slug: 'suzu-snowglobe-charm',
+		title: 'Suzu Snow Globe Charm',
+		name: 'Suzu Snow Globe Charm',
+		images: [
+			'/prints/suzu-snowglobe-charm-1.png',
+			'/prints/suzu-snowglobe-charm-2.png',
+		],
+		model: '/prints/suzu-snowglobe-charm.glb',
+		file: '/prints/suzu-snowglobe-charm.3mf',
+		fileLabel: '3MF',
+		about:
+			"A 3D-printable Suzu snow globe charm — Suzu tucked inside a cozy little snow globe, ready to clip onto your bag or keys! The file is provided as a 3MF, ready to slice in Bambu Studio, OrcaSlicer, or PrusaSlicer. Print it and paint it!",
+	},
 ];
