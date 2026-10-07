@@ -19,8 +19,8 @@ import { prints } from '../data/prints';
 		<div class="le-overlay" id="le-overlay" role="dialog" aria-modal="true" aria-labelledby="le-title">
 			<div class="le-modal">
 				<button class="le-close" id="le-close" aria-label="Close">&times;</button>
-				<div class="le-bats" aria-hidden="true"><span>🦇</span><span>🦇</span><span>🦇</span></div>
-				<div class="le-pumpkin" aria-hidden="true">🎃</div>
+				<div class="le-bats" aria-hidden="true"><img src="/halloween-bat-1.png" alt="" /><img src="/halloween-bat-2.png" alt="" /><img src="/halloween-bat-3.png" alt="" /></div>
+				<img class="le-pumpkin-img" src="/halloween-rosey.png" alt="" aria-hidden="true" />
 				<span class="le-badge">Limited Edition</span>
 				<h2 class="le-title" id="le-title">This Month: Halloween! 👻</h2>
 				<p class="le-text">A spooky-cute limited print you can only download for <strong>one week every month</strong>. Grab it before it vanishes into the night! 🕸️</p>
@@ -72,13 +72,13 @@ import { prints } from '../data/prints';
 	/* ===== Limited Edition corner tab ===== */
 	.le-tab {
 		position: fixed;
-		top: 92px;
-		left: 14px;
+		top: 180px;
+		left: 56px;
 		z-index: 90;
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		padding: 0.55rem 0.9rem;
+		gap: 0.7rem;
+		padding: 0.9rem 1.4rem;
 		border: none;
 		border-radius: 14px;
 		cursor: pointer;
@@ -96,9 +96,9 @@ import { prints } from '../data/prints';
 		transform: translateY(-2px) scale(1.03);
 		box-shadow: 0 6px 22px rgba(255, 140, 26, 0.5);
 	}
-	.le-tab-emoji { font-size: 1.6rem; }
-	.le-tab-text { font-size: 0.78rem; font-weight: 700; }
-	.le-tab-text small { font-size: 0.64rem; font-weight: 600; opacity: 0.85; }
+	.le-tab-emoji { font-size: 2.4rem; }
+	.le-tab-text { font-size: 1rem; font-weight: 700; }
+	.le-tab-text small { font-size: 0.82rem; font-weight: 600; opacity: 0.85; }
 	@keyframes le-tab-pulse {
 		0%, 100% { box-shadow: 0 4px 16px rgba(74, 43, 122, 0.4); }
 		50% { box-shadow: 0 4px 22px rgba(255, 140, 26, 0.6); }
@@ -149,13 +149,21 @@ import { prints } from '../data/prints';
 	}
 	.le-close:hover { opacity: 1; color: #ff8c1a; }
 
-	.le-bats { font-size: 1.8rem; letter-spacing: 0.9rem; opacity: 0.9; }
-	.le-bats span { display: inline-block; animation: le-float 3s ease-in-out infinite; }
-	.le-bats span:nth-child(2) { animation-delay: 0.4s; }
-	.le-bats span:nth-child(3) { animation-delay: 0.8s; }
+	.le-bats { display: flex; justify-content: center; align-items: center; gap: 1.1rem; margin-bottom: 0.2rem; }
+	.le-bats img { width: 68px; height: auto; animation: le-float 3s ease-in-out infinite; }
+	.le-bats img:nth-child(2) { animation-delay: 0.4s; }
+	.le-bats img:nth-child(3) { animation-delay: 0.8s; }
 	@keyframes le-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
-	.le-pumpkin { font-size: 7rem; margin: 0.5rem 0 0.7rem; animation: le-wiggle 2.5s ease-in-out infinite; }
+	.le-pumpkin-img {
+		display: block;
+		width: 180px;
+		max-width: 60%;
+		height: auto;
+		margin: 0.3rem auto 0.8rem;
+		filter: drop-shadow(0 6px 18px rgba(255, 140, 26, 0.45));
+		animation: le-wiggle 2.5s ease-in-out infinite;
+	}
 	@keyframes le-wiggle { 0%,100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
 
 	.le-badge {
@@ -328,15 +336,26 @@ import { prints } from '../data/prints';
 	}
 </style>
 
-<script>
-	const overlay = document.getElementById('le-overlay');
-	const tab = document.getElementById('le-tab');
-	const open = () => overlay?.classList.add('open');
-	const close = () => overlay?.classList.remove('open');
-	document.getElementById('le-close')?.addEventListener('click', close);
-	document.getElementById('le-cta')?.addEventListener('click', close);
-	overlay?.addEventListener('click', (e) => { if (e.target === overlay) close(); });
-	tab?.addEventListener('click', open);
-	// Pop up every time the 3D Prints page is opened.
-	open();
+<script is:inline>
+	(function () {
+		function init() {
+			var overlay = document.getElementById('le-overlay');
+			if (!overlay) return;
+			var tab = document.getElementById('le-tab');
+			var open = function () { overlay.classList.add('open'); };
+			var close = function () { overlay.classList.remove('open'); };
+			var closeBtn = document.getElementById('le-close');
+			var cta = document.getElementById('le-cta');
+			if (closeBtn) closeBtn.addEventListener('click', close);
+			if (cta) cta.addEventListener('click', close);
+			overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+			if (tab) tab.addEventListener('click', open);
+			open(); // pop up every time the 3D Prints page is opened
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', init);
+		} else {
+			init();
+		}
+	})();
 </script>
