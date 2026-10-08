@@ -22,7 +22,7 @@ import { prints } from '../data/prints';
 				<div class="le-bats" aria-hidden="true"><img src="/halloween-bat-1.png" alt="" /><img src="/halloween-bat-2.png" alt="" /><img src="/halloween-bat-3.png" alt="" /></div>
 				<img class="le-pumpkin-img" src="/halloween-rosey.png" alt="" aria-hidden="true" />
 				<span class="le-badge">Limited Edition</span>
-				<h2 class="le-title" id="le-title">This Month: Halloween! 👻</h2>
+				<h2 class="le-title" id="le-title">This Month: Halloween! <img class="le-ghost" src="/halloween-ghost.png" alt="" aria-hidden="true" /></h2>
 				<p class="le-text">A spooky-cute limited print you can only download for <strong>one week every month</strong>. Grab it before it vanishes into the night! 🕸️</p>
 				<button class="le-cta" id="le-cta">Ooooh, spooky! 🦇</button>
 			</div>
@@ -192,6 +192,13 @@ import { prints } from '../data/prints';
 		line-height: 1.65;
 		margin: 0 0 1.8rem;
 		opacity: 0.92;
+	}
+	.le-ghost {
+		height: 1.5em;
+		width: auto;
+		vertical-align: -0.35em;
+		margin-left: 0.1em;
+		animation: le-float 2.6s ease-in-out infinite;
 	}
 	.le-text strong { color: #ffce7a; }
 	.le-cta {
