@@ -48,6 +48,21 @@ const { title = "Japanezy Arts" } = Astro.props;
 			</div>
 		</nav>
 
+		<!-- Halloween decorations (festive; purely decorative) -->
+		<div class="hw-decor" aria-hidden="true">
+			<img class="hw hw-web hw-tl" src="/decor/web.png" alt="" />
+			<img class="hw hw-web hw-tr" src="/decor/web.png" alt="" />
+			<img class="hw hw-web hw-bl" src="/decor/web.png" alt="" />
+			<img class="hw hw-web hw-br" src="/decor/web.png" alt="" />
+			<img class="hw hw-spider" src="/decor/spider.png" alt="" />
+			<img class="hw hw-bat1" src="/halloween-bat-1.png" alt="" />
+			<img class="hw hw-bat2" src="/halloween-bat-3.png" alt="" />
+			<img class="hw hw-ghost1" src="/decor/ghost-1.png" alt="" />
+			<img class="hw hw-ghost2" src="/decor/ghost-3.png" alt="" />
+			<img class="hw hw-pumpkins" src="/decor/pumpkins.png" alt="" />
+			<img class="hw hw-treats" src="/decor/treats.png" alt="" />
+		</div>
+
 		<!-- Spin the Wheel Modal -->
 		<div class="wheel-overlay" id="wheel-overlay">
 			<div class="wheel-modal">
@@ -424,6 +439,30 @@ const { title = "Japanezy Arts" } = Astro.props;
 </html>
 
 <style is:global>
+	/* ===== Halloween site decorations ===== */
+	.hw-decor { position: fixed; inset: 0; z-index: 50; pointer-events: none; }
+	.hw-decor .hw { position: fixed; pointer-events: none; filter: drop-shadow(0 3px 8px rgba(107, 62, 46, 0.18)); }
+	.hw-decor .hw-web { width: 135px; opacity: 0.92; }
+	.hw-decor .hw-tl { top: 0; left: 0; }
+	.hw-decor .hw-tr { top: 0; right: 0; transform: scaleX(-1); }
+	.hw-decor .hw-bl { bottom: 0; left: 0; transform: scaleY(-1); }
+	.hw-decor .hw-br { bottom: 0; right: 0; transform: scale(-1, -1); }
+	.hw-decor .hw-spider { top: 0; right: 14%; width: 62px; animation: hw-bob 3s ease-in-out infinite; }
+	.hw-decor .hw-bat1 { top: 160px; left: 2.5%; width: 68px; animation: hw-floaty 4s ease-in-out infinite; }
+	.hw-decor .hw-bat2 { top: 300px; right: 2.5%; width: 56px; animation: hw-floaty 4.6s ease-in-out infinite; }
+	.hw-decor .hw-ghost1 { top: 46%; left: 1.5%; width: 66px; animation: hw-floaty 3.6s ease-in-out infinite; }
+	.hw-decor .hw-ghost2 { top: 62%; right: 1.5%; width: 62px; animation: hw-floaty 4.2s ease-in-out infinite; }
+	.hw-decor .hw-pumpkins { bottom: 10px; left: 14px; width: 120px; }
+	.hw-decor .hw-treats { bottom: 18px; right: 16px; width: 100px; }
+	@keyframes hw-floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+	@keyframes hw-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+	@media (max-width: 1000px) {
+		.hw-decor .hw-bat1, .hw-decor .hw-bat2, .hw-decor .hw-ghost1, .hw-decor .hw-ghost2, .hw-decor .hw-spider { display: none; }
+		.hw-decor .hw-web { width: 90px; }
+		.hw-decor .hw-pumpkins { width: 84px; }
+		.hw-decor .hw-treats { width: 74px; }
+	}
+
 	/* Footer decorations */
 	.footer-deco {
 		position: absolute;
