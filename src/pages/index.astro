@@ -41,6 +41,15 @@ import { products } from '../data/products';
 					<a href="https://www.youtube.com/@JapanezyArts?sub_confirmation=1" target="_blank" rel="noopener" class="yt-sub-link">Subscribe on YouTube &rarr;</a>
 				</div>
 			</div>
+			<a href="/halloween" class="yt-comp-card yt-comp-halloween">
+				<span class="yt-comp-badge">✨ Limited Edition</span>
+				<img src="/halloween-wallpaper-cover.jpg" alt="Halloween Freebies" />
+				<span class="yt-comp-title">Halloween 🎃</span>
+				<span class="yt-comp-bottom">
+					<span class="yt-comp-sub">This month only — spooky wallpapers &amp; freebies!</span>
+					<span class="yt-comp-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FF9BB7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+				</span>
+			</a>
 			<a href="/printable" class="yt-comp-card">
 				<img src="/freebie-library.png" alt="Freebie Library" />
 				<span class="yt-comp-title">Freebie Library</span>
@@ -564,6 +573,33 @@ import { products } from '../data/products';
 		gap: 0.2rem;
 		border: 1px solid rgba(255, 155, 183, 0.15);
 		transition: all 0.25s;
+	}
+
+	/* Limited-edition Halloween card */
+	.yt-comp-halloween {
+		position: relative;
+		background: linear-gradient(160deg, #f6eeff, #ffeede);
+		border: 2px solid #ffb37a;
+		box-shadow: 0 2px 14px rgba(156, 115, 214, 0.2);
+	}
+	.yt-comp-halloween:hover {
+		box-shadow: 0 6px 20px rgba(255, 140, 26, 0.3);
+	}
+	.yt-comp-badge {
+		position: absolute;
+		top: 7px;
+		left: 7px;
+		z-index: 2;
+		background: linear-gradient(135deg, #9c73d6, #ffb37a);
+		color: #fff;
+		font-family: 'Baloo 2', cursive;
+		font-weight: 800;
+		font-size: 0.56rem;
+		letter-spacing: 0.03em;
+		text-transform: uppercase;
+		padding: 0.2rem 0.5rem;
+		border-radius: 8px;
+		box-shadow: 0 2px 6px rgba(156, 115, 214, 0.4);
 	}
 
 	.yt-comp-card:hover {
