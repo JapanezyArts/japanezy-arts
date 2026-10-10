@@ -1,0 +1,7 @@
+name = "japanezy-votes"
+main = "src/index.js"
+compatibility_date = "2026-04-24"
+
+[[kv_namespaces]]
+binding = "VOTES"
+id = "5a82f99c21c6445bb0b406ae7e6b4e98"

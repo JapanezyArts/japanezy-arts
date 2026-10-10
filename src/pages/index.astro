@@ -100,6 +100,22 @@ import { products } from '../data/products';
 		</div>
 	</section>
 
+	<!-- Cutest Halloween Costume Vote -->
+	<section class="vote-section">
+		<span class="vote-badge">🎃 Halloween Vote</span>
+		<h2 class="vote-title">Who has the cutest costume?</h2>
+		<p class="vote-sub">Vote for your favorite PuchiPaw's Halloween look!</p>
+		<img src="/halloween/desktop-wallpaper-preview.jpg" alt="The PuchiPaws in their Halloween costumes" class="vote-showcase" loading="lazy" />
+		<div class="vote-buttons" id="vote-buttons">
+			<button class="vote-btn" data-choice="suzu">🧙 Suzu</button>
+			<button class="vote-btn" data-choice="rosey">🎃 Rosey</button>
+			<button class="vote-btn" data-choice="momo">🦇 Momo</button>
+			<button class="vote-btn" data-choice="saki">🐱 Saki</button>
+			<button class="vote-btn" data-choice="chizuro">👻 Chizuro</button>
+		</div>
+		<p class="vote-thanks" id="vote-thanks">Thanks for voting! 💜 Come back anytime to see who wins!</p>
+	</section>
+
 	<!-- Meet the PuchiPaws -->
 	<section class="meet">
 		<h2 class="section-title"><img src="/sakura-flower.png" alt="" class="title-flower" /> Meet the PuchiPaws <img src="/sakura-flower.png" alt="" class="title-flower" /></h2>
@@ -592,6 +608,99 @@ import { products } from '../data/products';
 		padding: 0.2rem 0.5rem;
 		border-radius: 8px;
 		box-shadow: 0 2px 6px rgba(156, 115, 214, 0.4);
+	}
+
+	/* ===== Halloween Costume Vote ===== */
+	.vote-section {
+		max-width: 760px;
+		margin: 2.5rem auto;
+		padding: 2.5rem 2rem;
+		text-align: center;
+		background: linear-gradient(160deg, #f3ecff, #ffeede);
+		border: 2px solid #e4d4ff;
+		border-radius: 28px;
+		position: relative;
+		z-index: 1;
+	}
+	.vote-badge {
+		display: inline-block;
+		background: linear-gradient(135deg, #9c73d6, #ffb37a);
+		color: #fff;
+		font-family: 'Baloo 2', cursive;
+		font-weight: 800;
+		font-size: 0.75rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		padding: 0.3rem 0.95rem;
+		border-radius: 999px;
+		margin-bottom: 0.8rem;
+		box-shadow: 0 2px 10px rgba(156, 115, 214, 0.35);
+	}
+	.vote-title {
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.9rem;
+		color: #5a3a82;
+		margin: 0 0 0.4rem;
+	}
+	.vote-sub {
+		font-family: 'Nunito', sans-serif;
+		font-size: 1rem;
+		color: #6B3E2E;
+		opacity: 0.8;
+		margin: 0 0 1.5rem;
+	}
+	.vote-showcase {
+		width: 100%;
+		max-width: 560px;
+		height: auto;
+		border-radius: 18px;
+		display: block;
+		margin: 0 auto 1.5rem;
+		box-shadow: 0 4px 16px rgba(107, 62, 46, 0.15);
+	}
+	.vote-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.7rem;
+	}
+	.vote-btn {
+		font-family: 'Baloo 2', cursive;
+		font-weight: 700;
+		font-size: 1rem;
+		padding: 0.7rem 1.4rem;
+		border: 2px solid #ffb37a;
+		border-radius: 14px;
+		cursor: pointer;
+		color: #6B3E2E;
+		background: #fff;
+		box-shadow: 0 2px 10px rgba(240, 131, 159, 0.2);
+		transition: all 0.2s;
+	}
+	.vote-btn:hover:not(:disabled) {
+		transform: translateY(-2px) scale(1.04);
+		background: linear-gradient(135deg, #ffb37a, #f0839f);
+		color: #fff;
+	}
+	.vote-btn:disabled { cursor: default; opacity: 0.55; }
+	.vote-btn.voted {
+		opacity: 1;
+		background: linear-gradient(135deg, #9c73d6, #f0839f);
+		color: #fff;
+		border-color: #9c73d6;
+	}
+	.vote-thanks {
+		display: none;
+		font-family: 'Baloo 2', cursive;
+		font-size: 1.1rem;
+		color: #5a3a82;
+		margin: 1.3rem 0 0;
+	}
+
+	@media (max-width: 600px) {
+		.vote-section { padding: 1.75rem 1rem; margin: 1.5rem 0.5rem; }
+		.vote-title { font-size: 1.5rem; }
+		.vote-btn { font-size: 0.9rem; padding: 0.6rem 1.1rem; }
 	}
 
 	.yt-comp-card:hover {
@@ -1721,4 +1830,38 @@ import { products } from '../data/products';
 		if (e.target === overlay) overlay.classList.remove('open');
 	});
 
+</script>
+
+<script is:inline>
+	(function () {
+		var API = 'https://japanezy-votes.japanezyartz.workers.dev/votes';
+		function init() {
+			var wrap = document.getElementById('vote-buttons');
+			if (!wrap) return;
+			var thanks = document.getElementById('vote-thanks');
+			var btns = Array.prototype.slice.call(wrap.querySelectorAll('.vote-btn'));
+			var done = false;
+			var prev = null;
+			try { prev = localStorage.getItem('costume-vote'); } catch (e) {}
+			function finish(choice) {
+				done = true;
+				btns.forEach(function (b) {
+					b.disabled = true;
+					if (b.getAttribute('data-choice') === choice) b.classList.add('voted');
+				});
+				if (thanks) thanks.style.display = 'block';
+			}
+			if (prev) finish(prev);
+			btns.forEach(function (b) {
+				b.addEventListener('click', function () {
+					if (done) return;
+					var choice = b.getAttribute('data-choice');
+					try { localStorage.setItem('costume-vote', choice); } catch (e) {}
+					finish(choice);
+					fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ choice: choice }) }).catch(function () {});
+				});
+			});
+		}
+		if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+	})();
 </script>
